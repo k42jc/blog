@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 数据库驱动包jar文件位置 -->
+	<classPathEntry location="D:\eclipse\java\spring\blog_main\WebContent\WEB-INF\lib\ojdbc14.jar" />
+	<context id="context">
+		<!-- 是否去除自动生成的注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 数据库连接信息 -->
+		<jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:liaoxudong"
+			userId="liaoxudong" password="liaoxudong" />
+		<!-- java与数据库类型转换 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="true" />
+			
+		</javaTypeResolver>
+		<!-- 成成对应文件存放目录 -->
+		<javaModelGenerator targetPackage="entity" targetProject="com.lxd.blog" >
+			<property name="enableSubPackages" value="true"/>
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="mybatis.mapper" targetProject="com.lxd.blog" />
+		<javaClientGenerator targetPackage="dao" targetProject="com.lxd.blog"
+			type="XMLMAPPER" />
+		<table schema="" tableName="SYS_USER" domainObjectName="User" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false" />
+	</context>
+</generatorConfiguration>
