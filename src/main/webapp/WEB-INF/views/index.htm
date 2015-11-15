@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -24,7 +24,7 @@
         不断前行，不断进步，生命不息，奋斗不止</p>    
       </div>
       <nav id="navbar" class="navbar">
-        <a href="index.htm"><span>首页</span><span class="en">Protal</span></a>
+        <a href="/"><span>首页</span><span class="en">Protal</span></a>
         <a href="blog.htm"><span>博文分类</span><span class="en">Blog</span></a>
         <a href="about.htm"><span>关于我</span><span class="en">About</span></a>
         <a href="leaveMessage.htm"><span>留言板</span><span class="en">Message</span></a>
@@ -38,16 +38,17 @@
            <div class="s_tuijian">
            <h2>文章<span>推荐</span></h2>
            </div>
+           #for(Blog blog:blogList)
           <div class="content_text">
            <!--wz-->
            <div class="wz">
-            <h3><a href="#" title="浅谈：html5和html的区别">开发日志：搭建自己的小站之路(1)</a></h3>
+            <h3><a href="#" title="${blog.title}">${blog.title}</a></h3>
              <dl>
                <dt><img src="images/s.jpg" width="200"  height="123" alt=""></dt>
                <dd>
-                 <p class="dd_text_1">上礼拜周六凌晨，大概1点钟的样子，就辣么一瞬间，终于拿起了自己设想已久--要给自己建个小站--的想法。俗话说：万事开头难，事情起步了，总会有那么点动力会驱使自己慢慢去完成它。当初的想法很让人激动，但是过去很久时间，却一直没踏出第一步。于是，那晚，2015-11-06日，终于狠下心买了云服务器，开始了行动路上的第一步。虽然是最低配，装的还是很久未接触的linux，不过还是通宵搭好了环境:jdk，数据库，nginx/tomcat。紧接着，服务器有了，便是开发：搭框架，选java模板(不用jsp)，搜静态页。到了今晚，终于把nginx+tomcat负载均衡完全完成，项目可以静动分离的正常跑起来。虽然现在还是相当于一些网上拿来的静态页面(少量后端动态交互)，但是竟然有点小小的激动,等待哥后续完成~</p>
+                 <p class="dd_text_1">${blog.content}</p>
                <p class="dd_text_2">
-               <span class="left author">${userName}</span><span class="left sj">时间:2015-11-09晚23:23分</span>
+               <span class="left author">${blog.user.userDetail.realName}</span><span class="left sj">时间:${blog.createDate}</span>
                <span class="left fl">分类:<a href="#" title="开发日志">开发日志</a></span><span class="left yd"><a href="#" title="阅读全文">阅读全文</a>
                </span>
                 <div class="clear"></div>
@@ -60,74 +61,8 @@
             <!--wz-->
            <!--wz end-->
            </div>
+           #end
 
-           <div class="content_text">
-           <!--wz-->
-           <div class="wz">
-            <h3><a href="#" title="浅谈：html5和html的区别">开发日志：搭建自己的小站之路(2)</a></h3>
-             <dl>
-               <dt><img src="images/s.jpg" width="200"  height="123" alt=""></dt>
-               <dd>
-                 <p class="dd_text_1">xmanager的xftp工具简直神器，直接win下编辑linux同步保存,非常方便。1.设置nginx的域名精确匹配，禁止ip直接访问，404等页面暂时直接使用nginx的等等。2.把项目托管到github，便于自己在任何地方开发。3.安装powerDisign建模工具，并创建repository库，便于接下来的规范化数据库设计。4.添加百度js分享工具完全不要自己动手可以分享。5.本来想今晚先把留言功能做完(存放在数据库),但是页面没有，比较难搞</p>
-               <p class="dd_text_2">
-               <span class="left author">${userName}</span><span class="left sj">时间:2015-11-10晚21:35分</span>
-               <span class="left fl">分类:<a href="#" title="开发日志">开发日志</a></span><span class="left yd"><a href="#" title="阅读全文">阅读全文</a>
-               </span>
-                <div class="clear"></div>
-               </p>
-               </dd>
-               <div class="clear"></div>
-             </dl>
-            </div>
-
-            <div class="content_text">
-           <!--wz-->
-           <div class="wz">
-            <h3><a href="#" title="浅谈：html5和html的区别">浅谈：html5和html的区别</a></h3>
-             <dl>
-               <dt><img src="images/s.jpg" width="200"  height="123" alt=""></dt>
-               <dd>
-                 <p class="dd_text_1">最近看群里聊天聊得最火热的莫过于手机网站和html5这两个词。可能有人会问，这两者有什么关系呢？随着这移动互联
-                 网快速发展的时代，尤其是4G时代已经来临的时刻，加上微软对"XP系统"不提供更新补丁、维护的情况下。
-               html5+css3也逐渐的成为新一代web前端技术.....</p>
-               <p class="dd_text_2">
-               <span class="left author">${userName}</span><span class="left sj">时间:<span class="now-date"></span></span>
-               <span class="left fl">分类:<a href="#" title="学无止境">学无止境</a></span><span class="left yd"><a href="#" title="阅读全文">阅读全文</a>
-               </span>
-                <div class="clear"></div>
-               </p>
-               </dd>
-               <div class="clear"></div>
-             </dl>
-            </div>
-                             
-           </div>
-            <div class="content_text">
-           <!--wz-->
-           <div class="wz">
-            <h3><a href="#" title="浅谈：html5和html的区别">浅谈：html5和html的区别</a></h3>
-             <dl>
-               <dt><img src="images/s.jpg" width="200"  height="123" alt=""></dt>
-               <dd>
-                 <p class="dd_text_1">最近看群里聊天聊得最火热的莫过于手机网站和html5这两个词。可能有人会问，这两者有什么关系呢？随着这移动互联
-                 网快速发展的时代，尤其是4G时代已经来临的时刻，加上微软对"XP系统"不提供更新补丁、维护的情况下。
-               html5+css3也逐渐的成为新一代web前端技术.....</p>
-               <p class="dd_text_2">
-               <span class="left author">${userName}</span><span class="left sj">时间:<span class="now-date"></span></span>
-               <span class="left fl">分类:<a href="#" title="学无止境">学无止境</a></span><span class="left yd"><a href="#" title="阅读全文">阅读全文</a>
-               </span>
-                <div class="clear"></div>
-               </p>
-               </dd>
-               <div class="clear"></div>
-             </dl>
-            </div>
-                             
-           </div>
-           <!--wz end-->
-            <!--wz-->
-           <!--wz end-->
-                             
            </div>
          </div>
          <!--left end-->

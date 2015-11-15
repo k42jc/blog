@@ -3,12 +3,17 @@ package pub.lxd.blog.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+/**
+ * 首页控制器
+ * @author k42jc
+ *
+ */
 @Controller
-public class IndexController {
+public class IndexController extends BaseController{
 	@RequestMapping("index")
 	public String index(ModelMap map){
 		map.put("userName", "廖旭东");
+		map.put("blogList", this.ServiceFactory.blogService.selectBlogList());
 		return "index";
 	}
 	

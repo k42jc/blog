@@ -1,40 +1,35 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>关于我-个人博客</title>
-<meta name="keywords" content="个人博客" />
-<meta name="description" content="" />
-<link rel="stylesheet" href="css/index.css"/>
-<link rel="stylesheet" href="css/style.css"/>
-<script type="text/javascript" src="js/jquery1.42.min.js"></script>
-<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
-<!--[if lt IE 9]>
-<script src="js/html5.js"></script>
-<![endif]-->
+  <meta charset="UTF-8">
+  <title>我的博客-关于我</title>
+  <meta name="keywords" content="廖旭东，个人博客" />
+  <meta name="description" content="个人博客，记录学习之路" />
+  <link href="images/favicon.png" type="image/x-icon" rel="shortcut icon" />
+  <!--css-->
+  <link rel="stylesheet" href="css/index.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/my.css"/>
+  <!--js-->
+  <script type="text/javascript" src="js/jquery1.42.min.js"></script>
+  <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
 </head>
 
 <body>
-      <!--header start-->
-    <div id="header">
-      <h1>个人博客</h1>
-      <p>青春是打开了,就合不上的书。人生是踏上了，就回不了头的路，爱情是扔出了，就收不回的赌注。</p>    
+     <!--header start-->
+    <div id="header" class="header">
+      <div id="maxim" class="maxim">
+        <p>越努力，越幸运<br/>
+        不断前行，不断进步，生命不息，奋斗不止</p>    
+      </div>
+      <nav id="navbar" class="navbar">
+        <a href="/"><span>首页</span><span class="en">Protal</span></a>
+        <a href="blog.htm"><span>博文分类</span><span class="en">Blog</span></a>
+        <a href="about.htm"><span>关于我</span><span class="en">About</span></a>
+        <a href="leaveMessage.htm"><span>留言板</span><span class="en">Message</span></a>
+      </nav>
     </div>
      <!--header end-->
-    <!--nav-->
-     <div id="nav">
-         <ul>
-         <li><a href="index.html">首页</a></li>
-         <li><a href="about.html">关于我</a></li>
-         <li><a href="shuo.html">碎言碎语</a></li>
-         <li><a href="riji.html">个人日记</a></li>
-         <li><a href="xc.html">相册展示</a></li>
-         <li><a href="learn.html">学无止境</a></li>
-         <li><a href="guestbook.html">留言板</a></li>
-         <div class="clear"></div>
-        </ul>
-      </div>
-       <!--nav end-->
     <!--content start-->
     <div id="content">
        <!--left-->
@@ -43,20 +38,29 @@
            <div class="wz_text">当前位置：<a href="#">首页</a>><h1>关于我</h1></div>
            </div>
            <div class="about_content">
-             博主是一个草根站长，喜欢研究web前端技术和SEO技术。
+             ${personInfo}
            </div>
          </div>
          <!--end left -->
          <!--right-->
-          <div class="right" id="c_right">
+         <div class="right" id="c_right">
           <div class="s_about">
           <h2>关于博主</h2>
            <img src="images/my.jpg" width="230" height="230" alt="博主"/>
-           <p>博主：XX</p>
-           <p>职业：web前端、视觉设计</p>
-           <p>简介：</p>
+           <br/>
+           <p>博主：${userName}</p>
+           <p>职业：java开发工程师</p>
+           <p>简介：一个90后苦逼程序猿。一直想做一个自己的网站，下定决心买了个最低配的服务器。博客使用java开发，服务器Linux centOS,mysql数据库,，nginx+tomcat负载均衡。页面呢，要我做前端ui设计/html就跟要亲命似的，就随便度娘了，顺便感谢下原作者的无私贡献</p>
            <p>
-           <a href="#" title="联系博主"><span class="left b_1"></span></a><a href="#" title="加入QQ群，一起学习！"><span class="left b_2"></span></a>
+           <br/>
+           <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare"><a class="bds_tsina"></a><a class="bds_qzone"></a><a class="bds_tqq"></a><a class="bds_renren"></a><span class="bds_more"></span><a class="shareCount"></a></div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+        <script type="text/javascript" id="bdshell_js"></script> 
+        <script type="text/javascript">
+      document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+      </script> 
+        <!-- Baidu Button END -->
            <div class="clear"></div>
            </p>
           </div>
@@ -67,40 +71,44 @@
               </div>
               <div class="bd">
                 <ul>
-					<li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
-					<li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
-					<li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
-					<li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
-					<li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
-				</ul>
+          <li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
+          <li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
+          <li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
+          <li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
+          <li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
+        </ul>
                  <ul>
-					<li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
-					<li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
-					<li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
-					<li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
-					<li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
-				</ul>
+          <li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
+          <li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
+          <li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
+          <li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
+          <li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
+        </ul>
                  <ul>
-					<li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
-					<li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
-					<li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
-					<li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
-					<li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
-				</ul>
+          <li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
+          <li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
+          <li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
+          <li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
+          <li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
+        </ul>
                  
                 
               </div>
            </div>
            <!--end-->
+           <!-- <div class="link">
+            <h2>友情链接</h2>
+            <p><a href="http://blog.lxd.pub">${userName}个人博客</a></p>
+           </div> -->
          </div>
-         <!--end  right-->
+         <!--right end-->
          <div class="clear"></div>
          
     </div>
     <!--content end-->
-    <!--footer-->
+    <!--footer start-->
     <div id="footer">
-     <p>Design by:少年 2014-8-9</p>
+     <p>Design by:<a href="http://blog.lxd.pub" target="_blank">Others~</a><span class="now-date"></span></p>
     </div>
     <!--footer end-->
     <script type="text/javascript">jQuery(".lanmubox").slide({easing:"easeOutBounce",delayTime:400});</script>
