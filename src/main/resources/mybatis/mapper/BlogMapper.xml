@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pub.lxd.blog.dao.IBlogDao" >
+  <resultMap id="BaseResultMap" type="pub.lxd.blog.entity.Blog" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="TYPEID" property="typeId" jdbcType="BIGINT" />
+    <result column="USERID" property="userId" jdbcType="BIGINT" />
+    <result column="KEYWORD" property="keyword" jdbcType="VARCHAR" />
+    <result column="VIEWNUMS" property="viewNums" jdbcType="INTEGER" />
+    <result column="CREATEDATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATEDATE" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="pub.lxd.blog.entity.Blog" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap type="pub.lxd.blog.entity.Blog" id="ResultMapWithDetail" extends="ResultMapWithBLOBs">
+  	<association property="blogType" javaType="pub.lxd.blog.entity.SysData">
+  		<id column="ID" property="id" jdbcType="BIGINT" />
+	    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+	    <result column="VALUE" property="value" jdbcType="VARCHAR" />
+	    <result column="ORDERS" property="orders" jdbcType="INTEGER" />
+	    <result column="STATUS" property="status" jdbcType="CHAR" />
+	    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+	    <result column="updateDate" property="updateDate" jdbcType="TIMESTAMP" />
+  	</association>
+  	<association property="user" javaType="pub.lxd.blog.entity.User">
+  		<id column="ID" property="id" jdbcType="BIGINT" />
+	    <result column="userName" property="userName" jdbcType="VARCHAR" />
+	    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+	    <result column="userIp" property="userIp" jdbcType="VARCHAR" />
+	    <result column="STATUS" property="status" jdbcType="CHAR" />
+	    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+	    <result column="updateDate" property="updateDate" jdbcType="TIMESTAMP" />
+	    <association property="userDetail" javaType="pub.lxd.blog.entity.UserDetail">
+  			<id column="ID" property="id" jdbcType="BIGINT" />
+		    <result column="realName" property="realName" jdbcType="VARCHAR" />
+		    <result column="AGE" property="age" jdbcType="INTEGER" />
+		    <result column="SEX" property="sex" jdbcType="BIGINT" />
+		    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+		    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		    <result column="IP" property="ip" jdbcType="VARCHAR" />
+		    <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
+		    <result column="updateDate" property="updateDate" jdbcType="TIMESTAMP" />
+	  	</association>
+  	</association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TITLE, typeId, USERID, KEYWORD, VIEWNUMS, CREATEDATE, UPDATEDATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_blog
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_blog
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="pub.lxd.blog.entity.Blog" >
+    insert into t_blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="typeId != null" >
+        TYPEID,
+      </if>
+      <if test="userId != null" >
+        USERID,
+      </if>
+      <if test="keyword != null" >
+        KEYWORD,
+      </if>
+      <if test="viewNums != null" >
+        VIEWNUMS,
+      </if>
+      <if test="createDate != null" >
+        CREATEDATE,
+      </if>
+      <if test="updateDate != null" >
+        UPDATEDATE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNums != null" >
+        #{viewNums,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pub.lxd.blog.entity.Blog" >
+    update t_blog
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        TYPEID = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        USERID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="keyword != null" >
+        KEYWORD = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="viewNums != null" >
+        VIEWNUMS = #{viewNums,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        CREATEDATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        UPDATEDATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAll" resultMap="ResultMapWithDetail">
+  	select * from T_BLOG b left join t_sysdata s on b.typeid=s.id left join t_user u on b.userid=u.id left join t_userdetail ud on u.id=ud.userid
+  </select>
+</mapper>
