@@ -23,4 +23,8 @@ public class BlogService extends BaseService implements IBlogService{
 		return null;
 	}
 
+	public List<Blog> selectTop5ViewedBlog() {
+		return this.daoFactory.blogDao.selectTop5ViewedBlog();
+	}
+
 }

@@ -1,145 +1,80 @@
-﻿<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <title>${userName}-个人博客</title>
-  <meta name="keywords" content="廖旭东，个人博客" />
-  <meta name="description" content="个人博客，记录学习之路" />
-  <link href="images/favicon.png" type="image/x-icon" rel="shortcut icon" />
-  <meta name="baidu-site-verification" content="5iA07ryeaf" /><!-- 百度验证 -->
-  <meta property="qc:admins" content="6716230277764046052" /><!-- 腾讯开放接口测试标记 -->
-  <!--css-->
-  <link rel="stylesheet" href="css/index.css"/>
-  <link rel="stylesheet" href="css/style.css"/>
-  <link rel="stylesheet" href="css/my.css"/>
-  <!--js-->
-  <script type="text/javascript" src="js/jquery1.42.min.js"></script>
-  <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
-</head>
-<body>
-    <!--header start-->
-    <div id="header" class="header">
-      <div id="maxim" class="maxim">
-        <p>越努力，越幸运<br/>
-        不断前行，不断进步，生命不息，奋斗不止</p>    
-      </div>
-      <nav id="navbar" class="navbar">
-        <a href="/"><span>首页</span><span class="en">Protal</span></a>
-        <a href="blog.htm"><span>博文分类</span><span class="en">Blog</span></a>
-        <a href="about.htm"><span>关于我</span><span class="en">About</span></a>
-        <a href="leaveMessage.htm"><span>留言板</span><span class="en">Message</span></a>
-      </nav>
+﻿#options(import="java.text.SimpleDateFormat")
+#set(date=new SimpleDateFormat("yyyy-MM-dd"))
+#set(datetime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
+#include("layout/header.htm")
+<link href="css/index.css" rel="stylesheet">
+<!--end header-->
+<div class="banner">
+  <section class="box">
+    <ul class="texts">
+      <p class="p1">越努力 越幸运</p>
+      <p class="p2">每一天，都不停下成长的脚步</p>
+      <p class="p3">Since:2015-11-11</p>
+    </ul>
+  </section>
+</div>
+<!--end banner-->
+<article>
+  <h2 class="title_tj">
+    <p>文章<span>推荐</span></p>
+  </h2>
+  <div class="bloglist left">
+   <!--wz-->
+   #for (Blog blog:blogList)
+    <div class="wz">
+    <h3>${blog.title}</h3>
+    <p class="dateview"><span>${datetime.format(blog.createDate)}</span><span>作者：${userName}</span><span>分类：[<a href="#">${blog.blogType.value}</a>]</span></p>
+    <figure><img src="images/001.jpg"></figure>
+    <ul>
+      <p class="content">${blog.content}</p>
+      <a title="阅读全文" href="/" target="_blank" class="readmore">阅读全文>></a>
+    </ul>
+    <div class="clear"></div>
     </div>
-     <!--header end-->
-    <!--content start-->
-    <div id="content">
-         <!--left-->
-         <div class="left" id="c_left">
-           <div class="s_tuijian">
-           <h2>文章<span>推荐</span></h2>
-           </div>
-           #for(Blog blog:blogList)
-          <div class="content_text">
-           <!--wz-->
-           <div class="wz">
-            <h3><a href="#" title="${blog.title}">${blog.title}</a></h3>
-             <dl>
-               <dt><img src="images/s.jpg" width="200"  height="123" alt=""></dt>
-               <dd>
-                 <p class="dd_text_1">${blog.content}</p>
-               <p class="dd_text_2">
-               <span class="left author">${blog.user.userDetail.realName}</span><span class="left sj">时间:${blog.createDate}</span>
-               <span class="left fl">分类:<a href="#" title="开发日志">开发日志</a></span><span class="left yd"><a href="#" title="阅读全文">阅读全文</a>
-               </span>
-                <div class="clear"></div>
-               </p>
-               </dd>
-               <div class="clear"></div>
-             </dl>
-            </div>
-           <!--wz end-->
-            <!--wz-->
-           <!--wz end-->
-           </div>
-           #end
-
-           </div>
-         </div>
-         <!--left end-->
-         <!--right-->
-         <div class="right" id="c_right">
-          <div class="s_about">
-          <h2>关于博主</h2>
-           <img src="images/my.jpg" width="230" height="230" alt="博主"/>
-           <br/>
-           <p>博主：${userName}</p>
-           <p>职业：java开发工程师</p>
-           <p>简介：一个90后苦逼程序猿。一直想做一个自己的网站，下定决心买了个最低配的服务器。博客使用java开发，服务器Linux centOS,mysql数据库,，nginx+tomcat负载均衡。页面呢，要我做前端ui设计/html就跟要亲命似的，就随便度娘了，顺便感谢下原作者的无私贡献</p>
-           <p>
-           <br/>
-           <!-- Baidu Button BEGIN -->
-		    <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare"><a class="bds_tsina"></a><a class="bds_qzone"></a><a class="bds_tqq"></a><a class="bds_renren"></a><span class="bds_more"></span><a class="shareCount"></a></div>
-		    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
-		    <script type="text/javascript" id="bdshell_js"></script> 
-		    <script type="text/javascript">
-			document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-			</script> 
-		    <!-- Baidu Button END -->
-           <div class="clear"></div>
-           </p>
-          </div>
-          <!--栏目分类-->
-           <div class="lanmubox">
-              <div class="hd">
-               <ul><li>精心推荐</li><li>最新文章</li><li class="hd_3">随机文章</li></ul>
-              </div>
-              <div class="bd">
-                <ul>
-					<li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
-					<li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
-					<li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
-					<li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
-					<li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
-				</ul>
-                 <ul>
-					<li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
-					<li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
-					<li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
-					<li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
-					<li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
-				</ul>
-                 <ul>
-					<li><a href="#" title="网站项目实战开发（-）">网站项目实战开发（-）</a></li>
-					<li><a href="#" title="关于响应式布局">关于响应式布局</a></li>
-					<li><a href="#" title="如何创建个人博客网站">如何创建个人博客网站</a></li>
-					<li><a href="#" title="网站项目实战开发（二）">网站项目实战开发（二）</a></li>
-					<li><a href="#" title="为什么新站前期排名老是浮动？(转)">为什么新站前期排名老是浮动？(转)</a></li>
-				</ul>
-                 
-                
-              </div>
-           </div>
-           <!--end-->
-           <!-- <div class="link">
-            <h2>友情链接</h2>
-            <p><a href="http://blog.lxd.pub">${userName}个人博客</a></p>
-           </div> -->
-         </div>
-         <!--right end-->
-         <div class="clear"></div>
+    #end
+   <!--end-->
+  </div>
+  <!-- <hr style="width:2px;height:1000px; "></hr> -->
+  <!--right-->
+  <aside class="right"> 
+    <div class="my">
+     <h2>关于<span>博主</span></h2>
+     <img src="images/my.png" border: #f4f2f2 1px solid; width="200" height="200" alt="大帅比">
+       <ul>
+        <li>博主：${userName}</li>
+        <li>职业：${job}</li>
+        <li>简介：${release}</li>
+        <li></li>   
+       </ul>
     </div>
-    <!--content end-->
-    <!--footer start-->
-    <div id="footer">
-     <p>Design by:<a href="http://blog.lxd.pub" target="_blank">Others~</a><span class="now-date"></span></p>
-    </div>
-    <!--footer end-->
-    <script type="text/javascript">jQuery(".lanmubox").slide({easing:"easeOutBounce",delayTime:400});</script>
-    <script type="text/javascript">
-        $(function(){
-          var today = new Date();
-          $('.now-date').text(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
-        });
-    </script>
-</body>
-</html>
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+    <div class="news">
+    <h3 class="ph">
+      <p>点击<span>排行</span></p>
+    </h3>
+    <ul class="paih">
+    	#for(Blog blog:viewedBlogTop5)
+      <li><a href="/" title="${blog.title}" target="_blank">${blog.title}</a></li>
+      	#end
+    </ul>
+    <!-- <h3>
+      <p>用户<span>关注</span></p>
+    </h3>
+    <ul class="rank">
+      <li><a href="/" title="如何建立个人博客" target="_blank">如何建立个人博客</a></li>
+      <li><a href="/" title="一个网站的开发流程" target="_blank">一个网站的开发流程</a></li>
+      <li><a href="/" title="关键词排名的三个时期" target="_blank">关键词排名的三个时期</a></li>
+      <li><a href="/" title="做网站到底需要什么?" target="_blank">做网站到底需要什么?</a></li>
+      <li><a href="/" title="关于响应式布局" target="_blank">关于响应式布局</a></li>
+      <li><a href="/" title="html5标签" target="_blank">html5标签</a></li>
+    </ul> -->
+    
+    <h3 class="links">
+      <p>友情<span>链接</span></p>
+    </h3>
+    <ul class="website">
+      <li><a href="http://blog.lxd.pub">个人博客1.0</a></li>
+    </ul> 
+    </div> 
+</article>
+#include("layout/footer.htm")

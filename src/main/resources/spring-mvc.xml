@@ -16,7 +16,6 @@
 	<mvc:annotation-driven/>
 	
 	<!-- 静态资源 -->
- 	<mvc:default-servlet-handler />
 
 	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
@@ -45,6 +44,7 @@
 	        <props>
 	            <prop key="jetx.input.encoding">utf-8</prop>
 	            <prop key="jetx.output.encoding">utf-8</prop>
+	            <prop key="jetx.autoscan.packages">pub.lxd.tags</prop>
 	        </props>
 	    </property>
 	</bean>

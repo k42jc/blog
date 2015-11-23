@@ -1,5 +1,8 @@
 package pub.lxd.blog.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +16,11 @@ public class IndexController extends BaseController{
 	@RequestMapping("index")
 	public String index(ModelMap map){
 		map.put("userName", "廖旭东");
-		map.put("blogList", this.ServiceFactory.blogService.selectBlogList());
+		map.put("job", "java程序员");
+		map.put("release", "一个大帅比");
+		map.put("blogList", this.serviceFactory.blogService.selectBlogList());
+		//首页点击排行top5
+		map.put("viewedBlogTop5", this.serviceFactory.blogService.selectTop5ViewedBlog());
 		return "index";
 	}
 	
@@ -42,5 +49,11 @@ public class IndexController extends BaseController{
 	public String leaveMessage(ModelMap map){
 		map.put("userName", "廖旭东");
 		return "leaveMessage";
+	}
+	
+	@RequestMapping("layout")
+	public String layout(ModelMap map) throws UnsupportedEncodingException{
+		map.put("url", webCtx.getRequest().getParameter("url"));
+		return "layout";
 	}
 }

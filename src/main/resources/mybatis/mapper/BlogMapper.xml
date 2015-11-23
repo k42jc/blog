@@ -159,4 +159,8 @@
   <select id="selectAll" resultMap="ResultMapWithDetail">
   	select * from T_BLOG b left join t_sysdata s on b.typeid=s.id left join t_user u on b.userid=u.id left join t_userdetail ud on u.id=ud.userid
   </select>
+  <!-- 博客点击排行 -->
+  <select id="selectTop5ViewedBlog" resultMap="BaseResultMap">
+    select id,title from t_blog order by VIEWNUMS desc limit 0,4
+  </select>
 </mapper>

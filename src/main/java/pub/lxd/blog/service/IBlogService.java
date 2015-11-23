@@ -23,4 +23,10 @@ public interface IBlogService {
 	 * @return
 	 */
 	public Blog selectOne(Blog blog);
+	
+	/**
+	 * 首页点击排行top5
+	 * @return blog数据集
+	 */
+	public List<Blog> selectTop5ViewedBlog();
 }

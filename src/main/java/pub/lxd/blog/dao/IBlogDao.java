@@ -1,5 +1,7 @@
 package pub.lxd.blog.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import pub.lxd.blog.entity.Blog;
@@ -10,5 +12,5 @@ import pub.lxd.blog.entity.Blog;
  */
 @Repository
 public interface IBlogDao extends IBaseDao<Blog> {
-
+	List<Blog> selectTop5ViewedBlog();
 }
