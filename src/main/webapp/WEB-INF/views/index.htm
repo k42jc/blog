@@ -9,7 +9,7 @@
     <ul class="texts">
       <p class="p1">越努力 越幸运</p>
       <p class="p2">每一天，都不停下成长的脚步</p>
-      <p class="p3">Since:2015-11-11</p>
+      <p class="p3">Since:2015-11-07</p>
     </ul>
   </section>
 </div>
@@ -24,10 +24,10 @@
     <div class="wz">
     <h3>${blog.title}</h3>
     <p class="dateview"><span>${datetime.format(blog.createDate)}</span><span>作者：${userName}</span><span>分类：[<a href="#">${blog.blogType.value}</a>]</span></p>
-    <figure><img src="images/001.jpg"></figure>
+    <figure><img src="/images/001.jpg"></figure>
     <ul>
       <p class="content">${blog.content}</p>
-      <a title="阅读全文" href="/" target="_blank" class="readmore">阅读全文>></a>
+      <a title="阅读全文" href="blog/${blog.id}.htm" target="_blank" class="readmore">阅读全文>></a>
     </ul>
     <div class="clear"></div>
     </div>
@@ -57,8 +57,8 @@
       <li><a href="/" title="${blog.title}" target="_blank">${blog.title}</a></li>
       	#end
     </ul>
-    <!-- <h3>
-      <p>用户<span>关注</span></p>
+    <h3>
+      <p>博客<span>分类</span></p>
     </h3>
     <ul class="rank">
       <li><a href="/" title="如何建立个人博客" target="_blank">如何建立个人博客</a></li>
@@ -67,7 +67,7 @@
       <li><a href="/" title="做网站到底需要什么?" target="_blank">做网站到底需要什么?</a></li>
       <li><a href="/" title="关于响应式布局" target="_blank">关于响应式布局</a></li>
       <li><a href="/" title="html5标签" target="_blank">html5标签</a></li>
-    </ul> -->
+    </ul>
     
     <h3 class="links">
       <p>友情<span>链接</span></p>
@@ -77,4 +77,7 @@
     </ul> 
     </div> 
 </article>
+<script src="/js/nav.js"></script>
+<!--百度分享-->
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 #include("layout/footer.htm")

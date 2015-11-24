@@ -12,5 +12,16 @@ import pub.lxd.blog.entity.Blog;
  */
 @Repository
 public interface IBlogDao extends IBaseDao<Blog> {
+	/**
+	 * 查询点击前5
+	 * @return
+	 */
 	List<Blog> selectTop5ViewedBlog();
+	
+	/**
+	 * 查询单条博客详情
+	 * @param id
+	 * @return
+	 */
+	Blog selectBlogDetailById(Long id);
 }

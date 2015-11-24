@@ -19,8 +19,7 @@ public class BlogService extends BaseService implements IBlogService{
 	}
 	
 	public Blog selectOne(Blog blog) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.daoFactory.blogDao.selectBlogDetailById(blog.getId());
 	}
 
 	public List<Blog> selectTop5ViewedBlog() {
