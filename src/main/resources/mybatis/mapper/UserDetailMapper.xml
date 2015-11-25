@@ -126,4 +126,7 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectUserDetailById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	
+  </select>
 </mapper>

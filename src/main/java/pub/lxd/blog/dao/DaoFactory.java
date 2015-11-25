@@ -11,4 +11,11 @@ import org.springframework.stereotype.Component;
 public class DaoFactory {
 	@Autowired
 	public IBlogDao blogDao;
+	@Autowired
+	public ISysDataDao sysDataDao;
+	@Autowired
+	public IUserDao userDao;
+	@Autowired
+	public IUserDetailDao userDetailDao;
+	
 }

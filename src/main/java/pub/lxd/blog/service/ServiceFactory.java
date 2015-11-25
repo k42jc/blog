@@ -3,8 +3,6 @@ package pub.lxd.blog.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pub.lxd.blog.service.impl.BlogService;
-
 /**
  * service工厂
  * @author k42jc
@@ -13,5 +11,9 @@ import pub.lxd.blog.service.impl.BlogService;
 @Component
 public class ServiceFactory {
 	@Autowired
-	public BlogService blogService;
+	public IBlogService blogService;
+	@Autowired
+	public ISysDataService sysDataService;
+	@Autowired
+	public IUserService userService;
 }

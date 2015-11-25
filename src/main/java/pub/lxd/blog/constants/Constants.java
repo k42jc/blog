@@ -14,4 +14,6 @@ public class Constants {
 	public static final String SYSDATA_TYPE_NAVBAR_TITLE = "navbar_title";
 	/**系统数据类型--座右铭*/
 	public static final String SYSDATA_TYPE_MOTO = "moto";
+	/**系统数据类型--关于*/
+	public static final String SYSDATA_TYPE_ABOUT = "about";
 }

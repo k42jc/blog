@@ -1,6 +1,7 @@
 package blog.test.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,15 @@ public class ServiceTest {
 	
 	@Test
 	public void blogServiceTest(){
+		List<Map<String,Object>> blogList = serviceFactory.blogService.selectBlogTypeList();
+		System.out.println(blogList);
+	}
+	
+	@Test
+	public void blogServiceTest2(){
+		String regexp = "[^'\"%]*";
+		String string = "abc%";
+		System.out.println (string.matches (regexp));
 		List<Blog> blogList = serviceFactory.blogService.selectBlogList();
 		System.out.println(blogList);
 	}

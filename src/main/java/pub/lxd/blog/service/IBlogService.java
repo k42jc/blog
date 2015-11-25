@@ -1,6 +1,7 @@
 package pub.lxd.blog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import pub.lxd.blog.entity.Blog;
 
@@ -29,4 +30,10 @@ public interface IBlogService {
 	 * @return blog数据集
 	 */
 	public List<Blog> selectTop5ViewedBlog();
+	
+	/**
+	 * 首页博客分类显示
+	 * @return
+	 */
+	public List<Map<String,Object>> selectBlogTypeList();
 }

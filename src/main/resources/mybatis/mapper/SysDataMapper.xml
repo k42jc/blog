@@ -96,4 +96,7 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * from t_sysdata where type=#{type}
+  </select>
 </mapper>

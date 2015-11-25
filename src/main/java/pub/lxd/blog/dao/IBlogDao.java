@@ -1,6 +1,7 @@
 package pub.lxd.blog.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -24,4 +25,16 @@ public interface IBlogDao extends IBaseDao<Blog> {
 	 * @return
 	 */
 	Blog selectBlogDetailById(Long id);
+	
+	/**
+	 * 首页博客分类显示
+	 * @return
+	 */
+	List<Map<String, Object>> selectBlogTypeList(String blogType);
+	
+	/**
+	 * 用户阅读数量+1
+	 * @param id
+	 */
+	void updateBlogViewdById(Long id);
 }
