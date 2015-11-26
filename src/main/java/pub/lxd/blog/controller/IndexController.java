@@ -51,7 +51,7 @@ public class IndexController extends BaseController{
 	public String blog(ModelMap map){
 		map.put("userName", "廖旭东");
 		return "blog";
-	}
+	}*/
 	
 	@RequestMapping("leaveMessage")
 	public String leaveMessage(ModelMap map){
@@ -59,7 +59,7 @@ public class IndexController extends BaseController{
 		return "leaveMessage";
 	}
 	
-	@RequestMapping("layout")
+	/*@RequestMapping("layout")
 	public String layout(ModelMap map) throws UnsupportedEncodingException{
 		map.put("url", webCtx.getRequest().getParameter("url"));
 		return "layout";

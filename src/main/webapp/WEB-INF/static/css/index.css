@@ -6,7 +6,6 @@ ul { list-style: none; }
 
 .left { float: left; }
 .right { float: right; }
-.blank { height: 5px; overflow: hidden; width: 100%; margin: auto; clear: both }
 .box{ width:1000px; margin:auto; overflow:hidden}
 
 
