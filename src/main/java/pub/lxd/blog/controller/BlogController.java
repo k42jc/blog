@@ -53,6 +53,11 @@ public class BlogController extends BaseController{
 		return "writeArticle";
 	}
 	
+	@RequestMapping("/blogList")
+	public String blogList(){
+		return "blogList";
+	}
+	
 	@RequestMapping("/saveArticle")
 	public void saveArticle(@RequestParam(value="title",required=false) String title,
 			@RequestParam(value="properties",required=false) String properties,

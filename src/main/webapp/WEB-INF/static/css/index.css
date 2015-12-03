@@ -6,6 +6,7 @@ ul { list-style: none; }
 
 .left { float: left; }
 .right { float: right; }
+.blank { height: 5px; overflow: hidden; width: 100%; margin: auto; clear: both }
 .box{ width:1000px; margin:auto; overflow:hidden}
 
 
@@ -121,7 +122,8 @@ padding-left: 15px; background: url(../images/li.jpg) no-repeat left center;bord
 .content{
 	margin-left:5px;
 	display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+	    -webkit-line-clamp: 3;
+	    -webkit-box-orient: vertical;
+	    overflow: hidden; 
+	    text-overflow:ellipsis;
 }
