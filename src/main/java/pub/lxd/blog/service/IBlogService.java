@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import pub.lxd.blog.entity.Blog;
+import pub.lxd.blog.constants.WebContext;
 
 /**
  * 博客Service接口
@@ -36,4 +37,9 @@ public interface IBlogService {
 	 * @return
 	 */
 	public List<Map<String,Object>> selectBlogTypeList();
+
+	/**
+	 * 保存文章
+	 */
+	public void saveArticle(WebContext webCtx);
 }

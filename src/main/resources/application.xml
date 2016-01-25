@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
 	<!-- 加载属性文件 -->
 	<context:property-placeholder
 		location="classpath:properties/application.properties" />
@@ -16,6 +18,9 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
+
+	<!-- 设置程序中properties属性配置 -->
+	<util:properties id="settings" location="classpath:properties/prop.properties"/>
 	
 	<!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"

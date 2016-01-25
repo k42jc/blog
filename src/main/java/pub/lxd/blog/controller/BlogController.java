@@ -1,19 +1,15 @@
 package pub.lxd.blog.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baidu.ueditor.ActionEnter;
-
+import pub.lxd.blog.constants.Constants;
 import pub.lxd.blog.constants.WebResponse;
 /**
  * 博客控制器
@@ -23,47 +19,43 @@ import pub.lxd.blog.constants.WebResponse;
 @Controller
 public class BlogController extends BaseController{
 	
-	@RequestMapping("/blog/list")
+	/*@RequestMapping("/blog/list")
 	@ResponseBody
 	public WebResponse blogList(ModelMap modelMap){
 		WebResponse response = new WebResponse(4);
 		response.put("blogList", this.serviceFactory.blogService.selectBlogList());
 		return response;
-	}
+	}*/
 	
-	@RequestMapping("/upload")
-	public void upload(HttpServletRequest request,HttpServletResponse response) {
-		try {
-			request.setCharacterEncoding("utf-8");
-			response.setHeader("Content-Type" , "text/html");
-			String rootPath = request.getSession().getServletContext()
-					.getRealPath("/");
-			String exec = new ActionEnter(request, rootPath).exec();
-			PrintWriter writer = response.getWriter();
-			writer.write(exec);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	@RequestMapping("/writeArticle")
-	public String writeArticle(){
+	public String writeArticle(ModelMap map){
+		map.put("blogTypeList",this.serviceFactory.sysDataService.selectSysDatByType(Constants.SYSDATA_TYPE_BLOG_TYPE));
 		return "writeArticle";
 	}
 	
 	@RequestMapping("/blogList")
-	public String blogList(){
+	public String blogList(ModelMap map){
+		map.put("userName","廖旭东");
+		map.put("blogList", this.serviceFactory.blogService.selectBlogList());
 		return "blogList";
 	}
 	
 	@RequestMapping("/saveArticle")
-	public void saveArticle(@RequestParam(value="title",required=false) String title,
-			@RequestParam(value="properties",required=false) String properties,
-			@RequestParam(value="content2",required=false) String content,
-			@RequestParam(value="keywords",required=false) String keywords){
-		System.out.println("xxx");
+	@ResponseBody
+	public WebResponse saveArticle(){
+		/*Map<String,String[]> map = webCtx.getRequest().getParameterMap();
+		Set<String> keySet = map.keySet();
+		Iterator<String> keys = keySet.iterator();
+		while(keys.hasNext()){
+			String key = keys.next();
+			System.out.println(key+"--"+map.get(key)[0]);
+		}
+		System.out.println(map);*/
+		this.serviceFactory.blogService.saveArticle(webCtx);
+		WebResponse response = new WebResponse();
+		return response;
+		//System.out.println("xxx");
 	}
 	
 }

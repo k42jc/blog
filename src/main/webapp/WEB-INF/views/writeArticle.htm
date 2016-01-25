@@ -4,29 +4,30 @@
 <link rel="stylesheet" href="kindeditor/themes/default/default.css" />
 <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
 <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="js/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="css/kube.min.css"/>
 <article class="aboutcon">
 <h1 class="t_nav"><span>您当前的位置：<a href="htpp://www.lxd.pub/writeArticle.htm">写博客</a></span></h1>
 <div class="content">
   <div id="me_text">
-  	<form action="saveArticle.htm" method="post" class="forms">
-		<!-- <section class="width-1">
+  	<form action="saveArticle.htm" method="POST" class="forms" id="blogForm">
+		<section class="width-1">
 			<h6>文章类型<span class="req">*</span></h6>
-			<select name="" id="" class="select">
+			<select name="articleType" id="articleType" class="select">
 				<option value="请选择">请选择</option>
-				<option value="原创">原创</option>
-				<option value="转载">转载</option>
+				<option value="1">原创</option>
+				<option value="2">转载</option>
 			</select>
-		</section> -->
+		</section>
 		<section>
 			<h6>文章标题<span class="req">*</span></h6>
-			<input type="text" placeholder="博客标题" class="width-4" />
+			<input name="title" type="text" placeholder="博客标题" class="width-4" />
 		</section>
 		<section class="checkbox-list">
 			<h6>所属分类<span class="req">*</span></h6>
-			<label><input type="radio"/>开发日志</label>
-			<label><input type="radio"/>java</label>
-			<label><input type="radio"/>数据库</label>
+			#for(SysData sysData:blogTypeList)
+			<label><input name="blogType" type="radio" value="${sysData.id}" />${sysData.value}</label>
+			#end
 		</section>
 		<section>
 			<h6>文章内容<span class="req">*</span></h6>
@@ -34,22 +35,32 @@
 		</section>
 		<section>
 			<h6>文章标签</h6>
-			<input type="text" placeholder="最多添加5个标签，多个标签使用“,”分隔" class="width-5" />
+			<input name="keywords" type="text" placeholder="最多添加5个标签，多个标签使用“,”分隔" class="width-5" />
 		</section>
 		<br>
 		<section>
-			<button type="primary">发表文章</button>&nbsp;&nbsp;<button type="black">保存草稿</button>&nbsp;&nbsp;<button>取消</button>
+			<button type="primary" id="saveArticle">发表文章</button>&nbsp;&nbsp;<button type="black">保存草稿</button>&nbsp;&nbsp;<button>取消</button>
 		</section>
-	</form>
+		</form>
   </div>
  <script>
 			var editor;
 			KindEditor.ready(function(K) {
 				editor = K.create('textarea[name="content"]', {
+					uploadJson : 'file/upload.htm',
+					fileManagerJson : 'file/manage.htm',
 					allowFileManager : true
 				});
-			});
-		</script>
+				/*K("#saveArticle").click(function(){
+					$("#blogForm").submit();
+					/* K.ajax('saveArticle.htm', function(data) {
+					        if(data.success)
+								alert(data.msg);
+					}, 'POST', {articleType:K('#articleType').val(),title:K('input[name="title"]').val(),blogType:$("input[type=radio][checked]").val(),content:editor.html(),contentView:editor.text(),keywords:K('input[name="keywords"]').val()});
+				});*/
+			}); 
+
+</script>
 
 </div>
 </article>

@@ -16,4 +16,8 @@ public class ServiceFactory {
 	public ISysDataService sysDataService;
 	@Autowired
 	public IUserService userService;
+	@Autowired
+	public IFileUploadService fileUploadService;
+	@Autowired
+	public IWeChatService weChatService;
 }

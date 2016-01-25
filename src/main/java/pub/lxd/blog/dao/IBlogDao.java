@@ -37,4 +37,12 @@ public interface IBlogDao extends IBaseDao<Blog> {
 	 * @param id
 	 */
 	void updateBlogViewdById(Long id);
+
+	/**
+	 * 保存文章
+	 * 2015年12月24日
+	 * @param blog
+	 *
+	 */
+	void saveArticle(Blog blog);
 }

@@ -1,8 +1,12 @@
 #options(import="java.text.SimpleDateFormat") 
 #set(date=new SimpleDateFormat("yyyy-MM-dd")) 
 #include("layout/header.htm")
-<link href="/css/base.css" rel="stylesheet">
-<link href="/css/new.css" rel="stylesheet">
+<link type="text/css" href="/css/base.css" rel="stylesheet">
+<link type="text/css" href="/css/new.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="/css/SyntaxHighlighter.css"></link>
+<script class="javascript" src="/js/jquery.js"></script>
+<script class="javascript" src="/js/shCore.js"></script>
+
 <article class="blogs">
 	<h1 class="t_nav">
 		<span>您当前的位置：<a href="/">博客</a>&nbsp;>&nbsp;<a href="/">${blog.blogType.value}</a></span>
@@ -15,10 +19,10 @@
 		</p>
 		<ul class="infos">
 			${blog.content}
+		</ul>
 			<!-- <iframe id="mood_frame" width="510" height="200"
 				src="/e/extend/mood/?classid=28&id=749" marginWidth=0 marginHeight=0
 				frameborder="0" scrolling="no"></iframe> -->
-		</ul>
 		<div class="keybq">
 			<p>
 				<span>关键字词</span>：${blog.keyword}

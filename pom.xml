@@ -43,6 +43,11 @@
 			<artifactId>jackson-datatype-joda</artifactId>
 			<version>${jackson-version}</version>
 		</dependency>
+		<dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.12</version>
+        </dependency>
 
 		<!-- XML begin -->
 		<dependency>
@@ -138,6 +143,19 @@
 		<!-- <dependency> <groupId>org.json</groupId> <artifactId>json</artifactId> 
 			<version>1.0</version> <scope>system</scope> <systemPath>${basedir}/src/main/webapp/WEB-INF/static/ueditor/jsp/lib/json.jar</systemPath> 
 			</dependency> -->
+			<dependency>
+    <groupId>com.thoughtworks.xstream</groupId>
+	    <artifactId>xstream</artifactId>
+	    <version>1.4.7</version>
+	</dependency>
+	<dependency>
+	<groupId>commons-httpclient</groupId>
+		<artifactId>commons-httpclient</artifactId>
+		<version>3.1</version>
+	</dependency>
+
+	
+				
 	</dependencies>
 
 </project>

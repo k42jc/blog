@@ -28,5 +28,21 @@ public class WebContext {
 		this.response = response;
 	}
 	
+	public Integer getInt(String params){
+		return Integer.valueOf(this.request.getParameter(params).toString());
+	}
+	
+	public Long getLong(String params){
+		return Long.valueOf(this.request.getParameter(params).toString());
+	}
+	
+	public String getString(String params){
+		return this.request.getParameter(params).toString();
+	}
+	
+	public Double getDouble(String params){
+		return Double.valueOf(this.request.getParameter(params).toString());
+	}
+	
 	
 }

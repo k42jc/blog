@@ -19,6 +19,8 @@ public class Blog {
 
     private Date updateDate;
 
+    private String contentView;
+
     private String content;
     
     private SysData blogType;
@@ -103,6 +105,14 @@ public class Blog {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public String getContentView() {
+        return contentView;
+    }
+
+    public void setContentView(String contentView) {
+        this.contentView = contentView == null ? null : contentView.trim();
     }
 
     public String getContent() {

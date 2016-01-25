@@ -8,6 +8,7 @@
 		<result column="USERID" property="userId" jdbcType="BIGINT" />
 		<result column="KEYWORD" property="keyword" jdbcType="VARCHAR" />
 		<result column="VIEWNUMS" property="viewNums" jdbcType="INTEGER" />
+		<result column="CONTENTVIEW" property="contentView" jdbcType="VARCHAR" />
 		<result column="CREATEDATE" property="createDate" jdbcType="TIMESTAMP" />
 		<result column="UPDATEDATE" property="updateDate" jdbcType="TIMESTAMP" />
 	</resultMap>
@@ -183,4 +184,8 @@
 	<update id="updateBlogViewdById" parameterType="java.lang.Long">
 		update t_blog set VIEWNUMs=VIEWNUMS+1 where id=#{id}
 	</update>
+	<!-- 保存文章 -->
+	<insert id="saveArticle" parameterType="pub.lxd.blog.entity.Blog">
+		insert into t_blog(title,contentView,content,typeId,keyword,createDate) values(#{title},#{contentView},#{content},#{typeId},#{keyword},#{createDate})
+	</insert>
 </mapper>

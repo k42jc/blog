@@ -1,6 +1,10 @@
 package pub.lxd.blog.constants;
 
 import java.util.HashMap;
+import java.util.Iterator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 定义页面公共返回数据格式
@@ -21,15 +25,15 @@ public class WebResponse extends HashMap<String, Object>{
 	public WebResponse(int length) {
 		super(length, DEFAULT_LOAD_FACTOR);
 		this.put("success", Constants.SUCCESS);
-		this.put("msg", this.msg);
 	}
 	
 	public WebResponse() {
+		super();
 		this.put("success", Constants.SUCCESS);
-		this.put("msg", this.msg);
 	}
 	
 	public WebResponse(String msg) {
+		super();
 		this.msg = msg ;
 		this.put("success", Constants.SUCCESS);
 		this.put("msg", this.msg);
@@ -41,6 +45,35 @@ public class WebResponse extends HashMap<String, Object>{
 	
 	public void setSuccess(int success){
 		this.put("success", success);
+	}
+	@SuppressWarnings("all")
+	public static String getError(String message){
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("error", 1);
+			obj.put("message", message);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return obj.toString();
+	}
+	
+	public static WebResponse toMap(String jsonStr){
+		WebResponse response = new WebResponse(4);
+		try {
+			JSONObject jsonObject = new JSONObject(jsonStr);
+			Iterator ite = jsonObject.keys();
+			while(ite.hasNext()){
+				Object key = ite.next();
+				response.put(key.toString(), jsonObject.get(key.toString()));
+			}
+			response.put("msg","获取access_token成功");
+			return response;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }
