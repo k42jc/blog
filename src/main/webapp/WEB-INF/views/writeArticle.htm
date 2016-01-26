@@ -14,19 +14,19 @@
 		<section class="width-1">
 			<h6>文章类型<span class="req">*</span></h6>
 			<select name="articleType" id="articleType" class="select">
-				<option value="请选择">请选择</option>
+				<option value="0">请选择</option>
 				<option value="1">原创</option>
 				<option value="2">转载</option>
 			</select>
 		</section>
 		<section>
-			<h6>文章标题<span class="req">*</span></h6>
-			<input name="title" type="text" placeholder="博客标题" class="width-4" />
+			<h6>文章标题<span id="titleSpan" class="desc">&nbsp;文章标题，请务必填写</span></h6>
+			<input oninput="validateInput('#titleSpan','#title','&nbsp;文章标题，请务必填写')" id="title" name="title" type="text" placeholder="博客标题" class="width-4" />
 		</section>
 		<section class="checkbox-list">
 			<h6>所属分类<span class="req">*</span></h6>
 			#for(SysData sysData:blogTypeList)
-			<label><input name="blogType" type="radio" value="${sysData.id}" />${sysData.value}</label>
+			<input name="blogType" type="radio" value="${sysData.id}" /><label>${sysData.value}</label>
 			#end
 		</section>
 		<section>
@@ -34,16 +34,48 @@
 			<textarea name="content" style="width:800px;height:400px;visibility:hidden;"></textarea>
 		</section>
 		<section>
-			<h6>文章标签</h6>
-			<input name="keywords" type="text" placeholder="最多添加5个标签，多个标签使用“,”分隔" class="width-5" />
+			<h6>文章标签<span id="keywordsSpan" class="desc">&nbsp;用于文章搜索、区分的标签属性</span></h6>
+			<input id="keywords" oninput="validateInput('#keywordsSpan','#keywords','&nbsp;用于文章搜索、区分的标签属性')" name="keywords" type="text" placeholder="最多添加5个标签，多个标签使用“,”分隔" class="width-5" />
 		</section>
 		<br>
 		<section>
-			<button type="primary" id="saveArticle">发表文章</button>&nbsp;&nbsp;<button type="black">保存草稿</button>&nbsp;&nbsp;<button>取消</button>
+			<button type="button" onclick="submitX()" id="saveArticle">发表文章</button>&nbsp;&nbsp;<button type="black">保存草稿</button>&nbsp;&nbsp;<button>取消</button>
 		</section>
 		</form>
   </div>
+
+</div>
+</article>
  <script>
+ function validateInput(spanId,inputId,desc){
+	 if($(inputId).val() != ''){
+		 $(inputId).removeClass('input-error');
+		 $(spanId).removeClass('error');
+		 $(spanId).html(desc);
+	 }
+ }
+ function submitX(){
+	 //数据校验
+	 if($('#articleType').select === 0){
+		 $('#articleType').focus();
+		 return false;
+	 }
+	 if($('#title').val() === ''){
+		 $('#title').addClass('input-error');
+		 $('#titleSpan').addClass('error');
+		 $('#titleSpan').html('&nbsp;请输入文章标题');
+		 $('#title').focus();
+		 return false;
+	 }
+	 if($('#keywords').val() === ''){
+		 $('#keywords').addClass('input-error');
+		 $('#keywordsSpan').addClass('error');
+		 $('#keywordsSpan').html('&nbsp;请输入文章标签');
+		 $('#keywords').focus();
+		 return false;
+	 }
+	 $('#blogForm').submit();
+ }
 			var editor;
 			KindEditor.ready(function(K) {
 				editor = K.create('textarea[name="content"]', {
@@ -61,8 +93,5 @@
 			}); 
 
 </script>
-
-</div>
-</article>
 #include("layout/footer.htm")
 
