@@ -8,11 +8,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
-	<!-- 加载属性文件 -->
-	<context:property-placeholder
-		location="classpath:properties/jdbc.properties" />
-		<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
-	<context:component-scan base-package="pub.lxd.blog.dao;pub.lxd.blog.service">
+	<!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
+	<context:component-scan base-package="com.techeffic.blog">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation"
@@ -22,43 +19,32 @@
 	<!-- 设置程序中properties属性配置 -->
 	<util:properties id="settings" location="classpath:properties/prop.properties"/>
 	
-	<!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
-	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
-		destroy-method="close">
-		<!-- Connection Info -->
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<property name="maxActive" value="${jdbc.pool.maxActive}" />
-		<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-		<property name="minIdle" value="0" />
-		<property name="defaultAutoCommit" value="false" />
-		<!-- 连接Idle10分钟后超时，每1分钟检查一次 -->
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-		<property name="minEvictableIdleTimeMillis" value="600000" />
-	</bean>
-	
-	<!-- MyBatis配置 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<!-- 自动扫描entity目录 -->
-		<property name="typeAliasesPackage" value="pub.lxd.blog.entity" />
-		<!-- 显式指定Mapper文件位置 -->
-		<property name="mapperLocations" value="classpath:/mybatis/mapper/*Mapper.xml" />
-	</bean>
-	<!-- 扫描basePackage下的所有接口 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="pub.lxd.blog.dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-	</bean>
-	
-	<!-- 事务管理器, Jdbc单数据源事务 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager"
-		proxy-target-class="true" />
+	<!-- 属性文件位置 -->  
+    <bean id="annotationPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="locations">  
+            <list>  
+                <value>classpath:properties/mongodb.properties</value>  
+                <value>classpath:properties/prop.properties</value>  
+                <value>classpath:properties/log4j.properties</value>  
+                <value>classpath:properties/jetbrick-template.properties</value>  
+            </list>  
+        </property>  
+    </bean>  
+      
+    <!-- 实体映射 -->  
+    <bean id="packagesToScan" class="org.springframework.beans.factory.config.ListFactoryBean">  
+        <property name="sourceList">  
+            <list>  
+                <value>com.techeffic.blog.entity</value>  
+            </list>  
+        </property>  
+    </bean>  
+  
+    <!-- 注解式事务 -->  
+    <tx:annotation-driven transaction-manager="transactionManager" />  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <property name="defaultEncoding" value="utf-8"></property>  
+    </bean>  
+  
+     <import resource="classpath:mongodb/mongodb.xml"/> 
 </beans>

@@ -8,12 +8,37 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 	<!-- 自动扫描且只扫描@Controller -->
-	<context:component-scan base-package="pub.lxd.blog.controller" use-default-filters="false">
+	<context:component-scan base-package="com.techeffic.blog.controller" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 	
-	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+	
+	<!-- 解决welcome-list配置首页不起作用的问题 -->  
+    <!-- <mvc:default-servlet-handler/> -->
+     
+    <!-- 启动 Spring json转换 -->  
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter" />  
+                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
+                    <property name="supportedMediaTypes">  
+                        <list>  
+                            <value>application/json;charset=UTF-8</value>  
+                        </list>  
+                    </property>  
+                </bean>  
+            </list>  
+        </property>  
+    </bean> 
+    
+    
+    <!-- 静态资源 之后交给nginx处理 -->  
+    <!-- <mvc:resources mapping="css/**" location="/WEB-INF/static/" /> -->  
+    
+    
+  	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
 		<mvc:message-converters register-defaults="true">
 			<!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -25,9 +50,6 @@
             </bean>
   		</mvc:message-converters>
 	</mvc:annotation-driven>
-	
-	<!-- 静态资源 -->
-
 	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 	    <property name="ignoreAcceptHeader" value="true" />
@@ -39,32 +61,24 @@
 	        </value>
 	    </property>
 	</bean>
-	<!-- 启动JSON格式的配置 -->
-	<!-- <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation
-		<property name="supportedMediaTypes">
-			<list>
-				<value>application/json;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean> -->
+	
 	
 	<!-- 模板配置 使用Jetbrick tempalte -->  
 	<bean id="viewResolver" class="jetbrick.template.web.springmvc.JetTemplateViewResolver">
 	    <property name="order" value="1" />
 	    <property name="contentType" value="text/html; charset=utf-8" />
 	    <property name="prefix" value="/WEB-INF/views/"/>
-	    <property name="suffix" value=".htm" />
+	    <property name="suffix" value=".html" />
 	
 	    <!-- 指定配置文件 -->
-	    <property name="configLocation" value="classpath:jetbrick/jetbrick-template.properties" />
+	    <property name="configLocation" value="classpath:properties/jetbrick-template.properties" />
 	
 	    <!-- 直接配置属性 -->
 	    <property name="configProperties">
 	        <props>
 	            <prop key="jetx.input.encoding">utf-8</prop>
 	            <prop key="jetx.output.encoding">utf-8</prop>
-	            <prop key="jetx.autoscan.packages">pub.lxd.tags</prop>
+	            <!-- <prop key="jetx.autoscan.packages">pub.lxd.tags</prop> -->
 	        </props>
 	    </property>
 	</bean>
