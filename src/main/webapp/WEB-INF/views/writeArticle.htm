@@ -2,28 +2,36 @@
 <link href="/css/base.css" rel="stylesheet">
 <link href="/css/about.css" rel="stylesheet">
 <link rel="stylesheet" href="kindeditor/themes/default/default.css" />
-<script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
-<script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
-<script charset="utf-8" src="js/jquery.js"></script>
-<link rel="stylesheet" type="text/css" href="css/kube.min.css"/>
+<link rel="stylesheet" type="text/css" href="css\kube.min.css"/>
+<style type="text/css">
+	body { font: 12px "微软雅黑", Arial, Helvetica, sans-serif; color: #756F71 }
+	article{
+		margin: 20px auto;
+		width: 1000px;
+		overflow: hidden;
+	}
+</style>
 <article class="aboutcon">
 <h1 class="t_nav"><span>您当前的位置：<a href="htpp://www.lxd.pub/writeArticle.htm">写博客</a></span></h1>
 <div class="content">
-  <div id="me_text">
-  	<form action="saveArticle.htm" method="POST" class="forms" id="blogForm">
-		<section class="width-1">
+  <form id="me_text" method="post">
+		<section>
 			<h6>文章类型<span class="req">*</span></h6>
-			<select name="articleType" id="articleType" class="select">
-				<option value="0">请选择</option>
+			<select name="articleType" id="articleType" class="select" style="width: 120px">
+				<option value="请选择">请选择</option>
 				<option value="1">原创</option>
 				<option value="2">转载</option>
 			</select>
 		</section>
 		<section>
-			<h6>文章标题<span id="titleSpan" class="desc">&nbsp;文章标题，请务必填写</span></h6>
-			<input oninput="validateInput('#titleSpan','#title','&nbsp;文章标题，请务必填写')" id="title" name="title" type="text" placeholder="博客标题" class="width-4" />
+			<h6>文章标题<span class="req">*</span></h6>
+			<input name="title" type="text" placeholder="博客标题" class="width-4" />
 		</section>
-		<section class="checkbox-list">
+		<section>
+			<h6>文章预览图<span class="req">*</span></h6>
+			<input name="imageView" type="text" id="imageViewURL" style="width:210px" /><button id="imageView" class="btn" onclick="return false;">选择图片</button>
+		</section>
+		<section class="checkbox-list" style="margin: 5px 0px 8px 0px;">
 			<h6>所属分类<span class="req">*</span></h6>
 			#for(SysData sysData:blogTypeList)
 			<input name="blogType" type="radio" value="${sysData.id}" /><label>${sysData.value}</label>
@@ -31,67 +39,72 @@
 		</section>
 		<section>
 			<h6>文章内容<span class="req">*</span></h6>
-			<textarea name="content" style="width:800px;height:400px;visibility:hidden;"></textarea>
+			<textarea id="content" style="width:800px;height:400px;visibility:hidden;"></textarea>
 		</section>
 		<section>
-			<h6>文章标签<span id="keywordsSpan" class="desc">&nbsp;用于文章搜索、区分的标签属性</span></h6>
-			<input id="keywords" oninput="validateInput('#keywordsSpan','#keywords','&nbsp;用于文章搜索、区分的标签属性')" name="keywords" type="text" placeholder="最多添加5个标签，多个标签使用“,”分隔" class="width-5" />
+			<h6>文章标签</h6>
+			<input name="keywords" type="text" placeholder="最多添加5个标签，多个标签使用“,”分隔" class="width-5" />
 		</section>
 		<br>
 		<section>
-			<button type="button" onclick="submitX()" id="saveArticle">发表文章</button>&nbsp;&nbsp;<button type="black">保存草稿</button>&nbsp;&nbsp;<button>取消</button>
+			<button type="black" id="saveArticle">发表文章</button>&nbsp;&nbsp;<button onclick="return false;">取消</button>
 		</section>
-		</form>
-  </div>
+  </form>
+  <script charset="utf-8" src="kindeditor\kindeditor-min.js"></script>
+ <script>
+			var editor;
+			var imageOnly;
+			KindEditor.ready(function(K) {
+				editor = K.create('#content', {
+					uploadJson : 'file/upload.htm',
+					fileManagerJson : 'file/manage.htm',
+					allowFileManager : true,
+					items:['source', '|', 'undo', 'redo', '|','code', 'cut', 'copy', 'paste', '|', 'justifyleft', 'justifycenter', 'justifyright','insertorderedlist', 'quickformat', 'selectall','formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold','italic', 'underline', '|',
+						'image', 'multiimage','insertfile', 'hr', 'baidumap', 'anchor', 'link'],
+					resizeType:0
+				});
+				imageOnly = K.editor({
+					allowFileManager:true,
+					uploadJson : 'file/upload.htm',
+					fileManagerJson : 'file/manage.htm'
+				});
+				K('#imageView').click(function() {
+					imageOnly.loadPlugin('image', function() {
+						imageOnly.plugin.imageDialog({
+							imageUrl : K('#imageViewURL').val(),
+							clickFn : function(url, title, width, height, border, align) {
+								K('#imageViewURL').val(url);
+								imageOnly.hideDialog();
+							}
+						});
+					});
+				});
+				
+				$('#me_text').form({
+						url:'saveArticle.htm',
+						onSubmit:function(param){
+							param.contentView=editor.text().replace(/[\r\n]/g,"");
+							param.content = editor.html();
+						},
+						success:function(data){
+							if(data.success){
+								alert('文章发布成功！');
+								window.location.href = "/blog/"+data.articleId+".htm";
+							}
+						}
+				});
+				/* function submitForm(){
+					$('#me_text').submit();
+				} */
+			});
+
+</script>
 
 </div>
 </article>
- <script>
- function validateInput(spanId,inputId,desc){
-	 if($(inputId).val() != ''){
-		 $(inputId).removeClass('input-error');
-		 $(spanId).removeClass('error');
-		 $(spanId).html(desc);
-	 }
- }
- function submitX(){
-	 //数据校验
-	 if($('#articleType').select === 0){
-		 $('#articleType').focus();
-		 return false;
-	 }
-	 if($('#title').val() === ''){
-		 $('#title').addClass('input-error');
-		 $('#titleSpan').addClass('error');
-		 $('#titleSpan').html('&nbsp;请输入文章标题');
-		 $('#title').focus();
-		 return false;
-	 }
-	 if($('#keywords').val() === ''){
-		 $('#keywords').addClass('input-error');
-		 $('#keywordsSpan').addClass('error');
-		 $('#keywordsSpan').html('&nbsp;请输入文章标签');
-		 $('#keywords').focus();
-		 return false;
-	 }
-	 $('#blogForm').submit();
- }
-			var editor;
-			KindEditor.ready(function(K) {
-				editor = K.create('textarea[name="content"]', {
-					uploadJson : 'file/upload.htm',
-					fileManagerJson : 'file/manage.htm',
-					allowFileManager : true
-				});
-				/*K("#saveArticle").click(function(){
-					$("#blogForm").submit();
-					/* K.ajax('saveArticle.htm', function(data) {
-					        if(data.success)
-								alert(data.msg);
-					}, 'POST', {articleType:K('#articleType').val(),title:K('input[name="title"]').val(),blogType:$("input[type=radio][checked]").val(),content:editor.html(),contentView:editor.text(),keywords:K('input[name="keywords"]').val()});
-				});*/
-			}); 
-
-</script>
+<script charset="utf-8" src="js\jquery.js"></script>
+<!-- <script charset="utf-8" src="E:\BaiduYunDownload\jquery-easyui-EDT-1.4-api\jquery-easyui-1.4\jquery.easyui.min.js"></script> -->
+<script charset="utf-8" src="js\jquery.parser.js"></script>
+<script charset="utf-8" src="js\jquery.form.js"></script>
 #include("layout/footer.htm")
 

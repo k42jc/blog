@@ -41,5 +41,5 @@ public interface IBlogService {
 	/**
 	 * 保存文章
 	 */
-	public void saveArticle(WebContext webCtx);
+	public long saveArticle(WebContext webCtx);
 }

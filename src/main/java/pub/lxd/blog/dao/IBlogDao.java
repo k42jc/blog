@@ -44,5 +44,5 @@ public interface IBlogDao extends IBaseDao<Blog> {
 	 * @param blog
 	 *
 	 */
-	void saveArticle(Blog blog);
+	long saveArticle(Blog blog);
 }

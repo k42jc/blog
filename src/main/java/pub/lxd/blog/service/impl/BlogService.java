@@ -39,22 +39,25 @@ public class BlogService extends BaseService implements IBlogService{
 	}
 
 	@Transactional(readOnly=false,rollbackFor=Exception.class)
-	public void saveArticle(WebContext webCtx) {
+	public long saveArticle(WebContext webCtx) {
 		Blog blog = new Blog();
 		//是否原创
 		//webCtx.getLong("blogType")
-		logger.info(webCtx.getLong("blogType"));
+		logger.info(webCtx.getLong("articleType"));
 		logger.info(webCtx.getString("title"));
+		logger.info(webCtx.getString("imageView"));
+		logger.info(webCtx.getLong("blogType"));
 		logger.info(webCtx.getString("content"));
 		logger.info(webCtx.getString("keywords"));
 		logger.info(webCtx.getString("contentView"));
 		blog.setTypeId(webCtx.getLong("blogType"));
 		blog.setTitle(webCtx.getString("title"));
 		blog.setCreateDate(new Date());
-		blog.setContentView(webCtx.getString("contentView").substring(0,350));
+		String contentView = webCtx.getString("contentView");
+		blog.setContentView(contentView.substring(0,contentView.length()>350?350:(contentView.length()-1)));
 		blog.setContent(webCtx.getString("content"));
 		blog.setKeyword(webCtx.getString("keywords"));
-		this.daoFactory.blogDao.saveArticle(blog);
+		return this.daoFactory.blogDao.saveArticle(blog);
 	}
 
 }

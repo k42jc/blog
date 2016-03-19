@@ -1,9 +1,5 @@
 package pub.lxd.blog.controller;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,16 +40,9 @@ public class BlogController extends BaseController{
 	@RequestMapping("/saveArticle")
 	@ResponseBody
 	public WebResponse saveArticle(){
-		/*Map<String,String[]> map = webCtx.getRequest().getParameterMap();
-		Set<String> keySet = map.keySet();
-		Iterator<String> keys = keySet.iterator();
-		while(keys.hasNext()){
-			String key = keys.next();
-			System.out.println(key+"--"+map.get(key)[0]);
-		}
-		System.out.println(map);*/
-		this.serviceFactory.blogService.saveArticle(webCtx);
+		long articleId = this.serviceFactory.blogService.saveArticle(webCtx);
 		WebResponse response = new WebResponse();
+		response.put("articleId", articleId);
 		return response;
 		//System.out.println("xxx");
 	}

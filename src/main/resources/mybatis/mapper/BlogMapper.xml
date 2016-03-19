@@ -185,7 +185,7 @@
 		update t_blog set VIEWNUMs=VIEWNUMS+1 where id=#{id}
 	</update>
 	<!-- 保存文章 -->
-	<insert id="saveArticle" parameterType="pub.lxd.blog.entity.Blog">
+	<insert id="saveArticle" parameterType="pub.lxd.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id">
 		insert into t_blog(title,contentView,content,typeId,keyword,createDate) values(#{title},#{contentView},#{content},#{typeId},#{keyword},#{createDate})
 	</insert>
 </mapper>

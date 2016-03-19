@@ -34,11 +34,20 @@
             <property name="defaultContentType" value="application/json" />
 	    <property name="mediaTypes" >
 	        <value>
-	            json=application/json
-	            xml=application/xml
+	            json=application/json;charset=UTF-8
+	            xml=application/xml;charset=UTF-8
 	        </value>
 	    </property>
 	</bean>
+	<!-- 启动JSON格式的配置 -->
+	<!-- <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		解决 HttpMediaTypeNotAcceptableException: Could not find acceptable representation
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean> -->
 	
 	<!-- 模板配置 使用Jetbrick tempalte -->  
 	<bean id="viewResolver" class="jetbrick.template.web.springmvc.JetTemplateViewResolver">
