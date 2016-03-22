@@ -3,10 +3,21 @@ package com.techeffic.blog.constants;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jetbrick.template.JetTemplate;
+
 public class WebContext {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
+	private JetTemplate template;
 	
+	public JetTemplate getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(JetTemplate template) {
+		this.template = template;
+	}
+
 	public WebContext(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
@@ -43,6 +54,5 @@ public class WebContext {
 	public Double getDouble(String params){
 		return Double.valueOf(this.request.getParameter(params).toString());
 	}
-	
-	
+
 }

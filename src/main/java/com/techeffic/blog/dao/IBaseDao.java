@@ -4,42 +4,38 @@ import java.util.List;
 
 /**
  * 基础dao接口
+ * 定义基础增删查该
  * @author k42jc
  *
- * @param <E> 对应的实体类对象
+ * @param <E> 实体类泛型
  */
 public interface IBaseDao<E> {
 	/**
-	 * 根据主键删除数据
-	 * @param id 主键
-	 * @return 删除的行数
+	 * 新增或修改记录
+	 * 数据存在时更新，不存在时新增
+	 * @param e 实体对象
 	 */
-	int deleteByPrimaryKey(Long id);
+	void saveOrUpdate(E e);
 	
 	/**
-	 * 新增数据
-	 * @param e 实体类对象
-	 * @return 对应的数据库主键
+	 * 删除记录
+	 * @param e 待删除的对象
 	 */
-    long insertSelective(E e);
-    
-    /**
-     * 根据主键查找一条记录
-     * @param id 主键
-     * @return 单个实体类对象
-     */
-    E selectByPrimaryKey(Long id);
-    
-    /**
-     * 更新数据
-     * @param e 实体类对象
-     * @return 更新的行数
-     */
-    int updateByPrimaryKeySelective(E e);
-    
-    /**
-     * 查询所有表记录
-     * @return 所有表记录
-     */
-    List<E> selectAll();
+	void remove(E e);
+	
+	/**
+	 * 根据id查询实体对象
+	 * @param clazz 实体对应的类型
+	 * @param id 主键
+	 * @return 查询结果
+	 */
+	E findById(Class<E> clazz,String id);
+	
+	/**
+	 * 查询所有结果集
+	 * @param clazz 实体对应的类型
+	 * @return 实体结果集
+	 */
+	List<E> findAll(Class<E> clazz);
+
 }

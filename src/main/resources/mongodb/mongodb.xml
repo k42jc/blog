@@ -31,7 +31,7 @@
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg ref="mongo" />
-		<constructor-arg name="databaseName" value="db_mongo" />
+		<constructor-arg name="databaseName" value="${mongo.db_name}" />
 	</bean>
 
 </beans>

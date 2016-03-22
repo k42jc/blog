@@ -58,22 +58,4 @@ public class WebResponse extends HashMap<String, Object>{
 		return obj.toString();
 	}
 	
-	public static WebResponse toMap(String jsonStr){
-		WebResponse response = new WebResponse(4);
-		try {
-			JSONObject jsonObject = new JSONObject(jsonStr);
-			Iterator ite = jsonObject.keys();
-			while(ite.hasNext()){
-				Object key = ite.next();
-				response.put(key.toString(), jsonObject.get(key.toString()));
-			}
-			response.put("msg","获取access_token成功");
-			return response;
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
 }

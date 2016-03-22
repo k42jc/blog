@@ -24,7 +24,7 @@ public class WeChatController extends BaseController{
 		map.put("viewedBlogTop5", this.serviceFactory.blogService.selectTop5ViewedBlog());
 		//首页博客分类
 		map.put("blogTypeList", this.serviceFactory.blogService.selectBlogTypeList());*/
-		String result = this.serviceFactory.weChatService.checkSignature(webCtx);
+		String result = this.getServiceFactory().getWeChatService().checkSignature(webCtx);
 		logger.info("结果字符串为："+result);
 		if(result == null || "".equals(result)){
 			return "结果是空的哟";

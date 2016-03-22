@@ -15,13 +15,13 @@ public class FileUploadController extends BaseController{
 	@RequestMapping("upload")
 	@ResponseBody
 	public String upload() throws Exception{
-		return this.serviceFactory.fileUploadService.fileUpload(webCtx);
+		return this.getServiceFactory().getFileUploadService().fileUpload(webCtx);
 	}
 	
 	@RequestMapping("manage")
 	@ResponseBody
 	public String manage() throws Exception{
 		
-		return this.serviceFactory.fileUploadService.fileManage(webCtx);
+		return this.getServiceFactory().getFileUploadService().fileManage(webCtx);
 	}
 }

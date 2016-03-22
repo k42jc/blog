@@ -16,7 +16,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  * @author xudong_liao<br/>
  * @date 2016年1月5日<br/>
  */
-public class XMLUtils {
+public class XMLUtil {
 	
 	public static XStream createXstream() {
 		return new XStream(new XppDriver() {

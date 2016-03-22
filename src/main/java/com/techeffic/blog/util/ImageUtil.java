@@ -18,7 +18,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * 缩略图类（通用） 本java类能将jpg、bmp、png、gif图片文件，进行等比或非等比的大小转换。 具体使用方法
  * compressPic(大图片路径,生成小图片路径,大图片文件名,生成小图片文名,生成小图片宽度,生成小图片高度,是否等比缩放(默认为true))
  */
- public class ImageUtils { 
+ public class ImageUtil { 
 	 private File file = null; // 文件对象 
 	 private String inputDir; // 输入图路径
 	 private String outputDir; // 输出图路径
@@ -27,7 +27,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 	 private int outputWidth = 100; // 默认输出图片宽
 	 private int outputHeight = 100; // 默认输出图片高
 	 private boolean proportion = true; // 是否等比缩放标记(默认为等比缩放)
-	 public ImageUtils() { // 初始化变量
+	 public ImageUtil() { // 初始化变量
 		 inputDir = ""; 
 		 outputDir = ""; 
 		 inputFileName = ""; 
@@ -147,7 +147,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  	// main测试 
  	// compressPic(大图片路径,生成小图片路径,大图片文件名,生成小图片文名,生成小图片宽度,生成小图片高度,是否等比缩放(默认为true))
  	public static void main(String[] arg) { 
- 		ImageUtils mypic = new ImageUtils(); 
+ 		ImageUtil mypic = new ImageUtil(); 
  		System.out.println("输入的图片大小：" + mypic.getPicSize("C:\\Users\\Administrator\\Desktop\\IMG_2146.JPG")/1024 + "KB"); 
  		int count = 0; // 记录全部图片压缩所用时间
  		for (int i = 0; i < 10; i++) { 

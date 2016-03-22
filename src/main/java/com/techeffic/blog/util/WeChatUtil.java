@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @date 2016年1月5日<br/>
  */
 @Component
-public class WeChatUtils {
+public class WeChatUtil {
 	@Value("#{settings['weChatToken']}")
 	private   String TOKEN = "";
 	@Value("#{settings['appId']}")

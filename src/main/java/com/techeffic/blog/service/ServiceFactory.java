@@ -10,8 +10,31 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ServiceFactory {
+	private IFileUploadService fileUploadService;
+	private IWeChatService weChatService;
+	private ITemplateService templateService;
+	
+	public IFileUploadService getFileUploadService() {
+		return fileUploadService;
+	}
 	@Autowired
-	public IFileUploadService fileUploadService;
+	public void setFileUploadService(IFileUploadService fileUploadService) {
+		this.fileUploadService = fileUploadService;
+	}
+	
+	public IWeChatService getWeChatService() {
+		return weChatService;
+	}
 	@Autowired
-	public IWeChatService weChatService;
+	public void setWeChatService(IWeChatService weChatService) {
+		this.weChatService = weChatService;
+	}
+	@Autowired
+	public void setTemplateService(ITemplateService templateService) {
+		this.templateService = templateService;
+	}
+	
+	public ITemplateService getTemplateService() {
+		return this.templateService;
+	}
 }
