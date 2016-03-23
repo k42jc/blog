@@ -85,7 +85,7 @@
 		<welcome-file>index</welcome-file>
 	</welcome-file-list>
 	
-	<servlet-mapping> 
+	<!-- <servlet-mapping> 
 	    <servlet-name>default</servlet-name>
 	    <url-pattern>*.jpg</url-pattern>   
 	</servlet-mapping>  
@@ -104,6 +104,6 @@
 	<servlet-mapping>      
 	    <servlet-name>default</servlet-name>     
 	    <url-pattern>*.gif</url-pattern>    
-	</servlet-mapping>
+	</servlet-mapping> -->
  
 </web-app>

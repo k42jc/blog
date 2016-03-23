@@ -5,12 +5,11 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jetbrick.template.JetTemplate;
-import jetbrick.template.web.JetWebContext;
+import jetbrick.template.JetEngine;
 import jetbrick.template.web.JetWebEngine;
-import jetbrick.template.web.springmvc.JetTemplateView;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.techeffic.blog.constants.WebContext;
 import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.service.ServiceFactory;
-import com.techeffic.blog.template.PageTemplateEngine;
 
 /**
  * 基础控制器
@@ -28,20 +26,23 @@ import com.techeffic.blog.template.PageTemplateEngine;
  */
 @ControllerAdvice
 public class BaseController {
-//	@Value("#{setting['template']}")
-	public String template = "/WEB-INF/views/template/template.html";
+	@Value("#{settings['metaPagePath']}")
+	public String metaPagePath = "";
+	
 	protected WebContext webCtx;
-	protected WebResponse webResponse;
+	protected static WebResponse webResponse;
+	
 	private ServiceFactory serviceFactory;
-	protected PageTemplateEngine pageTemplateEngine;
-
-	public PageTemplateEngine getPageTemplateEngine() {
-		return pageTemplateEngine;
+	
+	/*private JetWebEngine jetWebEngine;
+	
+	public JetWebEngine getJetWebEngine() {
+		return jetWebEngine;
 	}
 	@Autowired
-	public void setPageTemplateEngine(PageTemplateEngine pageTemplateEngine) {
-		this.pageTemplateEngine = pageTemplateEngine;
-	}
+	public void setJetWebEngine(JetWebEngine jetWebEngine) {
+		this.jetWebEngine = jetWebEngine;
+	}*/
 	public ServiceFactory getServiceFactory() {
 		return serviceFactory;
 	}
@@ -62,6 +63,11 @@ public class BaseController {
 	
 	@ModelAttribute
 	public void init(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		if(webResponse == null){
+			webResponse = new WebResponse();
+		}else{
+			webResponse.clear();
+		}
 		if(webCtx == null){
 			webCtx = new WebContext(request, response);
 		}else{
@@ -69,12 +75,7 @@ public class BaseController {
 			webCtx.setResponse(response);
 		}
 		//设置模板数据
-//		pageTemplateEngine.setJetEngine(jetWebEngine.getEngine());
-		JetWebContext context = new JetWebContext(request, response);
-		JetTemplate template = JetWebEngine.getEngine().getTemplate(this.template);
-		template.render(context, response.getOutputStream());
-//		webCtx.setTemplate(pageTemplateEngine.getTemplate(template));E:\work_kingdee\blog
-		
+		webCtx.setTemplate(JetWebEngine.getEngine().getTemplate(metaPagePath));
 	}
 	
 

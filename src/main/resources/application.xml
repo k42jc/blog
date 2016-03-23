@@ -47,4 +47,6 @@
     </bean>  
   
      <import resource="classpath:mongodb/mongodb.xml"/> 
+     
+     <!-- <bean id="jetWebEngine" class="jetbrick.template.web.JetWebEngine"></bean> -->
 </beans>

@@ -34,8 +34,8 @@
     </bean> 
     
     
-    <!-- 静态资源 之后交给nginx处理 -->  
-    <!-- <mvc:resources mapping="css/**" location="/WEB-INF/static/" /> -->  
+    <!-- 静态资源 交给nginx处理 -->  
+    <!-- <mvc:resources mapping="/css/**" location="/static/css/" /> -->
     
     
   	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
@@ -82,7 +82,6 @@
 	        </props>
 	    </property>
 	</bean>
-	
 	
 	<!-- end -->
 </beans>
