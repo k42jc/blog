@@ -5,17 +5,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import jetbrick.template.JetTemplate;
 
+/**
+ * 系统参数类
+ * 绑定系统常用参数
+ * httpServletRequest httpServletResponse jetTemplate的元数据模板
+ * @author k42jc
+ *
+ */
 public class WebContext {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
-	private JetTemplate template;
-	
-	public JetTemplate getTemplate() {
-		return template;
+	private JetTemplate metaPageTemplate;
+
+	public JetTemplate getMetaPageTemplate() {
+		return metaPageTemplate;
 	}
 
-	public void setTemplate(JetTemplate template) {
-		this.template = template;
+	public void setMetaPageTemplate(JetTemplate metaPageTemplate) {
+		this.metaPageTemplate = metaPageTemplate;
 	}
 
 	public WebContext(HttpServletRequest request, HttpServletResponse response) {

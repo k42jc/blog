@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jetbrick.template.JetEngine;
+import jetbrick.template.JetTemplate;
 import jetbrick.template.web.JetWebEngine;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,6 @@ public class BaseController {
 	
 	private ServiceFactory serviceFactory;
 	
-	/*private JetWebEngine jetWebEngine;
-	
-	public JetWebEngine getJetWebEngine() {
-		return jetWebEngine;
-	}
-	@Autowired
-	public void setJetWebEngine(JetWebEngine jetWebEngine) {
-		this.jetWebEngine = jetWebEngine;
-	}*/
 	public ServiceFactory getServiceFactory() {
 		return serviceFactory;
 	}
@@ -74,8 +66,8 @@ public class BaseController {
 			webCtx.setRequest(request);
 			webCtx.setResponse(response);
 		}
-		//设置模板数据
-		webCtx.setTemplate(JetWebEngine.getEngine().getTemplate(metaPagePath));
+		//获取基础模板
+		webCtx.setMetaPageTemplate(JetWebEngine.getEngine().getTemplate(metaPagePath));
 	}
 	
 
