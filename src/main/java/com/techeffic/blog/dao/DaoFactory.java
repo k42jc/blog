@@ -14,6 +14,16 @@ import org.springframework.stereotype.Component;
 public class DaoFactory {
 	//用户实例化接口
 	private IUserDao userMongoDao;
+	//模板实例化接口
+	private ITemplateDao templateMongoDao;
+	
+	public ITemplateDao getTemplateMongoDao() {
+		return templateMongoDao;
+	}
+	@Autowired
+	public void setTemplateMongoDao(ITemplateDao templateMongoDao) {
+		this.templateMongoDao = templateMongoDao;
+	}
 
 	public IUserDao getUserMongoDao() {
 		return userMongoDao;
