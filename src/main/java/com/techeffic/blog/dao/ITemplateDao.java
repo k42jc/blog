@@ -9,4 +9,6 @@ import com.techeffic.blog.entity.Template;
  */
 public interface ITemplateDao extends IBaseDao<Template>{
 
+	Template findTemplateByRequestURI(String requestURI);
+
 }

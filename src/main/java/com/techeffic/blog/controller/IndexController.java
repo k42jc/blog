@@ -24,11 +24,8 @@ public class IndexController extends BaseController{
 		//根据uri查询出模板
 		//获取模板
 		JetTemplate template = this.webCtx.getMetaPageTemplate();
-		webResponse.put("title", "首页");
-		webResponse.put("data", "<link rel='stylesheet' href='/static/css/kube.css'>"+
-	"<link rel='stylesheet' href='/static/css/swiper.min.css'>");
-		JetTemplate indexTemplate = JetWebEngine.getEngine().getTemplate("/WEB-INF/views/"+"index"+".html");
-		webResponse.put("body", StringUtil.strArrayToHtml(indexTemplate.getSource().getLines()));
+		JetTemplate indexTemplate = JetWebEngine.getEngine().getTemplate("/component/index.html");
+		webResponse.put("pageBody", StringUtil.strArrayToHtml(indexTemplate.getSource().getLines()));
 		template.render(webResponse, webCtx.getResponse().getOutputStream());
 //		return "index";
 	}

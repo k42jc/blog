@@ -12,7 +12,7 @@ public class Component implements Serializable{
 	//主键
 	private String id;
 	//模板id
-	private String templateId;
+//	private String templateId;
 	//当前组件唯一标识
 	private String key;
 	//当前组件所在目录
@@ -25,12 +25,12 @@ public class Component implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getTemplateId() {
+	/*public String getTemplateId() {
 		return templateId;
 	}
 	public void setTemplateId(String templateId) {
 		this.templateId = templateId;
-	}
+	}*/
 	public String getKey() {
 		return key;
 	}

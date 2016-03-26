@@ -16,7 +16,16 @@ public class DaoFactory {
 	private IUserDao userMongoDao;
 	//模板实例化接口
 	private ITemplateDao templateMongoDao;
+	//页面组件实例化接口
+	private IComponentDao componentMongoDao;
 	
+	public IComponentDao getComponentMongoDao() {
+		return componentMongoDao;
+	}
+	@Autowired
+	public void setComponentMongoDao(IComponentDao componentMongoDao) {
+		this.componentMongoDao = componentMongoDao;
+	}
 	public ITemplateDao getTemplateMongoDao() {
 		return templateMongoDao;
 	}

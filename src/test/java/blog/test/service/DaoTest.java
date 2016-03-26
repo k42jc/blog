@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import blog.test.JUnit4ClassRunner;
 
 import com.techeffic.blog.dao.DaoFactory;
+import com.techeffic.blog.entity.Component;
 import com.techeffic.blog.entity.Template;
 import com.techeffic.blog.entity.User;
 
@@ -45,5 +46,15 @@ public class DaoTest {
 		template.setNeedLogin("0");
 		
 		this.daoFactory.getTemplateMongoDao().saveOrUpdate(template);
+	}
+	@Test
+	public void componentTest(){
+		Component component = new Component();
+		component.setId(UUID.randomUUID().toString());
+		component.setKey("header");
+		component.setPath("component/header.html");
+		component.setClassName("headerComponentService");
+		
+		this.daoFactory.getComponentMongoDao().saveOrUpdate(component);
 	}
 }

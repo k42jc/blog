@@ -9,11 +9,12 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
-	
 	#tag introduce("/static/css/kube.css") #end
-	${data}
+	#tag introduce("/static/js/jquery-1.11.1.min.js") #end
+	#tag introduce("/static/js/customer.js") #end
 </head>
 <body>
-	${body}
+	#tag component("header") #end
+	${pageBody}
 </body>
 </html>

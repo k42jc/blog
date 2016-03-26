@@ -74,13 +74,13 @@
 	    <property name="configLocation" value="classpath:properties/jetbrick-template.properties" />
 	
 	    <!-- 直接配置属性 -->
-	    <property name="configProperties">
+	    <!-- <property name="configProperties">
 	        <props>
 	            <prop key="jetx.input.encoding">utf-8</prop>
 	            <prop key="jetx.output.encoding">utf-8</prop>
-	            <!-- <prop key="jetx.autoscan.packages">pub.lxd.tags</prop> -->
+	            <prop key="jetx.autoscan.packages">pub.lxd.tags</prop>
 	        </props>
-	    </property>
+	    </property> -->
 	</bean>
 	
 	<!-- end -->
