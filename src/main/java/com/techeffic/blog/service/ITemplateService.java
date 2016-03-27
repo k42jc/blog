@@ -1,13 +1,8 @@
 package com.techeffic.blog.service;
 
-import java.util.Map;
-
-import jetbrick.template.JetTemplate;
+import com.techeffic.blog.entity.Template;
 
 public interface ITemplateService {
 
-	/*Map<String, Object> findPageData(String string);
-
-	JetTemplate getMetaPageTemplate();*/
-	
+	public Template findTemplateByRequestURI(String requestURI);
 }

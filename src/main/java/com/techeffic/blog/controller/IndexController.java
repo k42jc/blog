@@ -14,11 +14,10 @@ import com.techeffic.blog.constants.WebContext;
 import com.techeffic.blog.util.StringUtil;
 
 @Controller
-@RequestMapping("index")
+//@RequestMapping("index")
 public class IndexController extends BaseController{
 	
-	@RequestMapping("")
-	public void index() throws IOException{
+	/*public void index() throws IOException{
 		//获取器当前请求URI
 		String uri = webCtx.getRequest().getRequestURI();
 		//根据uri查询出模板
@@ -28,5 +27,5 @@ public class IndexController extends BaseController{
 		webResponse.put("pageBody", StringUtil.strArrayToHtml(indexTemplate.getSource().getLines()));
 		template.render(webResponse, webCtx.getResponse().getOutputStream());
 //		return "index";
-	}
+	}*/
 }

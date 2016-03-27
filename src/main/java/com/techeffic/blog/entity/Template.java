@@ -14,20 +14,12 @@ public class Template implements Serializable{
 	private String id;
 	//请求URI
 	private String requestURI;
-	//内嵌数据获取类名
-	private String className;
-	//是否基础模板
-//	private String isMeta;
 	//页面标题
 	private String title;
 	//页面关键字
 	private String keyWords;
 	//页面描述
 	private String description;
-	//静态文件引入 包括CSS/javaScript外部文件
-	private String introduce;
-	//是否首页
-	private String isIndex;
 	//是否需要登录
 	private String needLogin;
 	public String getId() {
@@ -41,24 +33,6 @@ public class Template implements Serializable{
 	}
 	public void setRequestURI(String requestURI) {
 		this.requestURI = requestURI;
-	}
-	public String getClassName() {
-		return className;
-	}
-	public void setClassName(String className) {
-		this.className = className;
-	}
-	/*public String getIsMeta() {
-		return isMeta;
-	}
-	public void setIsMeta(String isMeta) {
-		this.isMeta = isMeta;
-	}*/
-	public String getIsIndex() {
-		return isIndex;
-	}
-	public void setIsIndex(String isIndex) {
-		this.isIndex = isIndex;
 	}
 	public String getNeedLogin() {
 		return needLogin;
@@ -83,12 +57,6 @@ public class Template implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getIntroduce() {
-		return introduce;
-	}
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
 	}
 	
 }

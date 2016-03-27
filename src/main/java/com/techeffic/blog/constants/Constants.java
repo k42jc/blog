@@ -24,4 +24,7 @@ public class Constants {
 	public static final String EXPIRES_IN = "expires_in";
 	/**微信公众号--ip_list*/
 	public static final String IP_LIST = "ip_list";
+	
+	//当前页面需要登录
+	public static final String NEED_LOGIN = "1";
 }

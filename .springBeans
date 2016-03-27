@@ -9,6 +9,8 @@
 	<configs>
 		<config>src/main/resources/application.xml</config>
 		<config>src/main/resources/mongodb/mongodb.xml</config>
+		<config>src/main/resources/interceptors/spring-interceptors.xml</config>
+		<config>src/main/resources/template/jetbrick-template.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/resources/spring-mvc.xml</config>

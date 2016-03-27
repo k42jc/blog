@@ -11,8 +11,6 @@ public class Component implements Serializable{
 	private static final long serialVersionUID = 6385751780887960216L;
 	//主键
 	private String id;
-	//模板id
-//	private String templateId;
 	//当前组件唯一标识
 	private String key;
 	//当前组件所在目录
