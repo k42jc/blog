@@ -20,6 +20,8 @@ public class Template implements Serializable{
 	private String keyWords;
 	//页面描述
 	private String description;
+	//模板位置
+	private String path;
 	//是否需要登录
 	private String needLogin;
 	public String getId() {
@@ -58,5 +60,12 @@ public class Template implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	
 	
 }

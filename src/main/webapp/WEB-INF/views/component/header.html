@@ -13,7 +13,7 @@
 			</div>
 			<div class="nav_z">
 				<ul id="navul" class="cl">
-					<li><a href="#">首页</a></li>
+					<li><a href="/">首页</a></li>
 					<li><a href="#">文章列表</a>
 						<ul>
 							<li><a href="#">开发日志</a></li>
@@ -45,13 +45,13 @@
 			<ul>
 				<li><a href="/">首页</a></li>
 				<li><a href="/">关于</a></li>
-			</ul>
+			<!-- </ul>
 		</nav>
 		<div class="brand hide-for-small">
 			<span>个人博客</span>
 		</div>
 		<nav id="nav-right">
-			<ul>
+			<ul> -->
 				<li><a href="/">关于作者</a></li>
 				<li><a href="article.html">博客</a></li>
 				<li><a href="login.html">账号登录</a></li>
@@ -59,3 +59,14 @@
 		</nav>
 	</div>
 </div>
+<script type="text/javascript">
+	$(function() {
+		//头页登录
+		$("#navul > li").not(".navhome").hover(function() {
+			$(this).addClass("navmoon")
+		}, function() {
+			$(this).removeClass("navmoon")
+		});
+	
+	});
+</script>

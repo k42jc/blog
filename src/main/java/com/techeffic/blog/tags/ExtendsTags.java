@@ -4,24 +4,16 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import jetbrick.template.JetAnnotations;
 import jetbrick.template.JetTemplate;
 import jetbrick.template.runtime.JetTagContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.ServletContextAware;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
 
-import com.techeffic.blog.constants.WebContext;
 import com.techeffic.blog.context.SpringContextHolder;
-import com.techeffic.blog.dao.DaoFactory;
 import com.techeffic.blog.entity.Component;
-import com.techeffic.blog.service.component.IComponentService;
+import com.techeffic.blog.service.ServiceFactory;
+import com.techeffic.blog.service.component.IDataModelService;
 
 /**
  * 模板标签扩展
@@ -29,7 +21,8 @@ import com.techeffic.blog.service.component.IComponentService;
  *
  */
 @JetAnnotations.Tags
-public class ExtendsTags extends DaoFactory {
+public class ExtendsTags extends BaseTags {
+	
 	/**
 	 * 引入静态文件tag
 	 * 
@@ -62,17 +55,13 @@ public class ExtendsTags extends DaoFactory {
 	 */
 	public static void component(JetTagContext ctx, String key)
 			throws IOException {
-		//获取当前请求的request/response
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		WebContext webCtx = new WebContext(request, null);
 		// 获取当前组件配置
-		Component component = ((DaoFactory) SpringContextHolder
-				.getBean("daoFactory")).getComponentMongoDao()
+		Component component = serviceFactory.getComponentService()
 				.findComponentByKey(key);
 		// 获取当前模板
 		JetTemplate template = ctx.getEngine().getTemplate(component.getPath());
 		// 获取模板内嵌数据
-		Map<String, Object> datas = ((IComponentService) SpringContextHolder
+		Map<String, Object> datas = ((IDataModelService) SpringContextHolder
 				.getBean(component.getClassName())).getData(webCtx);
 		// 模板渲染
 		StringWriter writer = new StringWriter();

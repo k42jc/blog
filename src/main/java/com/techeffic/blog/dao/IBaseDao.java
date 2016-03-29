@@ -37,5 +37,12 @@ public interface IBaseDao<E> {
 	 * @return 实体结果集
 	 */
 	List<E> findAll(Class<E> clazz);
+	
+	/**
+	 * 保存
+	 * @param e 实体
+	 * @param name 表名
+	 */
+	void save(E e,String name);
 
 }

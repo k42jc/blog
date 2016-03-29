@@ -35,6 +35,7 @@ header.header{
 .blog-view{
 	max-width: 1120px;
 	margin: 0 auto;
+	border-top:1px solid #d7d7d7;
 }
 .recommend{
     font: 18px "微软雅黑", Arial, Helvetica, sans-serif;
@@ -390,7 +391,7 @@ html {
 body {
 	font-family: "微软雅黑","Microsoft YaHei", Verdana, "Segoe UI", "宋体", Arial, Helvetica, sans-serif !important;
 	line-height: 24px;
-	background: #ffffff;
+	background: #fafafa;
 	color: #202020;
 }
 
@@ -4730,7 +4731,7 @@ h2 + .doc-head,h2 + .doc-head-faq {
 #footer {
 	padding: 48px;
 	padding-top: 48px;
-	border-top: 1px solid rgba(0,0,0,0.05);
+	border-top: 1px solid #d7d7d7;
 	font-size: 13px;
 	color: rgba(0,0,0,0.6);
 }

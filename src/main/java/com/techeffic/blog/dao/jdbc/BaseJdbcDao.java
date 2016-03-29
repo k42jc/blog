@@ -2,8 +2,7 @@ package com.techeffic.blog.dao.jdbc;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 /**
  * jdbc基础dao
@@ -12,8 +11,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
  * @param <E>
  */
 public abstract class BaseJdbcDao<E>{
-	
-	private SimpleJdbcTemplate jdbcTemplate;
+	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	public void delete(E e) {
 		
@@ -34,15 +32,14 @@ public abstract class BaseJdbcDao<E>{
 		return null;
 	}
 
-	public SimpleJdbcTemplate getJdbcTemplate() {
+	public NamedParameterJdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
 	
 //	@Autowired
-	public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
+	public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	
-	
+
 
 }

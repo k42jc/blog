@@ -86,4 +86,9 @@ public class BaseMongoDao<E> implements IBaseDao<E>{
 		return this.mongoTemplate.findAll(clazz);
 	}
 
+	@Override
+	public void save(E e, String name) {
+		this.mongoTemplate.save(e, name);
+	}
+
 }

@@ -13,7 +13,15 @@ public class ServiceFactory {
 	private IFileUploadService fileUploadService;
 	private IWeChatService weChatService;
 	private ITemplateService templateService;
-	
+	private IComponentService componentService;
+
+	public IComponentService getComponentService() {
+		return componentService;
+	}
+	@Autowired
+	public void setComponentService(IComponentService componentService) {
+		this.componentService = componentService;
+	}
 	public IFileUploadService getFileUploadService() {
 		return fileUploadService;
 	}

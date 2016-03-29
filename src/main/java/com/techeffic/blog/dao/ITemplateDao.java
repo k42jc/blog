@@ -1,5 +1,7 @@
 package com.techeffic.blog.dao;
 
+import java.util.List;
+
 import com.techeffic.blog.entity.Template;
 
 /**
