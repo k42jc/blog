@@ -1,0 +1,24 @@
+<div id="cover">
+	<div id="hero">
+		<h1>登录</h1>
+	</div>
+	<form action="/login.action" class="forms content-slim" data-tools="validate" data-url="/login/validate.action" method="post" >
+		<input type="hidden" name="redirectURI" value="${redirectURI[0]}">
+		<section>
+			<label for="userName">用户名/邮箱<span class="error" id="userName-error"></span></label>
+			<input type="text" name="userName" autofocus="true">
+		</section>
+		<section>
+			<label for="password">密码<span class="error" id="password-error"></span></label>
+			<input type="password" name="password">
+		</section>
+		<p>
+			<button name="send" class="btn width-12" type="primary">登录</button>
+		</p>
+		<p>
+			<a href="/" class="small color-black">忘记密码？</a>
+		</p>
+		<p class="small">
+			<p class="small">如果您无法使用账号密码登录，请仔细检查密码是否正确。若您有疑问，或者想对作者提出意见，欢迎发送邮件至<b>k42jc@hotmail.com</b>，我会尽快回复邮件！</p>
+		</p>
+	</form>

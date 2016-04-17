@@ -1,74 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="utf-8"/>
-	<title>登录页</title>
-	<link rel="stylesheet" type="text/css" href="css/kube.css">
-	<!-- <script type="text/javascript" src="js/combine.js"></script> -->
-	<!-- <script type="text/javascript" src="js/kube.js"></script> -->
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/customer.js"></script>
+	<meta charset="utf-8">
+	<title>${title}</title>
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">  
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="${keywords}" />
+	<meta name="description" content="${description}" />
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	#tag introduce("/static/css/kube.css") #end
+	#tag introduce("/static/js/jquery-1.11.1.min.js") #end
+	#tag introduce("/static/js/customer.js") #end
 
 </head>
 <body>
-	<div id="cover">
-		<div class="nav-toggle">
-			<div id="nav-brand">
-				<span>个人博客</span>
-				<a href="/" data-tools="togglenav" class="tools-toggle" data-target="#header"></a>
-			</div>
-		</div>
-		<header id="header" class="hide-for-small open" style>
-			<nav id="nav-left">
-				<ul>
-					<li><a href="/">首页</a></li>
-					<li><a href="/">博客</a></li>
-				</ul>
-			</nav>
-			<div class="brand hide-for-small">
-				<a href="index.html">廖旭东个人博客</a>
-			</div>
-			<nav id="nav-right">
-				<ul>
-					<li><a href="/">个人简介</a></li>
-					<li><a href="article.html">博客</a></li>
-					<li><span>账号登录</span></li>
-				</ul>
-			</nav>
-		</header>
-	</div>
-	<div id="hero">
-		<h1>登录</h1>
-	</div>
-	<form action="/" class="forms content-slim" data-tools="validate" data-url="json/respond.json" method="post" >
-		<section>
-			<label for="user-email">用户名/邮箱<span class="error" id="user-email-error"></span></label>
-			<input type="text" name="user-email" autofocus="true">
-		</section>
-		<section>
-			<label for="user-password">密码<span class="error" id="user-password-error"></span></label>
-			<input type="password" name="user-password">
-		</section>
-		<p>
-			<button name="send" class="btn width-12" type="primary">登录</button>
-		</p>
-		<p>
-			<a href="/" class="small color-black">忘记密码？</a>
-		</p>
-		<p class="small">
-			<p class="small">如果您无法使用账号密码登录，请仔细检查密码是否正确。若您有疑问，或者想对作者提出意见，欢迎发送邮件至<b>k42jc@hotmail.com</b>，我会尽快回复邮件！</p>
-		</p>
-	</form>
-	<br>
-	<br>
-	<footer id="footer">
-		<p>&copy;廖旭东个人博客.All rights reserved.</p>
-		<nav>
-			<ul>
-				<li><a href="/">联系作者.</a></li>
-				<li><a href="/">关注微信公众号.</a></li>
-			</ul>
-		</nav>
-	</footer>
+	#tag component("header") #end
+	#tag component("login_body") #end
+	#tag component("footer") #end
 </body>
 </html>

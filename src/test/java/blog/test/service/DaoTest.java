@@ -65,10 +65,20 @@ public class DaoTest {
 		template3.setTitle("登录-技术之路-廖旭东个人博客");
 		template3.setKeyWords("登录页面，技术博客，个人博客，技术文章");
 		template3.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
+		
+		Template template4 = new Template();
+		template4.setId(UUID.randomUUID().toString());
+		template4.setRequestURI("/write_kd");
+		template4.setPath("/write_kd.html");
+		template4.setNeedLogin("1");
+		template4.setTitle("写博客(普通模式)-技术之路-廖旭东个人博客");
+		template4.setKeyWords("使用富文本编辑器写博客，技术博客，个人博客，技术文章");
+		template4.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
 		List<Template> list = new ArrayList<Template>();
 		list.add(template);
 		list.add(template2);
 		list.add(template3);
+		list.add(template4);
 		
 		list.forEach(t -> {
 			this.daoFactory.getTemplateMongoDao().saveOrUpdate(t);
@@ -101,19 +111,30 @@ public class DaoTest {
 		component4.setPath("/component/index/recommend.html");
 		component4.setClassName("recommendDataModelService");
 		
-//		Component component5 = new Component();
-//		component5.setId(UUID.randomUUID().toString());
-//		component5.setKey("login");
-//		component5.setPath("/component/login.html");
-//		component5.setClassName("loginComponentService");
+		Component component5 = new Component();
+		component5.setId(UUID.randomUUID().toString());
+		component5.setKey("kd_body");
+		component5.setPath("/component/kindEditor/body.html");
+		component5.setClassName("kindEditorWriteService");
 		
 		List<Component> list = new ArrayList<Component>();
 		list.add(component);
 		list.add(component2);
 		list.add(component3);
 		list.add(component4);
+		list.add(component5);
 		list.forEach(c -> {
 			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
 		});
+	}
+	@Test
+	public void addLoginTemp(){
+		Component component5 = new Component();
+		component5.setId(UUID.randomUUID().toString());
+		component5.setKey("login_body");
+		component5.setPath("/component/login/body.html");
+		component5.setClassName("");
+		
+		this.daoFactory.getComponentMongoDao().saveOrUpdate(component5);
 	}
 }

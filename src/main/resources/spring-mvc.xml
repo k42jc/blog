@@ -15,30 +15,9 @@
 	
 	
 	<!-- 解决welcome-list配置首页不起作用的问题 -->  
-    <mvc:default-servlet-handler/>
+    <!-- <mvc:default-servlet-handler/> -->
      
-    <!-- 启动 Spring json转换 -->  
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
-        <property name="messageConverters">  
-            <list>  
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter" />  
-                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
-                    <property name="supportedMediaTypes">  
-                        <list>  
-                            <value>application/json;charset=UTF-8</value>  
-                        </list>  
-                    </property>  
-                </bean>  
-            </list>  
-        </property>  
-    </bean> 
-    
-    
-    <!-- 静态资源 交给nginx处理 -->  
-    <!-- <mvc:resources mapping="/css/**" location="/static/css/" /> -->
-    
-    
-  	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
 		<mvc:message-converters register-defaults="true">
 			<!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -50,21 +29,22 @@
             </bean>
   		</mvc:message-converters>
 	</mvc:annotation-driven>
+
 	<!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 	    <property name="ignoreAcceptHeader" value="true" />
             <property name="defaultContentType" value="application/json" />
 	    <property name="mediaTypes" >
 	        <value>
-	            json=application/json;charset=UTF-8
-	            xml=application/xml;charset=UTF-8
+	            json=application/json
+	            xml=application/xml
 	        </value>
 	    </property>
 	</bean>
 	
 	
 	<!-- 模板配置 使用Jetbrick tempalte -->  
-	<import resource="classpath:template/jetbrick-template.xml"/>	
+	<import resource="classpath:template/jetbrick-template.xml"/> 
 	<!-- <import resource="classpath:interceptors/spring-interceptors.xml"/> -->
 	
 	<!-- end -->

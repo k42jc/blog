@@ -7,6 +7,8 @@ package com.techeffic.blog.constants;
 public class Constants {
 	//true
 	public static final int SUCCESS = 1;
+	//false
+	public static final int FAIL = 0;
 	
 	/**系统数据类型--博客分类*/
 	public static final String SYSDATA_TYPE_BLOG_TYPE = "blog_type";

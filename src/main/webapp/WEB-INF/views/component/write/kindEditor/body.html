@@ -1,0 +1,91 @@
+#tag introduce("/static/kindeditor/themes/default/default.css") #end
+<div class="content">
+  <form id="me_text" method="post">
+		<section>
+			<h6>文章类型<span class="req">*</span></h6>
+			<select name="articleType" id="articleType" class="select" style="width: 120px">
+				<option value="请选择">请选择</option>
+				<option value="1">原创</option>
+				<option value="2">转载</option>
+			</select>
+		</section>
+		<section>
+			<h6>文章标题<span class="req">*</span></h6>
+			<input name="title" type="text" placeholder="博客标题" class="width-4" />
+		</section>
+		<section>
+			<h6>文章预览图<span class="req">*</span></h6>
+			<input name="imageView" type="text" id="imageViewURL" style="width:210px" /><button id="imageView" class="btn" onclick="return false;">选择图片</button>
+		</section>
+		<section class="checkbox-list" style="margin: 5px 0px 8px 0px;">
+			<h6>所属分类<span class="req">*</span></h6>
+			#for(SysData sysData:blogTypeList)
+			<input name="blogType" type="radio" value="${sysData.id}" /><label>${sysData.value}</label>
+			#end
+		</section>
+		<section>
+			<h6>文章内容<span class="req">*</span></h6>
+			<textarea id="content" style="width:800px;height:400px;visibility:hidden;"></textarea>
+		</section>
+		<section>
+			<h6>文章标签</h6>
+			<input name="keywords" type="text" placeholder="最多添加5个标签，多个标签使用“,”分隔" class="width-5" />
+		</section>
+		<br>
+		<section>
+			<button type="black" id="saveArticle">发表文章</button>&nbsp;&nbsp;<button onclick="return false;">取消</button>
+		</section>
+  </form>
+  #tag introduce("/static/kindeditor\kindeditor-min.js")
+ <script>
+			var editor;
+			var imageOnly;
+			KindEditor.ready(function(K) {
+				editor = K.create('#content', {
+					uploadJson : 'file/upload.htm',
+					fileManagerJson : 'file/manage.htm',
+					allowFileManager : true,
+					items:['source', '|', 'undo', 'redo', '|','code', 'cut', 'copy', 'paste', '|', 'justifyleft', 'justifycenter', 'justifyright','insertorderedlist', 'quickformat', 'selectall','formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold','italic', 'underline', '|',
+						'image', 'multiimage','insertfile', 'hr', 'baidumap', 'anchor', 'link'],
+					resizeType:0
+				});
+				imageOnly = K.editor({
+					allowFileManager:true,
+					uploadJson : 'file/upload.htm',
+					fileManagerJson : 'file/manage.htm'
+				});
+				K('#imageView').click(function() {
+					imageOnly.loadPlugin('image', function() {
+						imageOnly.plugin.imageDialog({
+							imageUrl : K('#imageViewURL').val(),
+							clickFn : function(url, title, width, height, border, align) {
+								K('#imageViewURL').val(url);
+								imageOnly.hideDialog();
+							}
+						});
+					});
+				});
+				
+				$('#me_text').form({
+						url:'saveArticle.htm',
+						onSubmit:function(param){
+							param.contentView=editor.text().replace(/[\r\n]/g,"");
+							param.content = editor.html();
+						},
+						success:function(data){
+							if(data.success){
+								alert('文章发布成功！');
+								window.location.href = "/blog/"+data.articleId+".htm";
+							}
+						}
+				});
+				/* function submitForm(){
+					$('#me_text').submit();
+				} */
+			});
+
+</script>
+
+</div>
+#tag introduce("/static/js/jquery.parser.js") #end
+#tag introduce("/static/js/jquery.form.js") #end

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.techeffic.blog.constants.Constants;
-import com.techeffic.blog.constants.WebContext;
 import com.techeffic.blog.constants.WebResponse;
+import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.entity.Template;
 import com.techeffic.blog.service.ServiceFactory;
 import com.techeffic.blog.util.StringUtil;
@@ -61,7 +61,7 @@ public class BaseController {
 		if(webResponse == null){
 			webResponse = new WebResponse();
 		}else{
-			webResponse.clear();
+			webResponse.init();
 		}
 		if(webCtx == null){
 			webCtx = new WebContext(request, response);

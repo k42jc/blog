@@ -17,10 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import jetbrick.template.JetTemplate;
 import jetbrick.template.web.JetWebEngine;
+import jetbrick.util.JSONUtils;
 
 import com.techeffic.blog.constants.Constants;
-import com.techeffic.blog.constants.WebContext;
 import com.techeffic.blog.context.SpringContextHolder;
+import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.dao.DaoFactory;
 import com.techeffic.blog.entity.Component;
 import com.techeffic.blog.entity.Template;
@@ -37,6 +38,7 @@ public class TemplateFilter implements Filter{
 	
 	private ServiceFactory serviceFactory;
 	private String requestURI;
+	private WebContext webCtx;
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -52,9 +54,10 @@ public class TemplateFilter implements Filter{
 			chain.doFilter(req, res);
 			return;
 		}
+		webCtx = new WebContext((HttpServletRequest)req, (HttpServletResponse)res);
 		try {
 			//获取对应页面并渲染
-			render(requestURI,(HttpServletResponse)res);
+			render((HttpServletRequest)req,(HttpServletResponse)res);
 		} catch (Exception e) {
 			((HttpServletResponse)res).sendRedirect("/404.html");
 		}
@@ -62,18 +65,21 @@ public class TemplateFilter implements Filter{
 	}
 	
 	/**
-	 * 
+	 * 设置过滤规则 某些URI无需过滤
 	 * @param requestURI 请求URI
 	 * @return true需要过滤当前请求 false表示通过
 	 */
 	private boolean filterRules(String requestURI) {
-		//
+		//基础页面无需过滤 nginx会将此指定为首页
 		if("/".equals(requestURI))
+			return false;
+		//*.action请求交给springMVC处理
+		if(requestURI.endsWith(".action"))
 			return false;
 		return true;
 	}
 
-	private void render(String requestURI,HttpServletResponse response) throws Exception{
+	private void render(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		// 获取对应请求模板数据
 		Template template = serviceFactory.getTemplateService()
 				.findTemplateByRequestURI(requestURI);
@@ -82,16 +88,32 @@ public class TemplateFilter implements Filter{
 		datas.put("title", template.getTitle());
 		datas.put("keywords", template.getKeyWords());
 		datas.put("description", template.getDescription());
+		//将请求中携带的参数放入模板数据
+		request.getParameterMap().forEach((key,values) ->{
+			if(values.length == 1){
+				datas.put(key,values[0]);
+			}else{
+				datas.put(key, JSONUtils.toJSONString(values));
+			}
+		});
 		// 如果当前页面不需要登录
-		if (!Constants.NEED_LOGIN.equals(template.getNeedLogin())) {
+		boolean isFilter = false;
+		if (Constants.NEED_LOGIN.equals(template.getNeedLogin())) {
+			//需要登录则查看当前用户是否已登录 
+			if(!webCtx.getLoginState().isLogin()){
+				isFilter = true;
+				//否则跳转到登录页面
+				response.sendRedirect("/login?redirectURI="+requestURI);
+			}
+		}
+		if(isFilter){
+			return;
+		}else{
 			// 直接渲染页面
 			OutputStream outputStream =	TemplateUtil.render(response.getOutputStream(), template.getPath(), datas);
 			outputStream.flush();
 			outputStream.close();
-		} else {
-			//需要登录则查看当前用户是否已登录 否则跳转到登录页面
 		}
-		
 	}
 
 	@Override

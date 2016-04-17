@@ -291,14 +291,18 @@
             this.enabled();
             this.clear();
             var obj = {};
-            if (jsonString !== '') {
-                jsonString = jsonString.replace(/^\[/, '');
-                jsonString = jsonString.replace(/\]$/, '');
-                try {
-                    obj = $.parseJSON(jsonString);
-                } catch (e) {
-                    obj = jsonString;
-                }
+            if(typeof(jsonString) == "string"){
+	            if (jsonString !== '') {
+	                jsonString = jsonString.replace(/^\[/, '');
+	                jsonString = jsonString.replace(/\]$/, '');
+	                try {
+	                    obj = $.parseJSON(jsonString);
+	                } catch (e) {
+	                    obj = jsonString;
+	                }
+	            }
+            }else if(typeof(jsonString) == "object"){
+            	obj = jsonString;
             }
             if (obj.type === 'error') {
                 $.each(obj.errors, $.proxy(function(name, text) {

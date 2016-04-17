@@ -25,8 +25,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.techeffic.blog.constants.WebContext;
 import com.techeffic.blog.constants.WebResponse;
+import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.service.IFileUploadService;
 import com.techeffic.blog.util.NameComparator;
 import com.techeffic.blog.util.SizeComparator;

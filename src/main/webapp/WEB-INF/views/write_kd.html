@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title>${title}</title>
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">  
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="${keywords}" />
+	<meta name="description" content="${description}" />
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	#tag introduce("/static/css/kube.css") #end
+	#tag introduce("/static/js/jquery-1.11.1.min.js") #end
+	#tag introduce("/static/js/customer.js") #end
+</head>
+<body>
+	#tag component("header") #end
+	#tag component("kd_body") #end
+	#tag component("footer") #end
+</body>
+</html>

@@ -2,17 +2,16 @@ package com.techeffic.blog.tags;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 import jetbrick.template.JetAnnotations;
 import jetbrick.template.JetTemplate;
 import jetbrick.template.runtime.JetTagContext;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import jetbrick.util.JSONUtils;
 
 import com.techeffic.blog.context.SpringContextHolder;
 import com.techeffic.blog.entity.Component;
-import com.techeffic.blog.service.ServiceFactory;
 import com.techeffic.blog.service.component.IDataModelService;
 
 /**
@@ -61,8 +60,22 @@ public class ExtendsTags extends BaseTags {
 		// 获取当前模板
 		JetTemplate template = ctx.getEngine().getTemplate(component.getPath());
 		// 获取模板内嵌数据
-		Map<String, Object> datas = ((IDataModelService) SpringContextHolder
-				.getBean(component.getClassName())).getData(webCtx);
+		Map<String, Object> datas = new HashMap<String, Object>();
+		//将当前URL携带的请求参数放入模板预置数据
+		//if(webCtx != null)//避免容器启动加载模板时出现java.lang.ClassFormatError: Unknown tag value for constant pool entry错误
+		/*webCtx.getRequest().getParameterMap().forEach((k,values) ->{
+			if(values.length == 1){
+				datas.put(k,values[0]);
+			}else{
+				datas.put(k, JSONUtils.toJSONString(values));
+			}
+		});*/
+		datas.putAll(webCtx.getRequest().getParameterMap());
+		
+		if(!"".equals(component.getClassName())){
+			datas.putAll(((IDataModelService) SpringContextHolder
+					.getBean(component.getClassName())).getData(webCtx));
+		}
 		// 模板渲染
 		StringWriter writer = new StringWriter();
 		template.render(datas, writer);

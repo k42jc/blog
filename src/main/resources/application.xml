@@ -50,7 +50,6 @@
     </bean>  
   
      <import resource="classpath:mongodb/mongodb.xml"/> 
-     <import resource="classpath:template/jetbrick-template.xml"/> 
      
 	     
      <!-- <bean id="jetWebEngine" class="jetbrick.template.web.JetWebEngine"></bean> -->

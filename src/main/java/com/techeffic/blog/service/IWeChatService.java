@@ -1,6 +1,6 @@
 package com.techeffic.blog.service;
 
-import com.techeffic.blog.constants.WebContext;
+import com.techeffic.blog.context.WebContext;
 
 /**
  * 微信公众号接口service

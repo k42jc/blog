@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.techeffic.blog.constants.WebContext;
+import com.techeffic.blog.context.WebContext;
 @Service
 public class RecommendDataModelService implements IDataModelService{
 

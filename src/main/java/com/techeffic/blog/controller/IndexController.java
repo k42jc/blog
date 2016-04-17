@@ -10,7 +10,7 @@ import jetbrick.template.web.JetWebEngine;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.techeffic.blog.constants.WebContext;
+import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.util.StringUtil;
 
 @Controller
