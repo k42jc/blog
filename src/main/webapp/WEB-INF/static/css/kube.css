@@ -126,7 +126,7 @@ h6.recommend p{
 	line-height: 40px;
 }
 #user-info span{
-	margin-left: 10px;
+	/*margin-left: 10px;*/
 	display: inline-block;
 	font-weight: 600;
 }

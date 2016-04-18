@@ -15,6 +15,10 @@ public class HeaderDataModelService extends BaseService implements IDataModelSer
 	public Map<String, Object> getData(WebContext webCtx) {
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("title", "廖旭东个人博客");
+		//若用户已登录 头部显示用户信息 而不是登录
+		if(webCtx.getLoginState().isLogin()){
+			resultMap.put("userName", "test");
+		}
 		return resultMap;
 	}
 

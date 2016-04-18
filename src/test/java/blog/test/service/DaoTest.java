@@ -38,7 +38,6 @@ public class DaoTest {
 		Assert.notEmpty(resultUser);
 		
 		System.out.println(resultUser.get(0).getId()+"-"+resultUser.get(0).getUserName());*/
-		
 		Template template = new Template();
 		template.setId(UUID.randomUUID().toString());
 		template.setRequestURI("/index");
@@ -83,10 +82,12 @@ public class DaoTest {
 		list.forEach(t -> {
 			this.daoFactory.getTemplateMongoDao().saveOrUpdate(t);
 		});
+		
 	}
 	//初始化基础数据
 	@Test
 	public void initMetaData(){
+		
 		Component component = new Component();
 		component.setId(UUID.randomUUID().toString());
 		component.setKey("header");
@@ -114,16 +115,23 @@ public class DaoTest {
 		Component component5 = new Component();
 		component5.setId(UUID.randomUUID().toString());
 		component5.setKey("kd_body");
-		component5.setPath("/component/kindEditor/body.html");
+		component5.setPath("/component/write/kindEditor/body.html");
 		component5.setClassName("kindEditorWriteService");
 		
-		List<Component> list = new ArrayList<Component>();
-		list.add(component);
-		list.add(component2);
-		list.add(component3);
-		list.add(component4);
-		list.add(component5);
-		list.forEach(c -> {
+		Component component6 = new Component();
+		component6.setId(UUID.randomUUID().toString());
+		component6.setKey("login_body");
+		component6.setPath("/component/login/body.html");
+		component6.setClassName("");
+		
+		List<Component> componentList = new ArrayList<Component>();
+		componentList.add(component);
+		componentList.add(component2);
+		componentList.add(component3);
+		componentList.add(component4);
+		componentList.add(component5);
+		componentList.add(component6);
+		componentList.forEach(c -> {
 			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
 		});
 	}
@@ -136,5 +144,11 @@ public class DaoTest {
 		component5.setClassName("");
 		
 		this.daoFactory.getComponentMongoDao().saveOrUpdate(component5);
+	}
+	
+	@Test
+	public void deleteTest(){
+//		this.daoFactory.getComponentMongoDao().re
+		this.daoFactory.getTemplateMongoDao().findTemplateByRequestURI("/login");
 	}
 }

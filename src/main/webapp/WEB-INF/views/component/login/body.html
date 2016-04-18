@@ -3,7 +3,7 @@
 		<h1>登录</h1>
 	</div>
 	<form action="/login.action" class="forms content-slim" data-tools="validate" data-url="/login/validate.action" method="post" >
-		<input type="hidden" name="redirectURI" value="${redirectURI[0]}">
+		<input type="hidden" name="redirectURI" value="${redirectURI[0]?!''}">
 		<section>
 			<label for="userName">用户名/邮箱<span class="error" id="userName-error"></span></label>
 			<input type="text" name="userName" autofocus="true">
