@@ -38,6 +38,20 @@ public class DaoTest {
 		Assert.notEmpty(resultUser);
 		
 		System.out.println(resultUser.get(0).getId()+"-"+resultUser.get(0).getUserName());*/
+		
+		Component component5 = new Component();
+		component5.setId(UUID.randomUUID().toString());
+		component5.setKey("md_body");
+		component5.setPath("/component/write/markdown/body.html");
+		component5.setClassName("markdownWriteService");
+		
+		this.daoFactory.getComponentMongoDao().saveOrUpdate(component5);
+		
+	}
+	//初始化基础数据
+	@Test
+	public void initMetaData(){
+		
 		Template template = new Template();
 		template.setId(UUID.randomUUID().toString());
 		template.setRequestURI("/index");
@@ -82,11 +96,6 @@ public class DaoTest {
 		list.forEach(t -> {
 			this.daoFactory.getTemplateMongoDao().saveOrUpdate(t);
 		});
-		
-	}
-	//初始化基础数据
-	@Test
-	public void initMetaData(){
 		
 		Component component = new Component();
 		component.setId(UUID.randomUUID().toString());
@@ -137,18 +146,28 @@ public class DaoTest {
 	}
 	@Test
 	public void addLoginTemp(){
-		Component component5 = new Component();
-		component5.setId(UUID.randomUUID().toString());
-		component5.setKey("login_body");
-		component5.setPath("/component/login/body.html");
-		component5.setClassName("");
+//		Component component5 = new Component();
+//		component5.setId(UUID.randomUUID().toString());
+//		component5.setKey("login_body");
+//		component5.setPath("/component/login/body.html");
+//		component5.setClassName("");
+//		
+//		this.daoFactory.getComponentMongoDao().saveOrUpdate(component5);
 		
-		this.daoFactory.getComponentMongoDao().saveOrUpdate(component5);
+		Template template4 = new Template();
+		template4.setId(UUID.randomUUID().toString());
+		template4.setRequestURI("/write_md");
+		template4.setPath("/write_md.html");
+		template4.setNeedLogin("1");
+		template4.setTitle("写博客(markdown编辑器)-技术之路-廖旭东个人博客");
+		template4.setKeyWords("使用markdown编辑器写博客，技术博客，个人博客，技术文章");
+		template4.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
+		this.daoFactory.getTemplateMongoDao().saveOrUpdate(template4);
 	}
 	
 	@Test
 	public void deleteTest(){
 //		this.daoFactory.getComponentMongoDao().re
-		this.daoFactory.getTemplateMongoDao().findTemplateByRequestURI("/login");
+//		this.daoFactory.getTemplateMongoDao().findTemplateByRequestURI("/login");
 	}
 }
