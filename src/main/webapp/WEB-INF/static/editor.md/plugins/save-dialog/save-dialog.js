@@ -42,7 +42,7 @@
     			+'<br/>'
     			/*+'<label>'+saveLang.viewImgURL+'</label><input id="viewImg" name="viewImg" type="text" value="http://"/>'
     			+'<div class="'+classPrefix+'file-input"><input type="file" name="editormd-image-file" accept="image/*" /><input type="button" value="本地上传" /></div><br/>'*/
-    			+'<label>'+saveLang.clazz+'</label><select id="clazz" name="clazz"><option selected="selected" value="0">请选择文章分类</option>'+saveLang.selectOptions.clazz+'</select>'
+    			+'<label>'+saveLang.clazz+'</label><select stype="width:33px;" id="clazz" name="clazz"><option selected="selected" value="0">请选择文章分类</option>'+saveLang.selectOptions.clazz+'</select>'
     			+'<br/>'
     			+'<label>'+saveLang.label+'</label><input id="label" name="label" type="text" value=""/>'
     			+'<textarea hidden="hidden" name="content" id="content">'+_this.getHTML()+'</textarea>'
