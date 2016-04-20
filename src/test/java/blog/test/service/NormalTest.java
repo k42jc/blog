@@ -26,4 +26,25 @@ public class NormalTest {
 			System.out.println(key+"-"+value);
 		});
 	}
+	
+	@Test
+	public void threadTest(){
+		Thread thread = new Thread(){
+			@Override
+			public void run() {
+				super.run();
+				System.out.println(Thread.currentThread().getName());
+				System.out.println("thread running 1");
+				System.out.println("thread running 2");
+				for(int i=3;i<10;i++){
+					System.out.println("thread running "+i);
+				}
+			}
+		};
+		System.out.println("开始时间："+System.currentTimeMillis());
+		System.out.println("running 0");
+		System.out.println(Thread.currentThread().getName());
+		thread.start();
+		System.out.println("结束时间："+System.currentTimeMillis());
+	}
 }

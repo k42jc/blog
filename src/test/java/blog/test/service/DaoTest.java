@@ -87,11 +87,21 @@ public class DaoTest {
 		template4.setTitle("写博客(普通模式)-技术之路-廖旭东个人博客");
 		template4.setKeyWords("使用富文本编辑器写博客，技术博客，个人博客，技术文章");
 		template4.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
+		
+		Template template5 = new Template();
+		template5.setId(UUID.randomUUID().toString());
+		template5.setRequestURI("/write_md");
+		template5.setPath("/write_md.html");
+		template5.setNeedLogin("1");
+		template5.setTitle("写博客(markdown编辑器)-技术之路-廖旭东个人博客");
+		template5.setKeyWords("使用markdown编辑器写博客，技术博客，个人博客，技术文章");
+		template5.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
 		List<Template> list = new ArrayList<Template>();
 		list.add(template);
 		list.add(template2);
 		list.add(template3);
 		list.add(template4);
+		list.add(template5);
 		
 		list.forEach(t -> {
 			this.daoFactory.getTemplateMongoDao().saveOrUpdate(t);
@@ -133,6 +143,12 @@ public class DaoTest {
 		component6.setPath("/component/login/body.html");
 		component6.setClassName("");
 		
+		Component component7 = new Component();
+		component7.setId(UUID.randomUUID().toString());
+		component7.setKey("md_body");
+		component7.setPath("/component/write/markdown/body.html");
+		component7.setClassName("markdownWriteService");
+		
 		List<Component> componentList = new ArrayList<Component>();
 		componentList.add(component);
 		componentList.add(component2);
@@ -140,6 +156,7 @@ public class DaoTest {
 		componentList.add(component4);
 		componentList.add(component5);
 		componentList.add(component6);
+		componentList.add(component7);
 		componentList.forEach(c -> {
 			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
 		});

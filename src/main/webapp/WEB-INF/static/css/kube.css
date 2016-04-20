@@ -4728,7 +4728,7 @@ h2 + .doc-head,h2 + .doc-head-faq {
 	 margin-bottom: 10px; 
 }
 
-#footer {
+/* #footer {
 	padding: 48px;
 	padding-top: 48px;
 	border-top: 1px solid #d7d7d7;
@@ -4768,7 +4768,7 @@ h2 + .doc-head,h2 + .doc-head-faq {
 #footer nav li {
 	display: inline-block;
 	margin-left: 24px;
-}
+} */
 
 .bg-blue {
 	background: #7e9ec7;
@@ -5120,9 +5120,9 @@ pre.hidebale {
 		height: auto;
 	}
 
-	#footer {
+	/* #footer {
 		text-align: center;
-	}
+	} 
 
 	#footer nav,#footer p {
 		float: none;
@@ -5132,7 +5132,7 @@ pre.hidebale {
 		margin: 8px 16px;
 		display: block;
 		text-align: center;
-	}
+	}*/
 
 	.documentation-nav-toggle {
 		background: #f4f4f4;

@@ -124,7 +124,7 @@
 				if (!settings.imageUpload) {
                     return ;
                 }
-
+				//文件上传配置
 				var fileInput  = dialog.find("[name=\"" + classPrefix + "image-file\"]");
 
 				fileInput.bind("change", function() {

@@ -12,23 +12,89 @@ div#title a{
 	margin-top:5px;
 	font-size: 10px;
 }
+.editormd-dialog-container select{
+	color: #999;
+	padding: 5px 78px;
+	border: 1px solid #ddd;
+	font: 14px "微软雅黑", Arial, Helvetica, sans-serif;
+}
 </style>
 	<div id="title">
 		<h1>写文章(Markdown模式)</h1>
 		<a class="switchEditor" href="/write_kd"><samp>切换到普通编辑模式</samp></a>
 	</div>
 	<div id="test-editormd"></div>
-    #tag introduce("/static/editor.md/editormd.min.js") #end
+    #tag introduce("/static/editor.md/editormd.js") #end
 	<script type="text/javascript">
 			var testEditor;
             
             $(function() {
                 
                     testEditor = editormd("test-editormd", {
-                        width: "90%",
+                        width: "95%",
                         height: 740,
                         path : '../lib/',
-                        theme : "default",
+                        toolbarIcons : function() {
+                            // Or return editormd.toolbarModes[name]; // full, simple, mini
+                            // Using "||" set icons align right.
+                            return editormd.toolbarModes["full"].concat(["|","save"]);
+                        },
+                        toolbarIconsClass : {
+                            save : "fa-save"  // 指定一个FontAawsome的图标类
+                        },
+                       /*  toolbarIconTexts : {
+                            testIcon2 : "测试按钮"  // 如果没有图标，则可以这样直接插入内容，可以是字符串或HTML标签
+                        },
+
+                        // 用于增加自定义工具栏的功能，可以直接插入HTML标签，不使用默认的元素创建图标
+                        toolbarCustomIcons : {
+                            file   : "<input type="file" accept=".md" />",
+                            faicon : "<i class="fa fa-star" onclick="alert('faicon');"></i>"
+                        }, */
+
+                        // 自定义工具栏按钮的事件处理
+                        toolbarHandlers : {
+                            /**
+                             * @param {Object}      cm         CodeMirror对象
+                             * @param {Object}      icon       图标按钮jQuery元素对象
+                             * @param {Object}      cursor     CodeMirror的光标对象，可获取光标所在行和位置
+                             * @param {String}      selection  编辑器选中的文本
+                             */
+                             /* save : function(cm, icon, cursor, selection) {} */
+
+                        },
+
+                        lang : {
+                            toolbar : {
+                                /* file : "上传文件",
+                                testIcon : "自定义按钮testIcon",  // 自定义按钮的提示文本，即title属性
+                                testIcon2 : "自定义按钮testIcon2",  
+                                undo : "撤销 (Ctrl+Z)" */
+                                save : "发布文章"
+                            },
+	                        dialog:{
+	                        	save : {
+	                        		dialogTitle : "发布文章",
+	                        		type : "文章类型",
+	                        		title: "文章标题",
+	                        		clazz: "所属分类",
+	                        		label: "文章标签",
+	                        		selectOptions:{
+	                        			type:'<option value="1">原创</option><option value="2">转载</option>',
+	                        			clazz:'<option value="1">服务器</option><option value="2">java</option>',
+	                        		}
+	                        	}
+	                        }
+                        },
+                        save :{
+                        	url : '/article/save.action',
+                        	method : 'post'
+                        },
+                        saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea 允许使用editormd.getHTML()获取解析好的html元素
+                        imageUpload : true,
+                        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                        imageUploadURL : "./php/upload.php",
+                        /* theme : "default",
                         previewTheme : "default",
                         editorTheme : "pastel-on-dark",
                         // markdown : md,
@@ -51,9 +117,6 @@ div#title a{
                         //dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
                         //dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
                         //dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
-                        imageUpload : true,
-                        imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                        imageUploadURL : "./php/upload.php",
                         onload : function() {
                             console.log('onload', this);
                             //this.fullscreen();
@@ -64,7 +127,8 @@ div#title a{
                             //this.width("100%");
                             //this.height(480);
                             //this.resize("100%", 640);
-                        }
+                        }*/
+                        
                 });
 
                 
@@ -78,8 +142,5 @@ div#title a{
                 });
                 */
                
-               $('#getHtml').click(function(){
-                    $('#html').html(testEditor.getHTML());
-               });
             });
         </script>

@@ -1,3 +1,60 @@
+<style>
+#footer {
+	padding: 48px;
+	padding-top: 48px;
+	border-top: 1px solid #d7d7d7;
+	font: 14px "微软雅黑", Arial, Helvetica, sans-serif;
+	color: rgba(0,0,0,0.6);
+}
+
+#footer:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+#footer a {
+	color: rgba(0,0,0,0.6);
+	text-decoration: none;
+}
+
+#footer a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+
+#footer p {
+	float: left;
+}
+
+#footer nav {
+	float: right;
+}
+
+#footer nav ul {
+	margin: 0;
+	list-style: none;
+}
+
+#footer nav li {
+	display: inline-block;
+	margin-left: 24px;
+}
+@media (max-width:768px) {
+	#footer {
+		text-align: center;
+	}
+	#footer nav,#footer p {
+		float: none;
+	}
+
+	#footer nav li {
+		margin: 8px 16px;
+		display: block;
+		text-align: center;
+	}
+}
+</style>
 <footer id="footer">
 	<p>&copy;廖旭东.All rights reserved.</p>
 	<nav>
