@@ -17,7 +17,7 @@ public class BaseTags{
 	
 	static{
 		ServletRequestAttributes attributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
-		webCtx =new WebContext(attributes.getRequest(),attributes.getResponse());
+		webCtx =WebContext.init(attributes.getRequest(),attributes.getResponse());
 		serviceFactory = SpringContextHolder.getBean(ServiceFactory.class);
 	}
 }

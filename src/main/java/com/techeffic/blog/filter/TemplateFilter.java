@@ -49,7 +49,8 @@ public class TemplateFilter implements Filter{
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
 		requestURI = ((HttpServletRequest)req).getRequestURI();
-		webCtx = new WebContext((HttpServletRequest)req, (HttpServletResponse)res);
+		webCtx = WebContext.init((HttpServletRequest)req, (HttpServletResponse)res);
+		System.out.println(webCtx.getRequest().getHeaders());
 		//定义过滤规则并处理requestURI
 		if(!filterRules(requestURI)){
 			chain.doFilter(req, res);

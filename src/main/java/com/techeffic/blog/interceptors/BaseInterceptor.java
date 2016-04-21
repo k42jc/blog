@@ -31,7 +31,7 @@ public abstract class BaseInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		return this.preHandle(new WebContext(request, response), handler);
+		return this.preHandle(WebContext.init(request, response), handler);
 	}
 	
 	public abstract boolean preHandle(WebContext webCtx,Object handler);

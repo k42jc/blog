@@ -41,7 +41,7 @@ public class LoginController extends BaseController{
 			webResponse.setSuccess(Constants.SUCCESS);
 			webResponse.setType("location");
 			webResponse.put("data", webCtx.getReqeustAttribute().getString("redirectURI"));
-			webCtx.logined(userId);
+			webCtx.userLogin(userId);
 		}
 		return webResponse;
 	}
