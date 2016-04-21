@@ -8,8 +8,9 @@
 	 <mvc:interceptors>  
         <mvc:interceptor>  
             <!--设置拦截的路径-->  
-            <mvc:mapping path="/*" />  
-            <bean class="com.techeffic.blog.interceptors.TemplateInterceptors"></bean>  
+            <mvc:mapping path="/*/**" />  
+            <ref bean="loginInterceptor" />
         </mvc:interceptor>  
     </mvc:interceptors>  
+    <bean id="loginInterceptor" class="com.techeffic.blog.interceptors.LoginInterceptor"></bean>  
 </beans>

@@ -45,7 +45,6 @@
 	
 	<!-- 模板配置 使用Jetbrick tempalte -->  
 	<import resource="classpath:template/jetbrick-template.xml"/> 
-	<!-- <import resource="classpath:interceptors/spring-interceptors.xml"/> -->
-	
+	<import resource="classpath:interceptors/spring-interceptors.xml"/>
 	<!-- end -->
 </beans>
