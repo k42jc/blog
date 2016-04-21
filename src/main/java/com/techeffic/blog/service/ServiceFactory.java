@@ -14,7 +14,15 @@ public class ServiceFactory {
 	private IWeChatService weChatService;
 	private ITemplateService templateService;
 	private IComponentService componentService;
-
+	private IArticleService articleService;
+	
+	public IArticleService getArticleService() {
+		return articleService;
+	}
+	@Autowired
+	public void setArticleService(IArticleService articleService) {
+		this.articleService = articleService;
+	}
 	public IComponentService getComponentService() {
 		return componentService;
 	}
