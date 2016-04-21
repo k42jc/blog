@@ -85,7 +85,8 @@ public class TemplateFilter implements Filter{
 		if("/".equals(requestURI))
 			return false;
 		//*.action请求交给springMVC处理
-		if(requestURI.endsWith(".action"))
+		//其它带"."的请求如图片加载项都不经过java处理
+		if(requestURI.indexOf(".") >= 0)
 			return false;
 		return true;
 	}
