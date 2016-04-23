@@ -90,5 +90,10 @@ public class BaseMongoDao<E> implements IBaseDao<E>{
 	public void save(E e, String name) {
 		this.mongoTemplate.save(e, name);
 	}
+	
+	@Override
+	public void clear(Class<E> e) {
+		this.mongoTemplate.dropCollection(e);
+	}
 
 }

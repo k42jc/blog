@@ -2,8 +2,10 @@ package com.techeffic.blog.entity;
 
 import java.util.Date;
 
-public class Blog {
+public class Article {
     private Long id;
+    //渲染文本格式 html或者markdown
+    private String contentType;
 
     private String title;
 
@@ -11,7 +13,7 @@ public class Blog {
 
     private Long userId;
 
-    private String keyword;
+    private String keywords;
 
     private Integer viewNums;
 
@@ -21,7 +23,8 @@ public class Blog {
 
     private String contentView;
 
-    private String content;
+    private String contentHtml;
+    private String contentMarkdown;
     
     private SysData blogType;
     
@@ -75,12 +78,12 @@ public class Blog {
         this.typeId = typeId;
     }
 
-    public String getKeyword() {
-        return keyword;
+    public String getKeywords() {
+        return keywords;
     }
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword == null ? null : keyword.trim();
+    public void setKeywords(String keywords) {
+        this.keywords = keywords == null ? null : keywords.trim();
     }
 
     public Integer getViewNums() {
@@ -115,11 +118,4 @@ public class Blog {
         this.contentView = contentView == null ? null : contentView.trim();
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
 }
