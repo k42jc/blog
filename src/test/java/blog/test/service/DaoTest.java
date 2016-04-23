@@ -39,13 +39,7 @@ public class DaoTest {
 		
 		System.out.println(resultUser.get(0).getId()+"-"+resultUser.get(0).getUserName());*/
 		
-		Component component5 = new Component();
-		component5.setId(UUID.randomUUID().toString());
-		component5.setKey("md_body");
-		component5.setPath("/component/write/markdown/body.html");
-		component5.setClassName("markdownWriteService");
 		
-		this.daoFactory.getComponentMongoDao().saveOrUpdate(component5);
 		
 	}
 	//初始化基础数据
@@ -135,7 +129,7 @@ public class DaoTest {
 		component5.setId(UUID.randomUUID().toString());
 		component5.setKey("kd_body");
 		component5.setPath("/component/write/kindEditor/body.html");
-		component5.setClassName("kindEditorWriteService");
+		component5.setClassName("kdDataModelService");
 		
 		Component component6 = new Component();
 		component6.setId(UUID.randomUUID().toString());
@@ -147,7 +141,13 @@ public class DaoTest {
 		component7.setId(UUID.randomUUID().toString());
 		component7.setKey("md_body");
 		component7.setPath("/component/write/markdown/body.html");
-		component7.setClassName("markdownWriteService");
+		component7.setClassName("mdDataModelService");
+		
+		Component component8 = new Component();
+		component8.setId(UUID.randomUUID().toString());
+		component8.setKey("article_body");
+		component8.setPath("/component/article/body.html");
+		component8.setClassName("articleDataModelService");
 		
 		List<Component> componentList = new ArrayList<Component>();
 		componentList.add(component);
@@ -157,12 +157,13 @@ public class DaoTest {
 		componentList.add(component5);
 		componentList.add(component6);
 		componentList.add(component7);
+		componentList.add(component8);
 		componentList.forEach(c -> {
 			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
 		});
 	}
 	@Test
-	public void addLoginTemp(){
+	public void tempTest(){
 //		Component component5 = new Component();
 //		component5.setId(UUID.randomUUID().toString());
 //		component5.setKey("login_body");
@@ -173,13 +174,86 @@ public class DaoTest {
 		
 		Template template4 = new Template();
 		template4.setId(UUID.randomUUID().toString());
+		template4.setRequestURI("/article");
+		template4.setPath("/article.html");
+		template4.setNeedLogin("0");
+		template4.setTitle("${title}-技术之路-廖旭东个人博客");
+		template4.setKeyWords("${keywords}，技术博客，个人博客，技术文章");
+		template4.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
+/*		Template template4 = new Template();
+		template4.setId(UUID.randomUUID().toString());
 		template4.setRequestURI("/write_md");
 		template4.setPath("/write_md.html");
 		template4.setNeedLogin("1");
 		template4.setTitle("写博客(markdown编辑器)-技术之路-廖旭东个人博客");
 		template4.setKeyWords("使用markdown编辑器写博客，技术博客，个人博客，技术文章");
 		template4.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
-		this.daoFactory.getTemplateMongoDao().saveOrUpdate(template4);
+*/		this.daoFactory.getTemplateMongoDao().saveOrUpdate(template4);
+	}
+	@Test
+	public void compTest(){
+		Component component = new Component();
+		component.setId(UUID.randomUUID().toString());
+		component.setKey("header");
+		component.setPath("/component/header.html");
+		component.setClassName("headerDataModelService");
+		
+		Component component2 = new Component();
+		component2.setId(UUID.randomUUID().toString());
+		component2.setKey("footer");
+		component2.setPath("/component/footer.html");
+		component2.setClassName("footerDataModelService");
+		
+		Component component3 = new Component();
+		component3.setId(UUID.randomUUID().toString());
+		component3.setKey("swiper");
+		component3.setPath("/component/index/swiper.html");
+		component3.setClassName("swiperDataModelService");
+		
+		Component component4 = new Component();
+		component4.setId(UUID.randomUUID().toString());
+		component4.setKey("recommend");
+		component4.setPath("/component/index/recommend.html");
+		component4.setClassName("recommendDataModelService");
+		
+		Component component5 = new Component();
+		component5.setId(UUID.randomUUID().toString());
+		component5.setKey("kd_body");
+		component5.setPath("/component/write/kindEditor/body.html");
+		component5.setClassName("kdDataModelService");
+		
+		Component component6 = new Component();
+		component6.setId(UUID.randomUUID().toString());
+		component6.setKey("login_body");
+		component6.setPath("/component/login/body.html");
+		component6.setClassName("");
+		
+		Component component7 = new Component();
+		component7.setId(UUID.randomUUID().toString());
+		component7.setKey("md_body");
+		component7.setPath("/component/write/markdown/body.html");
+		component7.setClassName("mdDataModelService");
+		
+		Component component8 = new Component();
+		component8.setId(UUID.randomUUID().toString());
+		component8.setKey("article_body");
+		component8.setPath("/component/article/body.html");
+		component8.setClassName("articleDataModelService");
+		
+		List<Component> componentList = new ArrayList<Component>();
+		componentList.add(component);
+		componentList.add(component2);
+		componentList.add(component3);
+		componentList.add(component4);
+		componentList.add(component5);
+		componentList.add(component6);
+		componentList.add(component7);
+		componentList.add(component8);
+		componentList.forEach(c -> {
+			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
+		});
+		
+//		this.daoFactory.getComponentMongoDao().saveOrUpdate(component5);
 	}
 	
 	@Test

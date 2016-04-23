@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public class WebContext {
-	private HttpServletRequest request;
-	private HttpServletResponse response;
+	private Request request;
+	private Response response;
 	private LoginState loginState;
 	private RequestAttribute reqeustAttribute;
 	
@@ -24,30 +24,27 @@ public class WebContext {
 		return reqeustAttribute;
 	}
 
-	public WebContext(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
+	private WebContext(HttpServletRequest request, HttpServletResponse response) {
+		this.request = new Request(request);
+		this.response = response == null?null:new Response(response);
 		loginState = new LoginState(this);
 		reqeustAttribute = new RequestAttribute(this);
 	}
+	
+	public static WebContext init(HttpServletRequest request, HttpServletResponse response){
+		return new WebContext(request, response);
+	}
 
-	public HttpServletRequest getRequest() {
+	public Request getRequest() {
 		return request;
 	}
 
-	public void setRequest(HttpServletRequest request) {
-		this.request = request;
-	}
 
-	public HttpServletResponse getResponse() {
+	public Response getResponse() {
 		return response;
 	}
 
-	public void setResponse(HttpServletResponse response) {
-		this.response = response;
-	}
-	
-	public void logined(String userId){
+	public void userLogin(String userId){
 		LoginCookie.addCookie(this, "userId", userId);
 	}
 	

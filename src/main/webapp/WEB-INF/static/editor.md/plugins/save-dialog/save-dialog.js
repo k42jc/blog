@@ -32,26 +32,26 @@
 			if(editor.find('.'+dialogName).length < 1){
 				var guid = (new Date()).getTime();//设置唯一标识
 				//设置表单提交action
-				var action = settings.save.url+(settings.save.url.indexOf("?")>0?"&":"?")+"guid="+guid;
+				var action = saveLang.url+(saveLang.url.indexOf("?")>0?"&":"?")+"guid="+guid;
 				
-				var dialogContent = '<form id="form" action="'+action+'" target="'+iframeName+'" method="'+settings.save.method+'" enctype="multipart/form-data" class="'+classPrefix+'form">'
+				var dialogContent = '<form id="form" action="'+action+'" target="'+iframeName+'" method="POST" '+/*enctype="multipart/form-data"*/+' class="'+classPrefix+'form">'
     			+'<iframe name="'+iframeName+'" id="'+iframeName+'" guid="'+guid+'"></iframe>'
-    			+'<label>'+saveLang.type+'</label><select id="type" name="type"><option selected="selected" value="0">请选择文章类型</option>'+saveLang.selectOptions.type+'</select>'
+    			+'<label>'+saveLang.labelNames.type+'</label><select id="type" name="type"><option selected="selected" value="0">请选择文章类型</option>'+saveLang.selectOptions.type+'</select>'
     			+'<br/>'
-    			+'<label>'+saveLang.title+'</label><input id="title" name="title" type="text" value=""/>'
+    			+'<label>'+saveLang.labelNames.title+'</label><input id="title" name="title" type="text" value=""/>'
     			+'<br/>'
     			/*+'<label>'+saveLang.viewImgURL+'</label><input id="viewImg" name="viewImg" type="text" value="http://"/>'
     			+'<div class="'+classPrefix+'file-input"><input type="file" name="editormd-image-file" accept="image/*" /><input type="button" value="本地上传" /></div><br/>'*/
-    			+'<label>'+saveLang.clazz+'</label><select stype="width:33px;" id="clazz" name="clazz"><option selected="selected" value="0">请选择文章分类</option>'+saveLang.selectOptions.clazz+'</select>'
+    			+'<label>'+saveLang.labelNames.clazz+'</label><select id="clazz" name="clazz"><option selected="selected" value="0">请选择文章分类</option>'+saveLang.selectOptions.clazz+'</select>'
     			+'<br/>'
-    			+'<label>'+saveLang.label+'</label><input id="label" name="label" type="text" value=""/>'
+    			+'<label>'+saveLang.labelNames.label+'</label><input id="label" name="label" type="text" value=""/>'
     			+'<textarea hidden="hidden" name="content" id="content">'+_this.getHTML()+'</textarea>'
     			+'<br/></form>';
 				
 				//创建窗口
 				dialog = _this.createDialog({
 					//窗口常规属性
-					title		: saveLang.dialogTitle,
+					title		: saveLang.title,
 					width		: 400,
 					height		: 295,
 					name		: dialogName,
@@ -67,6 +67,7 @@
 					buttons		: {
 						//发布按钮 自定义设置类型 支持设置为submit
 						enter 	:[lang.buttons.publish, function(){
+							//提交校验
 							var canNotSubmit = false,form=this.find('form')[0];
 							for(var index=0;index<form.length;index++){
 								var _this = $(form[index]);
@@ -115,6 +116,7 @@
 			this.dialogLockScreen();
 			dialog.show();
 			
+			//绑定输入框修改值之后还原样式
 			$("select").each(function(event){
                 $(this).change(function () {  
                        if($(this).find("option:selected").val() != "0"){

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.techeffic.blog.annotation.IsLogined;
 import com.techeffic.blog.constants.WebResponse;
 
 /**
@@ -15,6 +16,7 @@ import com.techeffic.blog.constants.WebResponse;
 @RequestMapping("article")
 public class ArticleController extends BaseController{
 	
+	@IsLogined
 	@RequestMapping("save")
 	@ResponseBody
 	public WebResponse save(){

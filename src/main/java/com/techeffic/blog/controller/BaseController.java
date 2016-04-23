@@ -63,12 +63,11 @@ public class BaseController {
 		}else{
 			webResponse.init();
 		}
-		if(webCtx == null){
-			webCtx = new WebContext(request, response);
+		/*if(webCtx == null){
+			webCtx = WebContext(request, response);
 		}else{
-			webCtx.setRequest(request);
-			webCtx.setResponse(response);
-		}
+		}*/
+		webCtx = WebContext.init(request,response);
 	}
 	
 	

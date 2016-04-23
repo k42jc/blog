@@ -49,12 +49,23 @@ public class TemplateFilter implements Filter{
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
 		requestURI = ((HttpServletRequest)req).getRequestURI();
+		webCtx = WebContext.init((HttpServletRequest)req, (HttpServletResponse)res);
+		System.out.println(webCtx.getRequest().getHeaders());
 		//定义过滤规则并处理requestURI
 		if(!filterRules(requestURI)){
 			chain.doFilter(req, res);
 			return;
 		}
-		webCtx = new WebContext((HttpServletRequest)req, (HttpServletResponse)res);
+		//已登陆不允许再访问登录页
+		if(requestURI.indexOf("/login") >= 0){
+			if(webCtx.getLoginState().isLogin()){
+				try {
+					webCtx.getResponse().sendRedirect("/");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		try {
 			//获取对应页面并渲染
 			render((HttpServletRequest)req,(HttpServletResponse)res);
@@ -74,7 +85,8 @@ public class TemplateFilter implements Filter{
 		if("/".equals(requestURI))
 			return false;
 		//*.action请求交给springMVC处理
-		if(requestURI.endsWith(".action"))
+		//其它带"."的请求如图片加载项都不经过java处理
+		if(requestURI.indexOf(".") >= 0)
 			return false;
 		return true;
 	}

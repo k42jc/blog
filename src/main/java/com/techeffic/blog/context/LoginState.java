@@ -9,8 +9,10 @@ package com.techeffic.blog.context;
 public class LoginState {
 	private String userId;
 	private boolean isLogin;
+	private WebContext webCtx;
 	
 	public LoginState(WebContext webCtx){
+		this.webCtx = webCtx;
 		this.userId = LoginCookie.getCookie(webCtx, "userId");
 		this.isLogin = (this.userId != null);
 	}
@@ -20,5 +22,8 @@ public class LoginState {
 	public boolean isLogin() {
 		return isLogin;
 	}
+	/*public void userLogin(String userId) {
+		LoginCookie.addCookie(webCtx, "userId", userId);
+	}*/
 	
 }

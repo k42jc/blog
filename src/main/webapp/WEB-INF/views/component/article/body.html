@@ -1,0 +1,168 @@
+<!-- 详情 -->
+#tag introduce("/static/editor.md/css/editormd.preview.min.css") #end
+<!-- #tag introduce("/static/editor.md/lib/marked.min.js") #end
+#tag introduce("/static/editor.md/lib/prettify.min.js") #end
+#tag introduce("/static/editor.md/lib/raphael.min.js") #end
+#tag introduce("/static/editor.md/lib/underscore.min.js") #end
+#tag introduce("/static/editor.md/lib/sequence-diagram.min.js") #end
+#tag introduce("/static/editor.md/lib/flowchart.min.js") #end
+#tag introduce("/static/editor.md/lib/jquery.flowchart.min.js") #end
+#tag introduce("/static/editor.md/editormd.min.js") #end -->
+
+	<div class="post-box">
+		<p class="text-centered"><a href="/" class="soft-muted">回到文章列表</a></p>
+		<section class="post">
+			<header class="headline text-centered">
+				<h1>开发日志：商品详情<一></h1>
+				<time class="upper soft-muted">2015.09.10</time>
+			</header>
+			<article id="article" class="markdown-body editormd-html-preview">
+				
+				<!-- <p><img src="/static/img/goodsDetail2.png"></p>
+				<p>
+					所谓“面向集合”（Collection-Oriented），意思是数据被分组存储在数据集中，被称为一个集合（Collection)。每个集合在数据库中都有一个唯一的标识名，并且可以包含无限数目的文档。集合的概念类似关系型数据库（RDBMS）里的表（table），不同的是它不需要定义任何模式（schema)。Nytro MegaRAID技术中的闪存高速缓存算法，能够快速识别数据库内大数据集中的热数据，提供一致的性能改进。
+				</p>
+				<p class="small">
+					模式自由（schema-free)，意味着对于存储在mongodb数据库中的文件，我们不需要知道它的任何结构定义。如果需要的话，你完全可以把不同结构的文件存储在同一个数据库里。
+				</p>
+				<p>
+					存储在集合中的文档，被存储为键-值对的形式。键用于唯一标识一个文档，为字符串类型，而值则可以是各种复杂的文件类型。我们称这种存储形式为BSON（Binary Serialized Document Format）。[3] 
+				</p>
+				<p>MongoDB已经在多个站点部署.</p>
+				<p>
+				<h2>其主要场景如下：</h2>
+				<ul><li>1）网站实时数据处理。它非常适合实时的插入、更新与查询，并具备网站实时数据存储所需的复制及高度伸缩性。</li>
+				<li>2）缓存。由于性能很高，它适合作为信息基础设施的缓存层。在系统重启之后，由它搭建的持久化缓存层可以避免下层的数据源过载。</li>
+				<li>3）高伸缩性的场景。非常适合由数十或数百台服务器组成的数据库，它的路线图中已经包含对MapReduce引擎的内置支持。</li></ul>
+				<h2>不适用的场景如下：</h2><ul><li>1）要求高度事务性的系统。</li>
+				<li>2）传统的商业智能应用。</li>
+				<li>3）复杂的跨文档（表）级联查询。</li></ul>
+				</p> -->
+			</article>
+			<br>
+			<hr>
+			<br>
+			<!--订阅按钮 -->
+			<p class="subscribe-btns">
+				<a href="/" class="btn" type="primary">关注微信公众号</a>
+				<a href="/" class="btn" type="black" outline>RSS订阅博客</a>
+			</p>
+			<p class="small soft-muted content-width-5">您可以通过关注微信公众号或者RSS邮件订阅本站，及时获取博客更新资讯。</p>
+			<!-- 博客底部 上一篇 下一篇-->
+			<footer>
+				<hr>
+				<ul class="next-prev">
+					<li><a href="/" class="prev">开发日志：数据库设计</a></li>
+					<li><a href="/" class="next">开发日志：购物车<二></a></li>
+				</ul>
+			</footer>
+		</section>
+		<!-- 评论 -->
+		<div id="comments-box">
+			<form action="" method="POST" class="forms">
+				<section>
+					<label for="">
+					<h3>用户评论</h3>
+					</label>
+					<textarea rows="6"></textarea>
+					<a href="" class="btn right" type="primary" style="margin-top: 8px;">发表</a>	
+				</section>
+			</form>
+			<!-- 评论完成后提示 -->
+			<p id="comments-moderate-message" style="display: none;">Thank you. Your comment should be displayed soon.</p>
+			<br>
+			<ul id="comments" class="comments"> <!-- style="background:#FCFCFC;" -->
+				<header class="headline text-left">
+					<h5>评论列表</h5>
+				</header>
+				<li>
+					<p>
+						<b>广东深圳游客:192.168.1.1</b>&nbsp;&nbsp;发布于<time class="">2015.10.01</time>	
+					</p>			
+					<fieldset>
+						<!-- <legend>
+						</legend> -->
+						<span>挺不错的文章，受教了！</span>
+						<p class="next-prev"><a href="" class="next">回复</a></p>
+					</fieldset>
+				</li>	
+				<li>
+					<p>
+						<b>广东深圳游客:114.125.0.16</b>&nbsp;&nbsp;发布于<time class="">2016.01.21</time>	
+					</p>	
+					<fieldset>			
+						<!-- <legend>
+						</legend> -->
+					<legend>回复<b>广东深圳游客:192.168.1.1</b></legend>
+					<blockquote>
+					挺不错的文章，受教了！
+					</blockquote>
+					<span>挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！</span>
+					<p class="next-prev"><a href="" class="next">回复</a></p>
+					</fieldset>
+				</li>
+				<li>
+					<p>
+						<b>湖南长沙游客:115.20.135.222</b>&nbsp;&nbsp;发布于<time class="">2016.2.12</time>	
+					</p>
+					<fieldset>
+						<legend>回复<b>广东深圳游客:114.125.0.16</b></legend>
+						<!-- <legend>
+						</legend> -->
+						<blockquote>
+						挺不错的文章，受教了！
+						</blockquote>
+						<blockquote>
+						挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！挺不错的文章，受教了！
+						</blockquote>
+						<span>非常好!</span>
+						<p class="next-prev"><a href="" class="next">回复</a></p>
+					</fieldset>	
+				</li>
+			</ul>
+			 <badge id="comments-counter"></badge>
+		</div>
+	</div>
+	
+	<!-- <script type="text/javascript">
+            $(function() {
+                var testEditormdView, testEditormdView2;
+                
+                $.get("/static/小蝶云商.md", function(markdown) {
+                    
+				    testEditormdView = editormd.markdownToHTML("article", {
+                        markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
+                        //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                        htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                        //toc             : false,
+                        tocm            : true,    // Using [TOCM]
+                        //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                        //gfm             : false,
+                        //tocDropdown     : true,
+                        // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                        emoji           : true,
+                        taskList        : true,
+                        tex             : true,  // 默认不解析
+                        flowChart       : true,  // 默认不解析
+                        sequenceDiagram : true,  // 默认不解析
+                    });
+                    
+                    //console.log("返回一个 jQuery 实例 =>", testEditormdView);
+                    
+                    // 获取Markdown源码
+                    //console.log(testEditormdView.getMarkdown());
+                    
+                    //alert(testEditormdView.getMarkdown());
+                });
+                    
+                /* testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    emoji           : true,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true,  // 默认不解析
+                }); */
+            });
+        </script> -->
+	
