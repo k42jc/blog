@@ -13,7 +13,7 @@ import com.techeffic.blog.service.ServiceFactory;
  *
  * @param <E>
  */
-public abstract class BaseListener<E extends ApplicationEvent> implements ApplicationListener<E>{
+public abstract class BaseSpringListener<E extends ApplicationEvent> implements ApplicationListener<E>{
 	
 	protected boolean isRootLoad;
 	

@@ -9,6 +9,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.techeffic.blog.dao.DaoFactory;
+import com.techeffic.blog.entity.SysData;
 import com.techeffic.blog.entity.Template;
 
 /**
@@ -17,7 +18,7 @@ import com.techeffic.blog.entity.Template;
  *
  */
 @Component
-public class MetaDataInitListener extends BaseListener<ContextRefreshedEvent>{
+public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEvent>{
 	@Autowired
 	private DaoFactory daoFactory;
 	
@@ -164,5 +165,9 @@ public class MetaDataInitListener extends BaseListener<ContextRefreshedEvent>{
 		componentList.forEach(c -> {
 			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
 		});
+		
+		//初始化系统类型
+		SysData blogClazz = new SysData();
+		blogClazz.setId("");
 	}
 }
