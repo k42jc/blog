@@ -44,5 +44,11 @@ public interface IBaseDao<E> {
 	 * @param name 表名
 	 */
 	void save(E e,String name);
+	
+	/**
+	 * 清空e集合
+	 * @param e
+	 */
+	void clear(Class<E> e);
 
 }
