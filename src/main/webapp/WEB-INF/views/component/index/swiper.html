@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #tag introduce("/static/css/swiper.min.css") #end
 #tag introduce("/static/js/swiper.min.js") #end
 <div id="swiper-container" class="swiper-container">
@@ -67,4 +68,75 @@
 			// alert('事件触发了;');
 		}
 	});
+=======
+#tag introduce("/static/css/swiper.min.css") #end
+#tag introduce("/static/js/swiper.min.js") #end
+<div id="swiper-container" class="swiper-container">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide">
+			<div id="intro" style="padding: 47px 0 75px 0">
+				<h1>每日一句</h1>
+				<h6 style="background: #DF2935;">成长不仅仅意味着失去</h6>
+				<div class="motto">
+					<blockquote>
+						<p>逆水行舟，不进则退。每时每刻，都不停下学习的脚步，只有不断摸索，才能不断前行！</p>
+					</blockquote>
+				</div>
+				<p class="subscribe-btns wrap text-centered">
+					<a href="/" class="btn" type="red" outline>给我留言&gt;&gt;</a>
+				</p>
+			</div>
+		</div>
+		<div class="swiper-slide">
+			<div id="hero" style="padding: 47px 0 75px 0">
+				<h1>记录从点滴做起</h1>
+				<p>说是这么说，但是本人又比较懒，虽然比较懒，但也不能忽视我偶尔起来的热情，简直能吓到我自己</p>
+			</div>
+			<!-- 按钮 -->
+			<p class="subscribe-btns wrap text-centered">
+				<a href="/" class="btn" type="primary">关注我的微信公众号</a> &nbsp;&nbsp; <a
+					href="/" class="btn" type="black" outline>RSS订阅本博客</a>
+			</p>
+		</div>
+	</div>
+	<!-- 分页器 -->
+	<!-- <div class="swiper-pagination"></div> -->
+
+	<!-- 导航按钮
+		<div class="swiper-button-prev swiper-button-black"></div>
+		<div class="swiper-button-next swiper-button-black"></div> -->
+</div>
+<script type="text/javascript">
+	var swiper = new Swiper('.swiper-container', {
+		// loop:true,
+		autoplay : 5000,
+		speed : 1000,
+		grabCursor : true,
+		parallax : true,
+		// pagination:'.swiper-pagination',
+		/*nextButton:'.swiper-button-next',
+		prevButton:'.swiper-button-prev',*/
+		/**延迟加载到前后一张*/
+		lazyLoading : true,
+		lazyLoadingInPrevNext : true,
+		onInit : function(swiper) {
+			$('#cover-customer').attr('class', 'cover-1');
+		},
+		onAutoplay : function(swiper) {
+			/*switch(swiper.activeIndex){
+				case 0:
+					$('#nav-header').attr('class','cover-0');
+					break;
+				case 1:
+					$('#nav-header').attr('class','cover-1');
+					break;
+				case 2:
+					$('#nav-header').attr('class','cover-2');
+					break;
+			}*/
+			//console.log(swiper.activeIndex);
+			// alert('事件触发了;');
+		}
+	});
+>>>>>>> branch 'blog_2.0' of git@github.com:k42jc/blog.git
 </script>

@@ -21,6 +21,7 @@ public class SysData implements Serializable {
 	private String value;
 	// 顺序
 	private Integer orders;
+
 	// 状态 0 启用 1 禁用 默认0
 	private Integer status = 0;
 	// 创建日期 默认当前
@@ -28,6 +29,14 @@ public class SysData implements Serializable {
 	// 更新日期
 	private Date updateDate;
 
+	public String getKey() {
+		return key;
+	}
+	
+	public void setKey(String key) {
+		this.key = key;
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -42,14 +51,6 @@ public class SysData implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
 	}
 
 	public Integer getOrders() {

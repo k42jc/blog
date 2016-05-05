@@ -19,7 +19,7 @@ import com.techeffic.blog.entity.User;
  * @param <E>
  *            对应的实体类对象
  */
-@Repository
+//@Repository
 public class BaseMongoDao<E> implements IBaseDao<E>{
 
 	private MongoTemplate mongoTemplate;

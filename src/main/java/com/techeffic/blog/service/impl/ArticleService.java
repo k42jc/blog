@@ -31,12 +31,12 @@ public class ArticleService extends BaseService implements IArticleService{
 		article.setType(type);
 		article.setTitle(title);
 		article.setKeywords(label);
-		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
 			article.setCreateDate(sdf.parse("2016-04-18 20:36:21"));
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}*/
+		}
 		//找到上一篇文章
 		Article previous = this.getDaoFactory().getArticleMongoDao().findPrevious();
 		article.setOrder(previous == null?1:previous.getOrder()+1);

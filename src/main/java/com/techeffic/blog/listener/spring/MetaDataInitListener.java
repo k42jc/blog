@@ -171,7 +171,6 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		componentList.add(component6);
 		componentList.add(component7);
 		componentList.add(component8);
-		componentList.add(component9);
 		componentList.forEach(c -> {
 			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
 		});
