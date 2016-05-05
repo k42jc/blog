@@ -29,4 +29,9 @@ public class Constants {
 	
 	//当前页面需要登录
 	public static final String NEED_LOGIN = "1";
+	
+	/**文章的文本类型 --- html**/
+	public static final String CONTENT_TYPE_HTML ="H";
+	/**文章的文本类型 --- markdown**/
+	public static final String CONTENT_TYPE_MARKDOWN = "M";
 }
