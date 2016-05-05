@@ -1,18 +1,10 @@
-<!-- 使用editormd.js搭配marked.js解析纯markdown文本并渲染到指定标签下
-搭配kube.css -->
 <!-- 详情 -->
-<<<<<<< HEAD
 #tag introduce("/static/editor.md/css/editormd.preview.min.css") #end
 #tag introduce("/static/editor.md/lib/marked.min.js") #end
 #tag introduce("/static/js/ZeroClipboard.min.js") #end
 <!--#tag introduce("/static/editor.md/lib/raphael.min.js") #end
 #tag introduce("/static/js/bootstrap-3.3.2.min.js") #end
-=======
-<!--  #tag introduce("/static/editor.md/css/editormd.preview.min.css") #end-->
-#tag introduce("/static/editor.md/lib/marked.min.js") #end
->>>>>>> branch 'blog_2.0' of git@github.com:k42jc/blog.git
 #tag introduce("/static/editor.md/lib/prettify.min.js") #end
-<<<<<<< HEAD
 #tag introduce("/static/editor.md/lib/underscore.min.js") #end
 #tag introduce("/static/editor.md/lib/sequence-diagram.min.js") #end
 #tag introduce("/static/editor.md/lib/flowchart.min.js") #end
@@ -161,33 +153,8 @@ blockquote{
 		<ul id="comments" class="comments"> style="background:#FCFCFC;"
 			<header class="headline text-left">
 				<h5>评论列表</h5>
-=======
-#tag introduce("/static/editor.md/editormd.js") #end
-<style>
-#article blockquote p{
-	font-size:14px;
-}
-@media (max-width:768px){
-.markdown-toc{
-	display:none;
-}
-}
-</style>
-	<div class="post-box">
-		<p class="text-centered"><a href="/" class="soft-muted">回到文章列表</a></p>
-		<section class="post">
-			<header class="headline text-centered">
-				<h1>开发日志：商品详情<一></h1>
-				<time class="upper soft-muted">2015.09.10</time>
->>>>>>> branch 'blog_2.0' of git@github.com:k42jc/blog.git
 			</header>
-<<<<<<< HEAD
 			<li>
-=======
-			<article id="article">
-				
-				<!-- <p><img src="/static/img/goodsDetail2.png"></p>
->>>>>>> branch 'blog_2.0' of git@github.com:k42jc/blog.git
 				<p>
 					<b>广东深圳游客:192.168.1.1</b>&nbsp;&nbsp;发布于<time class="">2015.10.01</time>	
 				</p>			
@@ -234,19 +201,12 @@ blockquote{
 		</ul> -->
 		 <badge id="comments-counter"></badge>
 	</div>
-<<<<<<< HEAD
 </div>
 
 <script type="text/javascript">
         $(function() {
 
             // $.get("/static/小蝶云商.md", function(markdown) {
-=======
-	
-	<script type="text/javascript">
-            $(function() {
-                var testEditormdView, testEditormdView2;
->>>>>>> branch 'blog_2.0' of git@github.com:k42jc/blog.git
                 
 			   var testEditormdView = editormd.markdownToHTML("article", {
                     //markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
@@ -267,7 +227,6 @@ blockquote{
                     //flowChart       : true,  // 默认不解析
                     //sequenceDiagram : true,  // 默认不解析
                 });
-<<<<<<< HEAD
 				//$('#article>p').css('text-indent','2em');
 					//$('#article>em>p').css('text-indent','2em');
 					//$('#article>ul').css('margin-left','3em');
@@ -365,17 +324,4 @@ blockquote{
     };
 
     </script>
-=======
-                    
-                /* testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
-                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
-                    emoji           : true,
-                    taskList        : true,
-                    tex             : true,  // 默认不解析
-                    flowChart       : true,  // 默认不解析
-                    sequenceDiagram : true,  // 默认不解析
-                }); */
-            });
-        </script>
->>>>>>> branch 'blog_2.0' of git@github.com:k42jc/blog.git
 	
