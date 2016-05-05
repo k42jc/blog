@@ -15,6 +15,8 @@ public class SysData implements Serializable {
 	private String id;
 	// 类型
 	private String type;
+	// 编码
+	private String key;
 	// 值
 	private String value;
 	// 顺序
@@ -40,6 +42,14 @@ public class SysData implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public Integer getOrders() {

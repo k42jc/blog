@@ -18,7 +18,25 @@ public class DaoFactory {
 	private ITemplateDao templateMongoDao;
 	//页面组件实例化接口
 	private IComponentDao componentMongoDao;
+	//基础数据实例化接口
+	private ISysDataDao sysDataMongoDao;
+	//文章实例化接口
+	private IArticleDao articleMongoDao;
 	
+	public IArticleDao getArticleMongoDao() {
+		return articleMongoDao;
+	}
+	@Autowired
+	public void setArticleMongoDao(IArticleDao articleMongoDao) {
+		this.articleMongoDao = articleMongoDao;
+	}
+	public ISysDataDao getSysDataMongoDao() {
+		return sysDataMongoDao;
+	}
+	@Autowired
+	public void setSysDataMongoDao(ISysDataDao sysDataMongoDao) {
+		this.sysDataMongoDao = sysDataMongoDao;
+	}
 	public IComponentDao getComponentMongoDao() {
 		return componentMongoDao;
 	}

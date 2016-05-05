@@ -19,7 +19,7 @@ import com.techeffic.blog.entity.User;
  * @param <E>
  *            对应的实体类对象
  */
-//@Repository
+@Repository
 public class BaseMongoDao<E> implements IBaseDao<E>{
 
 	private MongoTemplate mongoTemplate;
@@ -94,6 +94,14 @@ public class BaseMongoDao<E> implements IBaseDao<E>{
 	@Override
 	public void clear(Class<E> e) {
 		this.mongoTemplate.dropCollection(e);
+	}
+	
+	public E findOne(Query query,Class<E> e){
+		return this.mongoTemplate.findOne(query, e);
+	}
+	
+	public List<E> find(Query query,Class<E> e){
+		return this.mongoTemplate.find(query, e);
 	}
 
 }

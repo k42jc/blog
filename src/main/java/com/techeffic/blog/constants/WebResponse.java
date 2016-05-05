@@ -33,13 +33,13 @@ public class WebResponse extends HashMap<String, Object>{
 	}
 	
 	public WebResponse() {
-		super();
+		super(4);
 		this.put("success", Constants.SUCCESS);
 		this.put("type", "info");
 	}
 	
 	public WebResponse(String type,String msg) {
-		super();
+		this(4);
 		this.msg = msg ;
 		this.type = type;
 		this.put("success", Constants.SUCCESS);

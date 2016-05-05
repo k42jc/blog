@@ -1,6 +1,7 @@
 package com.techeffic.blog.listener.spring;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.techeffic.blog.dao.DaoFactory;
 import com.techeffic.blog.entity.SysData;
 import com.techeffic.blog.entity.Template;
+import com.techeffic.blog.util.KeyUtil;
 
 /**
  * 用于容器初启动完成后执行操作
@@ -36,6 +38,7 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 	private void clear() {
 		daoFactory.getTemplateMongoDao().clear(Template.class);
 		daoFactory.getComponentMongoDao().clear(com.techeffic.blog.entity.Component.class);
+		daoFactory.getSysDataMongoDao().clear(SysData.class);
 		
 	}
 
@@ -153,6 +156,12 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		component8.setPath("/component/article/body.html");
 		component8.setClassName("articleDataModelService");
 		
+		com.techeffic.blog.entity.Component component9 = new com.techeffic.blog.entity.Component();
+		component9.setId(UUID.randomUUID().toString());
+		component9.setKey("aboutMe");
+		component9.setPath("/component/about/body.html");
+		component9.setClassName("aboutDataModelService");
+		
 		List<com.techeffic.blog.entity.Component> componentList = new ArrayList<com.techeffic.blog.entity.Component>();
 		componentList.add(component);
 		componentList.add(component2);
@@ -162,12 +171,72 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		componentList.add(component6);
 		componentList.add(component7);
 		componentList.add(component8);
+		componentList.add(component9);
 		componentList.forEach(c -> {
 			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
 		});
 		
 		//初始化系统类型
 		SysData blogClazz = new SysData();
-		blogClazz.setId("");
+		blogClazz.setId(KeyUtil.generate());
+		blogClazz.setCreateDate(new Date());
+		blogClazz.setOrders(1);
+		blogClazz.setType("blogClazz");
+		blogClazz.setKey("y");
+		blogClazz.setValue("原创");
+		
+		SysData blogClazz2 = new SysData();
+		blogClazz2.setId(KeyUtil.generate());
+		blogClazz2.setCreateDate(new Date());
+		blogClazz2.setOrders(2);
+		blogClazz2.setType("blogClazz");
+		blogClazz2.setKey("z");
+		blogClazz2.setValue("转载");
+		
+		SysData blogType = new SysData();
+		blogType.setId(KeyUtil.generate());
+		blogType.setCreateDate(new Date());
+		blogType.setOrders(1);
+		blogType.setType("blogType");
+		blogType.setKey("java");
+		blogType.setValue("java");
+		
+		SysData blogType2 = new SysData();
+		blogType2.setId(KeyUtil.generate());
+		blogType2.setCreateDate(new Date());
+		blogType2.setOrders(2);
+		blogType2.setType("blogType");
+		blogType2.setKey("db");
+		blogType2.setValue("数据库");
+		
+		SysData blogType3 = new SysData();
+		blogType3.setId(KeyUtil.generate());
+		blogType3.setCreateDate(new Date());
+		blogType3.setOrders(3);
+		blogType3.setType("blogType");
+		blogType3.setKey("server");
+		blogType3.setValue("服务器");
+		
+		SysData blogType4 = new SysData();
+		blogType4.setId(KeyUtil.generate());
+		blogType4.setCreateDate(new Date());
+		blogType4.setOrders(3);
+		blogType4.setType("blogType");
+		blogType4.setKey("js");
+		blogType4.setValue("javascript");
+		
+		List<SysData> sysDataList = new ArrayList<SysData>();
+		
+		sysDataList.add(blogClazz);
+		sysDataList.add(blogClazz2);
+		sysDataList.add(blogType);
+		sysDataList.add(blogType2);
+		sysDataList.add(blogType3);
+		sysDataList.add(blogType4);
+		
+		sysDataList.forEach(sysData -> {
+			this.daoFactory.getSysDataMongoDao().saveOrUpdate(sysData);
+		});
+		
 	}
 }

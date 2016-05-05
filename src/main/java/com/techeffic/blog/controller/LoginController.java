@@ -21,8 +21,8 @@ public class LoginController extends BaseController{
 	@RequestMapping("login/validate.action")
 	@ResponseBody
 	public WebResponse validate(){
-		String userName = webCtx.getReqeustAttribute().getString("userName");
-		String password = webCtx.getReqeustAttribute().getString("password");
+		String userName = webCtx.getRequestParameter().getString("userName");
+		String password = webCtx.getRequestParameter().getString("password");
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		webResponse.setSuccess(Constants.FAIL);
@@ -40,7 +40,7 @@ public class LoginController extends BaseController{
 			String userId = "abcd";
 			webResponse.setSuccess(Constants.SUCCESS);
 			webResponse.setType("location");
-			webResponse.put("data", webCtx.getReqeustAttribute().getString("redirectURI"));
+			webResponse.put("data", webCtx.getRequestParameter().getString("redirectURI"));
 			webCtx.userLogin(userId);
 		}
 		return webResponse;
@@ -52,8 +52,8 @@ public class LoginController extends BaseController{
 	@RequestMapping("login.action")
 	@ResponseBody
 	public WebResponse login(){
-		String userName = webCtx.getReqeustAttribute().getString("userName");
-		String password = webCtx.getReqeustAttribute().getString("password");
+		String userName = webCtx.getRequestParameter().getString("userName");
+		String password = webCtx.getRequestParameter().getString("password");
 		if("test".equals(userName) && "123456".equals(password)){
 			webResponse.setSuccess(Constants.SUCCESS);
 		}else{

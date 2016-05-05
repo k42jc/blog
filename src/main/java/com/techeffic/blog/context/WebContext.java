@@ -14,21 +14,27 @@ public class WebContext {
 	private Request request;
 	private Response response;
 	private LoginState loginState;
-	private RequestAttribute reqeustAttribute;
+	private RequestParameter requestParameter;
+	private RequestAttribute requestAttribute;
 	
+	public RequestAttribute getRequestAttribute() {
+		return requestAttribute;
+	}
+
 	public LoginState getLoginState() {
 		return loginState;
 	}
 
-	public RequestAttribute getReqeustAttribute() {
-		return reqeustAttribute;
+	public RequestParameter getRequestParameter() {
+		return requestParameter;
 	}
 
 	private WebContext(HttpServletRequest request, HttpServletResponse response) {
 		this.request = new Request(request);
 		this.response = response == null?null:new Response(response);
 		loginState = new LoginState(this);
-		reqeustAttribute = new RequestAttribute(this);
+		requestParameter = new RequestParameter(this);
+		requestAttribute = new RequestAttribute(this);
 	}
 	
 	public static WebContext init(HttpServletRequest request, HttpServletResponse response){

@@ -19,9 +19,9 @@ public class Article implements Serializable {
 	private String title;
 	// 博客类型 Y 原创 or Z 转载 默认原创
 	private String type = "Y";
-	// 博客分类 默认为0
-	private String clazzId;
-	// 所属用户 默认为0
+	// 博客分类
+	private String clazz;
+	// 所属用户
 	private String userId;
 	// 关键字/标签
 	private String keywords;
@@ -39,8 +39,6 @@ public class Article implements Serializable {
 	private String contentHtml;
 	// markdown格式文本内容
 	private String contentMarkdown;
-	// 关联系统类型中的博客类型
-	private SysData clazz;
 	// 关联用户
 	private User user;
 	// 顺序 用于页面URL显示用
@@ -94,12 +92,12 @@ public class Article implements Serializable {
 		this.id = id;
 	}
 
-	public String getClazzId() {
-		return clazzId;
+	public String getClazz() {
+		return clazz;
 	}
 
-	public void setClazzId(String clazzId) {
-		this.clazzId = clazzId;
+	public void setClazz(String clazz) {
+		this.clazz = clazz;
 	}
 
 	public String getUserId() {
@@ -164,14 +162,6 @@ public class Article implements Serializable {
 
 	public void setContentMarkdown(String contentMarkdown) {
 		this.contentMarkdown = contentMarkdown;
-	}
-
-	public SysData getClazz() {
-		return clazz;
-	}
-
-	public void setClazz(SysData clazz) {
-		this.clazz = clazz;
 	}
 
 	public User getUser() {

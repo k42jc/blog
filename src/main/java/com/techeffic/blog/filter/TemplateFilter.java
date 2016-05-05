@@ -66,6 +66,12 @@ public class TemplateFilter implements Filter{
 				}
 			}
 		}
+		//处理文章显示页面
+		if(requestURI.startsWith("/article")){
+			/*datas.put("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));*/
+			webCtx.getRequest().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
+			requestURI = requestURI.substring(0,requestURI.lastIndexOf("/"));
+		}
 		try {
 			//获取对应页面并渲染
 			render((HttpServletRequest)req,(HttpServletResponse)res);
@@ -92,6 +98,7 @@ public class TemplateFilter implements Filter{
 	}
 
 	private void render(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		//处理文章显示页面
 		// 获取对应请求模板数据
 		Template template = serviceFactory.getTemplateService()
 				.findTemplateByRequestURI(requestURI);

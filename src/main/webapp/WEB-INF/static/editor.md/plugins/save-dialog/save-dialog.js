@@ -34,7 +34,7 @@
 				//设置表单提交action
 				var action = saveLang.url+(saveLang.url.indexOf("?")>0?"&":"?")+"guid="+guid;
 				
-				var dialogContent = '<form id="form" action="'+action+'" target="'+iframeName+'" method="POST" '+/*enctype="multipart/form-data"*/+' class="'+classPrefix+'form">'
+				var dialogContent = '<form id="form" action="'+action+'" target="'+iframeName+'" method="POST" '+/*enctype="multipart/form-data"*/' class="'+classPrefix+'form">'
     			+'<iframe name="'+iframeName+'" id="'+iframeName+'" guid="'+guid+'"></iframe>'
     			+'<label>'+saveLang.labelNames.type+'</label><select id="type" name="type"><option selected="selected" value="0">请选择文章类型</option>'+saveLang.selectOptions.type+'</select>'
     			+'<br/>'
@@ -45,7 +45,8 @@
     			+'<label>'+saveLang.labelNames.clazz+'</label><select id="clazz" name="clazz"><option selected="selected" value="0">请选择文章分类</option>'+saveLang.selectOptions.clazz+'</select>'
     			+'<br/>'
     			+'<label>'+saveLang.labelNames.label+'</label><input id="label" name="label" type="text" value=""/>'
-    			+'<textarea hidden="hidden" name="content" id="content">'+_this.getHTML()+'</textarea>'
+    			+'<textarea hidden="hidden" name="html" id="html">'+_this.getHTML()+'</textarea>'
+    			+'<textarea hidden="hidden" name="markdown" id="markdown">'+_this.getMarkdown()+'</textarea>'
     			+'<br/></form>';
 				
 				//创建窗口

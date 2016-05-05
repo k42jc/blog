@@ -44,10 +44,10 @@ public class WeChatService extends BaseService implements IWeChatService{
 	 * @return 原样返回echostr参数内容
 	 */
 	public String checkSignature(WebContext webCtx) {
-		String signature = webCtx.getReqeustAttribute().getString("signature");
+		String signature = webCtx.getRequestParameter().getString("signature");
 		logger.info("原signture字符"+signature);
-		String timestamp = webCtx.getReqeustAttribute().getString("timestamp");
-		String nonce = webCtx.getReqeustAttribute().getString("nonce");
+		String timestamp = webCtx.getRequestParameter().getString("timestamp");
+		String nonce = webCtx.getRequestParameter().getString("nonce");
 		
 		String[] targets = {token,timestamp,nonce};
 		//字典排序
@@ -61,7 +61,7 @@ public class WeChatService extends BaseService implements IWeChatService{
 		logger.info("转换拼接字符"+targetString);
 		
 		if(signature.equals(targetString))
-			return webCtx.getReqeustAttribute().getString("echostr");
+			return webCtx.getRequestParameter().getString("echostr");
 		return "";
 	}
 	

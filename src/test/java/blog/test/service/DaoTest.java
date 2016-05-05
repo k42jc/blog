@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import jetbrick.util.codec.MD5Utils;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.util.Assert;
 
 import blog.test.JUnit4ClassRunner;
 
 import com.techeffic.blog.dao.DaoFactory;
+import com.techeffic.blog.dao.mongodb.BaseMongoDao;
+import com.techeffic.blog.entity.Article;
 import com.techeffic.blog.entity.Component;
 import com.techeffic.blog.entity.Template;
-import com.techeffic.blog.entity.User;
 
 @RunWith(JUnit4ClassRunner.class)  
 @ContextConfiguration({"classpath:application-test.xml"})  
@@ -260,5 +261,12 @@ public class DaoTest {
 	public void deleteTest(){
 //		this.daoFactory.getComponentMongoDao().re
 //		this.daoFactory.getTemplateMongoDao().findTemplateByRequestURI("/login");
+	}
+	@Autowired
+	public BaseMongoDao<Article> baseMongoDao;
+	@Test
+	public void test(){
+		Article article = baseMongoDao.findOne(new Query().with(new Sort(Sort.Direction.DESC,"createDate")),Article.class);
+		System.out.println(article);
 	}
 }
