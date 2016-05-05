@@ -84,7 +84,7 @@
 	<!-- <welcome-file-list>
 		<welcome-file>index</welcome-file>
 	</welcome-file-list> -->
-	
+	<!-- 用于获取requestContextHodler -->
 	<listener>  
         <listener-class>  
             org.springframework.web.context.request.RequestContextListener  
