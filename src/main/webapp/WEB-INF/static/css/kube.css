@@ -132,8 +132,7 @@ h6.recommend p{
 	color: #eb4f38;
 }
 #user-info{
-	float: left;
-	margin-left: 390px;
+	float: right;
 	height: 40px;
 	line-height: 40px;
 }
