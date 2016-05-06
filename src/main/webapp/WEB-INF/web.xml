@@ -115,7 +115,7 @@
 	<filter>  
 		<description>模板渲染过滤器</description>
 	    <filter-name>templateFilter</filter-name>  
-	    <filter-class>com.techeffic.blog.filter.TemplateFilter</filter-class>  
+	    <filter-class>com.techeffic.blog.filter.TemplateDispatcher</filter-class>  
 	 </filter>  
 	   
 	 <filter-mapping>  

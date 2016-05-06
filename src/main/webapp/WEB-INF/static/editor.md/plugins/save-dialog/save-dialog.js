@@ -35,7 +35,7 @@
 				var action = saveLang.url+(saveLang.url.indexOf("?")>0?"&":"?")+"guid="+guid;
 				
 				var dialogContent = '<form id="form" action="'+action+'" target="'+iframeName+'" method="POST" '+/*enctype="multipart/form-data"*/' class="'+classPrefix+'form">'
-    			+'<iframe name="'+iframeName+'" id="'+iframeName+'" guid="'+guid+'"></iframe>'
+    			+'<iframe name="'+iframeName+'" id="'+iframeName+'" guid="'+guid+'" target="_parent"></iframe>'
     			+'<label>'+saveLang.labelNames.type+'</label><select id="type" name="type"><option selected="selected" value="0">请选择文章类型</option>'+saveLang.selectOptions.type+'</select>'
     			+'<br/>'
     			+'<label>'+saveLang.labelNames.title+'</label><input id="title" name="title" type="text" value=""/>'
@@ -98,6 +98,7 @@
 							}else{
                                 this.hide().lockScreen(false).hideMask();
                                 this.find('#form').submit();
+                                window.location.href = "/class";
 							}
                             return false;
 						}],

@@ -66,7 +66,7 @@ public class TemplateFilter implements Filter{
 				}
 			}
 		}
-		//处理文章显示页面
+		//处理文章显示页面的URI请求
 		if(requestURI.startsWith("/article")){
 			/*datas.put("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));*/
 			webCtx.getRequest().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
@@ -76,6 +76,7 @@ public class TemplateFilter implements Filter{
 			//获取对应页面并渲染
 			render((HttpServletRequest)req,(HttpServletResponse)res);
 		} catch (Exception e) {
+			e.printStackTrace();
 			((HttpServletResponse)res).sendRedirect("/404.html");
 		}
 		
@@ -102,19 +103,6 @@ public class TemplateFilter implements Filter{
 		// 获取对应请求模板数据
 		Template template = serviceFactory.getTemplateService()
 				.findTemplateByRequestURI(requestURI);
-		// 填充页面数据
-		Map<String, Object> datas = new HashMap<String, Object>();
-		datas.put("title", template.getTitle());
-		datas.put("keywords", template.getKeyWords());
-		datas.put("description", template.getDescription());
-		//将请求中携带的参数放入模板数据
-		request.getParameterMap().forEach((key,values) ->{
-			if(values.length == 1){
-				datas.put(key,values[0]);
-			}else{
-				datas.put(key, JSONUtils.toJSONString(values));
-			}
-		});
 		// 如果当前页面不需要登录
 		boolean isFilter = false;
 		if (Constants.NEED_LOGIN.equals(template.getNeedLogin())) {
@@ -128,6 +116,19 @@ public class TemplateFilter implements Filter{
 		if(isFilter){
 			return;
 		}else{
+			// 填充页面数据
+			Map<String, Object> datas = new HashMap<String, Object>();
+			datas.put("title", template.getTitle());
+			datas.put("keywords", template.getKeyWords());
+			datas.put("description", template.getDescription());
+			//将请求中携带的参数放入模板数据
+			request.getParameterMap().forEach((key,values) ->{
+				if(values.length == 1){
+					datas.put(key,values[0]);
+				}else{
+					datas.put(key, JSONUtils.toJSONString(values));
+				}
+			});
 			// 直接渲染页面
 			OutputStream outputStream =	TemplateUtil.render(response.getOutputStream(), template.getPath(), datas);
 			outputStream.flush();

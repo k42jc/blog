@@ -2,6 +2,8 @@ package com.techeffic.blog.dao;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.core.query.Query;
+
 /**
  * 基础dao接口
  * 定义基础增删查该
@@ -50,5 +52,21 @@ public interface IBaseDao<E> {
 	 * @param e
 	 */
 	void clear(Class<E> e);
+	
+	/**
+	 * 使用query查询集合
+	 * @param query
+	 * @param e
+	 * @return
+	 */
+	public List<E> find(Query query,Class<E> e);
+	
+	/**
+	 * 使用query查询单个对象
+	 * @param query
+	 * @param e
+	 * @return
+	 */
+	public E findOne(Query query,Class<E> e);
 
 }

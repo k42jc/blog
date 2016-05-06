@@ -10,8 +10,10 @@ public class Constants {
 	//false
 	public static final int FAIL = 0;
 	
-	/**系统数据类型--博客分类*/
-	public static final String SYSDATA_TYPE_BLOG_TYPE = "blog_type";
+	/**系统数据类型--博客分类：原创/转载*/
+	public static final String SYSDATA_TYPE_BLOG_TYPE = "blogType";
+	/**系统数据类型--博客类别*/
+	public static final String SYSDATA_TYPE_BLOG_CLAZZ = "blogClazz";
 	/**系统数据类型--导航栏标题*/
 	public static final String SYSDATA_TYPE_NAVBAR_TITLE = "navbar_title";
 	/**系统数据类型--座右铭*/
@@ -34,4 +36,9 @@ public class Constants {
 	public static final String CONTENT_TYPE_HTML ="H";
 	/**文章的文本类型 --- markdown**/
 	public static final String CONTENT_TYPE_MARKDOWN = "M";
+	
+	/**文章请求URI*/
+	public static final String REQUEST_URI_ARTICLE = "/article"; 
+	/**文章列表请求URI*/
+	public static final String REQUEST_URI_LIST = "/list"; 
 }

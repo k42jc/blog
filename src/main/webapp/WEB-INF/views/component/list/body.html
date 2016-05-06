@@ -1,0 +1,54 @@
+<!-- 详情标题 -->
+<style>
+#hero{
+	padding: 60px 0 72px 0;
+}
+.post-list-box {
+    max-width: 700px;
+    margin: 0 auto;
+}
+</style>
+<div id="hero">
+	<div id="hero-box">
+		<h1>文章列表-${sysData.value}分类</h1>
+	</div>
+</div>
+<!-- 页面详情 -->
+<div id="posts">
+	<!-- 文章预览效果 -->
+	#for (Article article:articleList)
+	<div class="post-list-box">
+		<h2><a href="/article/${article.order}">${article.title}</a></h2>
+		<time>${article.createDate.format("yyyy-MM-dd HH:mm:ss")}</time>
+		#if (article.viewImgUrl != '')<p><a href="/"><img src="img/goodsDetail.png" alt=""></a></p> #end
+		<!-- <p>#if (article.contentView.length() >= 150) ${article.contentView.substring(0,150)} #else ${article.contentView} #end</p> -->
+		<a href="/article/${article.order}" class="post-read-more">查看详情...</a>
+		#if (canEdit == true) 
+		&nbsp;&nbsp;<a href="/write_md" class="post-read-more">编辑</a>
+		&nbsp;&nbsp;<a href="javascript:void(0);" onclick="deleteArticle('${article.id}')" class="post-read-more">删除</a>
+		 #end
+		 <script type="text/javascript">
+		 	function deleteArticle(id){
+		 		$.ajax({
+		 			url:'/article/delete.action',
+		 			dataType:'json',
+		 			method:'POST',
+		 			data:{id:id},
+		 			success:function(data){
+		 				if(data.success === 1){
+		 					alert('删除成功！');
+		 					window.location.href="/list/${sysData.key}";
+		 				}
+		 			}
+		 		});
+		 	}
+		 </script>
+	</div>
+	#end
+	<!-- 分页条 -->
+	<ul class="pagination">
+		<li><a href="/" class="active">1</a></li>
+		<li><a href="/">2</a></li>
+		<li><a href="">&rarr;</a></li>
+	</ul>
+</div>

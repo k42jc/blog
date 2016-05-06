@@ -1,13 +1,10 @@
 package com.techeffic.blog.service.impl;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.springframework.stereotype.Service;
-import org.springframework.test.annotation.Rollback;
 
-import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.entity.Article;
 import com.techeffic.blog.service.BaseService;
@@ -18,7 +15,7 @@ import com.techeffic.blog.util.KeyUtil;
 public class ArticleService extends BaseService implements IArticleService{
 
 	@Override
-	public synchronized WebResponse save(WebContext webCtx) {
+	public synchronized Article save(WebContext webCtx) {
 		String type = webCtx.getRequestParameter().getString("type");
 		String title = webCtx.getRequestParameter().getString("title");
 		String clazz = webCtx.getRequestParameter().getString("clazz");
@@ -44,7 +41,14 @@ public class ArticleService extends BaseService implements IArticleService{
 		article.setContentMarkdown(markdown);
 		article.setContentView(html.substring(0, 200));
 		this.getDaoFactory().getArticleMongoDao().saveOrUpdate(article);
-		return new WebResponse("info","文章发表成功！");
+		return article;
+	}
+
+	@Override
+	public void deleteById(WebContext webCtx) {
+		Article article = new Article();
+		article.setId(webCtx.getRequestParameter().getString("id"));
+		this.getDaoFactory().getArticleMongoDao().remove(article);
 	}
 
 }

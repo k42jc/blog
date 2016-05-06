@@ -1,46 +1,46 @@
 package com.techeffic.blog.context;
 
 /**
- * 请求参数封装对象
+ * 分装request主动设置的参数对象
  * @author k42jc
  *
  */
 public class RequestAttribute {
 	private WebContext webCtx;
-	
+
 	public RequestAttribute(WebContext webCtx) {
 		this.webCtx = webCtx;
 	}
-	
-	public Integer getInt(String params){
-		String result = webCtx.getRequest().getParameter(params);
-		if(result == null){
+
+	public Integer getInt(String params) {
+		Object result = webCtx.getRequest().getAttribute(params);
+		if (result == null) {
 			return null;
 		}
-		return Integer.valueOf(result);
+		return Integer.valueOf(result.toString());
 	}
-	
-	public Long getLong(String params){
-		String result = webCtx.getRequest().getParameter(params);
-		if(result == null){
+
+	public Long getLong(String params) {
+		Object result = webCtx.getRequest().getAttribute(params);
+		if (result == null) {
 			return null;
 		}
-		return Long.valueOf(result);
+		return Long.valueOf(result.toString());
 	}
-	
-	public String getString(String params){
-		String result = webCtx.getRequest().getParameter(params);
-		if(result == null){
+
+	public String getString(String params) {
+		Object result = webCtx.getRequest().getAttribute(params);
+		if (result == null) {
 			return null;
 		}
 		return result.toString();
 	}
-	
-	public Double getDouble(String params){
-		String result = webCtx.getRequest().getParameter(params);
-		if(result == null){
+
+	public Double getDouble(String params) {
+		Object result = webCtx.getRequest().getAttribute(params);
+		if (result == null) {
 			return null;
 		}
-		return Double.valueOf(result);
+		return Double.valueOf(result.toString());
 	}
 }
