@@ -34,8 +34,7 @@
 				//设置表单提交action
 				var action = saveLang.url+(saveLang.url.indexOf("?")>0?"&":"?")+"guid="+guid;
 				
-				var dialogContent = '<form id="form" action="'+action+'" target="'+iframeName+'" method="POST" '+/*enctype="multipart/form-data"*/' class="'+classPrefix+'form">'
-    			+'<iframe name="'+iframeName+'" id="'+iframeName+'" guid="'+guid+'" target="_parent"></iframe>'
+				var dialogContent = '<form id="form" '+/*action="'+action+'" target="'+iframeName+'" */+'method="POST" '+/*enctype="multipart/form-data"*/' class="'+classPrefix+'form">'
     			+'<label>'+saveLang.labelNames.type+'</label><select id="type" name="type"><option selected="selected" value="0">请选择文章类型</option>'+saveLang.selectOptions.type+'</select>'
     			+'<br/>'
     			+'<label>'+saveLang.labelNames.title+'</label><input id="title" name="title" type="text" value=""/>'
@@ -45,7 +44,7 @@
     			+'<label>'+saveLang.labelNames.clazz+'</label><select id="clazz" name="clazz"><option selected="selected" value="0">请选择文章分类</option>'+saveLang.selectOptions.clazz+'</select>'
     			+'<br/>'
     			+'<label>'+saveLang.labelNames.label+'</label><input id="label" name="label" type="text" value=""/>'
-    			+'<textarea hidden="hidden" name="html" id="html">'+_this.getHTML()+'</textarea>'
+    			+'<textarea hidden="hidden" name="html" id="html">'+_this.getPreviewedHTML()+'</textarea>'
     			+'<textarea hidden="hidden" name="markdown" id="markdown">'+_this.getMarkdown()+'</textarea>'
     			+'<br/></form>';
 				
@@ -97,8 +96,22 @@
 								return false;
 							}else{
                                 this.hide().lockScreen(false).hideMask();
-                                this.find('#form').submit();
-                                window.location.href = "/class";
+                                $('#form').form({
+                                	url:action,
+                                	onSubmit:function(param){
+                                		param.contentView=_this[0].innerText.replace(/[\r\n]/g,"");
+                                	},
+                                	success:function(data){
+                                		var data = $.parseJSON(data);
+                                		if(data.success == 1){
+                                			alert("文章发表成功！页面跳转中...");
+                                			window.location.href = "/article/"+data.articleId;
+                                		}else{
+                                			alert('服务器故障，文章发表失败！');
+                                		}
+                                	}
+                                });
+                                $('#form').submit();
 							}
                             return false;
 						}],

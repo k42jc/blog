@@ -269,4 +269,11 @@ public class DaoTest {
 		Article article = baseMongoDao.findOne(new Query().with(new Sort(Sort.Direction.DESC,"createDate")),Article.class);
 		System.out.println(article);
 	}
+	@Test
+	public void testSort(){
+		List<Article> resultList = baseMongoDao.find(new Query().with(new Sort(Sort.Direction.DESC,"createDate")), Article.class);
+		resultList.forEach(article ->{
+			System.out.println(article.getCreateDate());
+		});
+	}
 }

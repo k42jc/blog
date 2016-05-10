@@ -24,7 +24,7 @@
 		<!-- <p>#if (article.contentView.length() >= 150) ${article.contentView.substring(0,150)} #else ${article.contentView} #end</p> -->
 		<a href="/article/${article.order}" class="post-read-more">查看详情...</a>
 		#if (canEdit == true) 
-		&nbsp;&nbsp;<a href="/write_md" class="post-read-more">编辑</a>
+		&nbsp;&nbsp;<a href="/write_md/${article.id}" class="post-read-more">编辑</a>
 		&nbsp;&nbsp;<a href="javascript:void(0);" onclick="deleteArticle('${article.id}')" class="post-read-more">删除</a>
 		 #end
 		 <script type="text/javascript">

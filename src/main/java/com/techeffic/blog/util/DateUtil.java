@@ -22,7 +22,7 @@ public class DateUtil {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return formatter.format(currentTime);
     }
-
+    
     /**
      * 获取指定日期的零点 即00:00:00
      * @author xudong_liao

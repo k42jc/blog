@@ -107,18 +107,20 @@ blockquote{
 }
 </style>
 <div class="post-box">
-	<p class="text-centered"><a href="/list/${article.clazz}" class="soft-muted">回到${clazzName}分类</a></p>
+	<p class="text-centered"><a href="/list/${article.clazz?!''}" id="backClazz" class="soft-muted">回到${clazzName}分类</a></p>
 	<section class="post">
 		<header class="headline text-centered">
-			<h1>${article.title}</h1>
-			<time class="upper soft-muted">${article.createDate.format("yyyy-MM-dd HH:mm:ss")}</time>
+			<h1 id="title">${article.title?!''}</h1>
+			<time id="createDate" class="upper soft-muted">#if (article!=null)${article.createDate.format("yyyy-MM-dd HH:mm:ss")} #end</time>
 		</header>
 		<article id="article" class="markdown-body editormd-html-preview">
-			
+			#if (clientType == ClientType::CLIENT_TYPE_MOBILE)
+			${article.contentHtml}
+			#end
 		</article>
-		<textarea hidden="hidden" name="article_md" id="article_md" cols="30" rows="10">
-			${article.contentMarkdown}
-		</textarea>
+		<!-- <textarea hidden="hidden" name="article_md" id="article_md" cols="30" rows="10">
+			{article.contentMarkdown}
+		</textarea> -->
 		<!--订阅按钮 -->
 		<!-- <hr>
 		<p class="subscribe-btns">
@@ -131,8 +133,8 @@ blockquote{
 		<footer>
 			<!-- <hr> -->
 			<ul class="next-prev">
-				<li><a href="/article/11" class="prev">上一篇</a></li>
-				<li><a href="/article/16" class="next">下一篇</a></li>
+				<li><a href="#if (previous == null) javascript:void(0); #else /article/${previous.order?!0} #end" class="prev">#if (previous == null) 已经是第一篇文章了~ #else 下一篇:${previous.title?!''} #end</a></li>
+				<li><a href="#if (next == null) javascript:void(0); #else /article/${next.order?!0} #end" class="next">#if (next == null) 已经是最后一篇文章了~ #else 下一篇:${next.title?!''} #end</a></li>
 			</ul>
 		</footer>
 	</section>
@@ -203,14 +205,32 @@ blockquote{
 	</div>
 </div>
 
+#if (clientType == ClientType::CLIENT_TYPE_PC)
 <script type="text/javascript">
         $(function() {
 
-            // $.get("/static/小蝶云商.md", function(markdown) {
-                
+            $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:${articleId}}, async:false,success:function(data) {
+                $('#title').text(data.article.title);
+                $('#createDate').text(data.createTime);
+                $('#backClazz').text("回到"+data.clazzName+"分类");
+                $('#backClazz').attr('href','/list/'+data.article.clazz);
+                if(data.previous != null){
+	                $('.prev').attr('href',data.previous.order);
+	                $('.prev').text('上一篇:'+data.previous.title);
+                }else{
+                	$('.prev').attr('href','javascript:void(0);');
+	                $('.prev').text('已经是第一篇文章了~');
+                }
+                if(data.next != null){
+    	            $('.next').text('下一篇:'+data.next.title);
+        	        $('.next').attr('href',data.next.order);
+                }else{
+    	            $('.next').text('已经是最后一篇文章了~');
+        	        $('.next').attr('href','javascript:void(0);');
+                }
 			   var testEditormdView = editormd.markdownToHTML("article", {
-                    //markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
-                    markdown        : $('#article_md').text() ,//+ "\r\n" + $("#append-test").text(),
+                    markdown        : data.article.contentMarkdown ,//+ "\r\n" + $("#append-test").text(),
+                    //markdown        : $('#article_md').text() ,//+ "\r\n" + $("#append-test").text(),
                     htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
                     //htmlDecode      : "style,script,iframe",  // you can filter tags decode
                     //toc             : true,
@@ -240,7 +260,7 @@ blockquote{
                 //console.log(testEditormdView.getMarkdown());
                 
                 //alert(testEditormdView.getMarkdown());
-            // });
+           }});
                 
             /* testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
                 htmlDecode      : "style,script,iframe",  // you can filter tags decode
@@ -250,38 +270,10 @@ blockquote{
                 flowChart       : true,  // 默认不解析
                 sequenceDiagram : true,  // 默认不解析
             });*/
-			$("pre > code").each(function() {
-		        var $copy = '<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div>';
-		        $(this).parent().before($copy);
-		    });
-		    
-		    var clip = new ZeroClipboard($(".btn-clipboard"));
-		    var $bridge = $("#global-zeroclipboard-html-bridge");
-		 
-		    clip.on("ready", function(e) {
-		        //$bridge.data("placement", "left").attr("title", "Copy to clipboard~").tooltip();
-	        	$bridge.append('<div class="alert alert-primary" id="copy">Copy to clipboard~</div>');
-		    });
-		 
-		    clip.on("copy", function(e) {
-		        var c = $(e.target).parent().next();
-		        clip.setText(c.text());
-		    });
-		 
-		    clip.on("aftercopy", function(e) {
-		        //$bridge.attr("title", "Copied!").tooltip("fixTitle").tooltip("show").attr("title", "Copy to clipboard~").tooltip("fixTitle");
-	        	$bridge.find('#copy').replaceWith('<div class="alert alert-success" id="copy" style="width:60px;">Copied!</div>');
-	        	setTimeout(function(){
-	        		$bridge.find('#copy').replaceWith('<div class="alert alert-primary" id="copy">Copy to clipboard~</div>');
-	        	}, 800);
-		    });
-		 
-		    clip.on("error", function(e) {
-		        //$bridge.attr("title", e.message).tooltip("fixTitle").tooltip("show");
-		        $bridge.find('#copy').replaceWith('<div class="alert alert-error" id="copy">Copy error!</div>');
-		    });
+			
 
 		    scrolltop();
+		    codeCopy();
         });
 		/**
      * 单击此处，返回到顶部
@@ -322,6 +314,38 @@ blockquote{
             }
         });
     };
-
-    </script>
-	
+    
+    function codeCopy(){
+    	$("pre > code").each(function() {
+	        var $copy = '<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div>';
+	        $(this).parent().before($copy);
+	    });
+	    
+	    var clip = new ZeroClipboard($(".btn-clipboard"));
+	    var $bridge = $("#global-zeroclipboard-html-bridge");
+	 
+	    clip.on("ready", function(e) {
+	        //$bridge.data("placement", "left").attr("title", "Copy to clipboard~").tooltip();
+        	$bridge.append('<div class="alert alert-primary" id="copy">Copy to clipboard~</div>');
+	    });
+	 
+	    clip.on("copy", function(e) {
+	        var c = $(e.target).parent().next();
+	        clip.setText(c.text());
+	    });
+	 
+	    clip.on("aftercopy", function(e) {
+	        //$bridge.attr("title", "Copied!").tooltip("fixTitle").tooltip("show").attr("title", "Copy to clipboard~").tooltip("fixTitle");
+        	$bridge.find('#copy').replaceWith('<div class="alert alert-success" id="copy" style="width:60px;">Copied!</div>');
+        	setTimeout(function(){
+        		$bridge.find('#copy').replaceWith('<div class="alert alert-primary" id="copy">Copy to clipboard~</div>');
+        	}, 800);
+	    });
+	 
+	    clip.on("error", function(e) {
+	        //$bridge.attr("title", e.message).tooltip("fixTitle").tooltip("show");
+	        $bridge.find('#copy').replaceWith('<div class="alert alert-error" id="copy">Copy error!</div>');
+	    });
+    }
+</script>
+#end

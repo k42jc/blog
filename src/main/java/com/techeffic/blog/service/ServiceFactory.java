@@ -15,7 +15,15 @@ public class ServiceFactory {
 	private ITemplateService templateService;
 	private IComponentService componentService;
 	private IArticleService articleService;
+	private ISysDataService sysDataService;
 	
+	public ISysDataService getSysDataService() {
+		return sysDataService;
+	}
+	@Autowired
+	public void setSysDataService(ISysDataService sysDataService) {
+		this.sysDataService = sysDataService;
+	}
 	public IArticleService getArticleService() {
 		return articleService;
 	}

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,8 @@ public class ListDataModelService extends BaseService implements IDataModelServi
 	public Map<String, Object> getData(WebContext webCtx) {
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		String clazz = webCtx.getRequestAttribute().getString("articleClazz");
-		List<Article> articleList = this.getDaoFactory().getArticleMongoDao().find(new Query(new Criteria("clazz").is(clazz)), Article.class);
+		//查询前10条某个类别的文章并按发表日期逆序
+		List<Article> articleList = this.getDaoFactory().getArticleMongoDao().find(new Query(new Criteria("clazz").is(clazz)).with(new Sort(Sort.Direction.DESC,"createDate")).limit(10), Article.class);
 		resultMap.put("articleList", articleList);
 		SysData sysData = this.getDaoFactory().getSysDataMongoDao().findOne(new Query(new Criteria("key").is(clazz)), SysData.class);
 		resultMap.put("sysData", sysData);

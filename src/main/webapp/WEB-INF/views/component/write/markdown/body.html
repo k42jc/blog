@@ -1,4 +1,6 @@
 #tag introduce("/static/editor.md/css/editormd.min.css") #end
+#tag introduce("/static/js/jquery.parser.js") #end
+#tag introduce("/static/js/jquery.form.js") #end
 <style>
 a.switchEditor{
 	text-decoration: none;
@@ -45,9 +47,14 @@ samp{
 }
 </style>
 	<div id="title">
-		<h1>写文章(Markdown模式)</h1>
+		<h1>#if (editType == Constants::EDIT_TYPE_ADD) 写文章(Markdown编辑器) #else 文章编辑(Markdown编辑器) #end</h1>
 		<a class="switchEditor" href="/write_kd"><samp>切换到普通编辑模式</samp></a>
 	</div>
+	#if (editType == Constants::EDIT_TYPE_EDIT)
+	<textarea hidden="hidden" name="article_md" id="content" cols="30" rows="10">
+			${article.contentMarkdown}
+	</textarea>
+	#end
 	<div id="test-editormd"></div>
     #tag introduce("/static/editor.md/editormd.js") #end
 	<script type="text/javascript">
@@ -57,6 +64,9 @@ samp{
                 
                     testEditor = editormd("test-editormd", {
                         width: "95%",
+                        #if (editType == Constants::EDIT_TYPE_EDIT)
+                        	markdown: $('#content').text(),
+                        #end
                         height: 740,
                         path : '../lib/',
                         toolbarIcons : function() {

@@ -29,6 +29,10 @@ public class TemplateDispatcher extends BaseDispatcher{
 			if(requestURI.startsWith(Constants.REQUEST_URI_LIST)){
 				webCtx.getRequest().setAttribute("articleClazz", requestURI.substring(requestURI.lastIndexOf("/")+1));
 			}
+			//处理文章编辑页面URI请求
+			if(requestURI.startsWith(Constants.REQUEST_URI_WRITE_MD)){
+				webCtx.getRequest().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
+			}
 			requestURI = requestURI.substring(0,requestURI.lastIndexOf("/"));
 			
 		}

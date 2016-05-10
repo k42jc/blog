@@ -7,8 +7,8 @@ package com.techeffic.blog.context;
  *
  */
 public class LoginState {
-	private static String userId;
-	private static boolean isLogin = false;
+	private String userId;
+	private boolean isLogin;
 	private WebContext webCtx;
 	
 	public LoginState(WebContext webCtx){
@@ -22,8 +22,12 @@ public class LoginState {
 	public boolean isLogin() {
 		return isLogin;
 	}
-	/*public void userLogin(String userId) {
+	/**
+	 * 用户登录操作
+	 * @param userId
+	 */
+	public void userLogin(String userId) {
 		LoginCookie.addCookie(webCtx, "userId", userId);
-	}*/
+	}
 	
 }
