@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.entity.Article;
+import com.techeffic.blog.entity.Page;
+import com.techeffic.blog.entity.PageCondition;
 import com.techeffic.blog.service.BaseService;
 import com.techeffic.blog.service.IArticleService;
 import com.techeffic.blog.util.KeyUtil;
@@ -66,6 +68,12 @@ public class ArticleService extends BaseService implements IArticleService{
 		webResponse.put("previous", previous);
 		webResponse.put("next", next);
 		return webResponse;
+	}
+
+	@Override
+	public Page<Article> pagenation(Class<Article> e, Integer page,
+			Integer pageSize, PageCondition condition) {
+		return this.getDaoFactory().getArticleMongoDao().pagenation(e, page, pageSize, condition);
 	}
 	
 

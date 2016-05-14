@@ -3,6 +3,8 @@ package com.techeffic.blog.service;
 import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.entity.Article;
+import com.techeffic.blog.entity.Page;
+import com.techeffic.blog.entity.PageCondition;
 
 public interface IArticleService {
 	
@@ -20,4 +22,7 @@ public interface IArticleService {
 	 * @return
 	 */
 	public WebResponse findByOrder(Integer int1);
+
+	public Page<Article> pagenation(Class<Article> class1, Integer int1,
+			Integer int2, PageCondition condition);
 }

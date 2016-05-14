@@ -96,7 +96,30 @@
 								return false;
 							}else{
                                 this.hide().lockScreen(false).hideMask();
-                                $('#form').form({
+                                $.ajax({
+                                	url:action,
+                                	type:'POST',
+                                	dataType:'json',
+                                	data:{
+                                		type:$('#type option:selected').val(),
+                                		title:$('input[name=title]').val(),
+                                		clazz:$('#clazz option:selected').val(),
+                                		label:$('#label').val(),
+                                		html:$('#html').val(),
+                                		markdown:$('#markdown').val(),
+                                		contentView:_this[0].innerText.replace(/[\r\n]/g,"")
+                                	},
+                                	success:function(data){
+                                		/*var data = $.parseJSON(data);*/
+                                		if(data.success == 1){
+                                			alert("文章发表成功！页面跳转中...");
+                                			window.location.href = "/article/"+data.articleId;
+                                		}else{
+                                			alert('服务器故障，文章发表失败！');
+                                		}
+                                	}
+                                });
+                                /*$('#form').form({
                                 	url:action,
                                 	onSubmit:function(param){
                                 		param.contentView=_this[0].innerText.replace(/[\r\n]/g,"");
@@ -111,7 +134,7 @@
                                 		}
                                 	}
                                 });
-                                $('#form').submit();
+                                $('#form').submit();*/
 							}
                             return false;
 						}],

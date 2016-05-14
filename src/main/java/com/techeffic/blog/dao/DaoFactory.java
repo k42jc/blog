@@ -2,6 +2,8 @@ package com.techeffic.blog.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.techeffic.blog.dao.mongodb.BaseMongoDao;
 /**
  * dao工厂
  * 直接面向实体dao接口

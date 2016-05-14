@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,6 +20,8 @@ import com.techeffic.blog.dao.DaoFactory;
 import com.techeffic.blog.dao.mongodb.BaseMongoDao;
 import com.techeffic.blog.entity.Article;
 import com.techeffic.blog.entity.Component;
+import com.techeffic.blog.entity.Page;
+import com.techeffic.blog.entity.PageCondition;
 import com.techeffic.blog.entity.Template;
 
 @RunWith(JUnit4ClassRunner.class)  
@@ -275,5 +279,15 @@ public class DaoTest {
 		resultList.forEach(article ->{
 			System.out.println(article.getCreateDate());
 		});
+	}
+	@Test
+	public void testPagenation(){
+		PageCondition condition = new PageCondition();
+		condition.setCondition("clazz", "java");
+		condition.setSortColumns("createDate");
+		condition.setSortWay(Direction.DESC);
+		Page<Article> page = baseMongoDao.pagenation(Article.class, 2, 5, condition);
+		Assert.assertNotNull(page);
+		org.springframework.util.Assert.notEmpty(page.getDatas());
 	}
 }

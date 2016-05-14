@@ -1,8 +1,14 @@
 package com.techeffic.blog.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+
+import com.techeffic.blog.entity.Page;
+import com.techeffic.blog.entity.PageCondition;
 
 /**
  * 基础dao接口
@@ -68,5 +74,23 @@ public interface IBaseDao<E> {
 	 * @return
 	 */
 	public E findOne(Query query,Class<E> e);
+	
+	/**
+	 * 统计查询
+	 * @param e
+	 * @return
+	 */
+	public long count(Class<E> e);
+	
+	/**
+	 * 分页查询
+	 * @param e
+	 * @param page
+	 * @param pageSize
+	 * @param condition
+	 * @return
+	 */
+	public Page<E> pagenation(Class<E> e, int page, int pageSize,
+			PageCondition condition);
 
 }

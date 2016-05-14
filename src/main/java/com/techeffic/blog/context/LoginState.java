@@ -7,14 +7,14 @@ package com.techeffic.blog.context;
  *
  */
 public class LoginState {
-	private String userId;
-	private boolean isLogin;
+	private static String userId;
+	private static boolean isLogin;
 	private WebContext webCtx;
 	
 	public LoginState(WebContext webCtx){
 		this.webCtx = webCtx;
-		this.userId = LoginCookie.getCookie(webCtx, "userId");
-		this.isLogin = (this.userId != null);
+		userId = LoginCookie.getCookie(webCtx, "userId");
+		isLogin = (userId != null);
 	}
 	public String getUserId() {
 		return userId;

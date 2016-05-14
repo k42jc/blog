@@ -1,15 +1,17 @@
 package com.techeffic.blog.dao.mongodb;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Repository;
 
 import com.techeffic.blog.dao.IBaseDao;
-import com.techeffic.blog.entity.User;
+import com.techeffic.blog.entity.Page;
+import com.techeffic.blog.entity.PageCondition;
 
 /**
  * mongodb基础dao 提供mongoTemplate实例
@@ -19,11 +21,11 @@ import com.techeffic.blog.entity.User;
  * @param <E>
  *            对应的实体类对象
  */
-//@Repository
-public class BaseMongoDao<E> implements IBaseDao<E>{
+// @Repository
+public class BaseMongoDao<E> implements IBaseDao<E> {
 
 	private MongoTemplate mongoTemplate;
-	
+
 	public MongoTemplate getMongoTemplate() {
 		return mongoTemplate;
 	}
@@ -90,18 +92,48 @@ public class BaseMongoDao<E> implements IBaseDao<E>{
 	public void save(E e, String name) {
 		this.mongoTemplate.save(e, name);
 	}
-	
+
 	@Override
 	public void clear(Class<E> e) {
 		this.mongoTemplate.dropCollection(e);
 	}
-	
-	public E findOne(Query query,Class<E> e){
+
+	public E findOne(Query query, Class<E> e) {
 		return this.mongoTemplate.findOne(query, e);
 	}
-	
-	public List<E> find(Query query,Class<E> e){
+
+	public List<E> find(Query query, Class<E> e) {
 		return this.mongoTemplate.find(query, e);
+	}
+	
+	public long count(Class<E> e){
+		return this.mongoTemplate.count(new Query(), e);
+	}
+
+	public Page<E> pagenation(Class<E> e, int page, int pageSize,
+			PageCondition condition) {
+		Query query = new Query();
+		Criteria criteria = new Criteria();
+		// 设置查询条件
+		Map<String, Object> queryCondition = condition.getCondtion();
+		queryCondition.forEach((key, value) -> {
+			// 置入查询条件
+				criteria.and(key).is(value);
+			});
+		// 设置排序条件
+		query.with(new Sort(condition.getSortWay(), condition.getSortColumns()));
+		// 过滤分页参数
+		int skip = 0;
+		if (page != 1) {
+			skip = (page - 1) * pageSize;
+		}
+		List<E> resultList = this.mongoTemplate.find(
+				query.skip(skip).limit(pageSize), e);
+		// 将数据封装为page对象
+		Page<E> datas = new Page<E>(page, pageSize);
+		datas.setTotal(count(e));
+		datas.setDatas(resultList);
+		return datas;
 	}
 
 }

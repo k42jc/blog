@@ -16,7 +16,7 @@
 <!-- 页面详情 -->
 <div id="posts">
 	<!-- 文章预览效果 -->
-	#for (Article article:articleList)
+	#for (Article article:page.datas)
 	<div class="post-list-box">
 		<h2><a href="/article/${article.order}">${article.title}</a></h2>
 		<time>${article.createDate.format("yyyy-MM-dd HH:mm:ss")}</time>
@@ -46,9 +46,86 @@
 	</div>
 	#end
 	<!-- 分页条 -->
-	<ul class="pagination">
-		<li><a href="/" class="active">1</a></li>
-		<li><a href="/">2</a></li>
-		<li><a href="">&rarr;</a></li>
+	<ul class="pagination" id="pagenation">
+		#for(int p:range(1,page.pages))
+		<li><a id="${p}" href="javascript:void(0);" #if (p==1) class="active" #end >${p}</a></li>
+		#end
+		<!-- <li><a id="previous" href="">&larr;</a></li>
+		<li><a href="/" class="active">1</a></li> -->
+		#if (page.pages>1)
+		<li><a id="next" href="javascript:void(0);">&rarr;</a></li>
+		#end
 	</ul>
+	
+	<script type="text/javascript">
+		$(function(){
+			//因为通过js拼接的元素会导致直接事件失效 所以将点击事件委托到父级元素
+			$('#pagenation').on('click','a',function(event){
+				//当前页点击无效
+				if($(this).attr('class') === 'active'){
+					return;
+				}
+				//上一页下一页控制
+				if($(this).attr('id') === 'previous'){
+					$('#'+(Number($('#pagenation>li a.active').text())-1)+"").click();
+					return;
+				}
+				if($(this).attr('id') === 'next'){
+					$('#'+(Number($('#pagenation>li a.active').text())+1)+"").click();
+					return;
+				}
+				$('#pagenation>li a').removeClass('active');
+				$(this).addClass('active');
+				//上一页按钮显示隐藏效果
+				var currentPage = event.currentTarget.innerText;
+				if(currentPage === '1'){
+					$('#previous').remove();
+				}else if($('#previous').size() <= 0){
+					$('#pagenation').prepend('<li><a id="previous" href="javascript:void(0);">&larr;</a></li>');
+				}
+				//下一页按钮隐藏显示效果
+				if(currentPage === '${page.pages}'){
+					$('#next').remove();
+				}else if($('#next').size() <= 0){
+					$('#pagenation').append('<li><a id="next" href="javascript:void(0);">&rarr;</a></li>');
+				}
+				//异步加载分页数据
+				asyncLoad({page:currentPage});
+			});
+		});
+		
+		function asyncLoad(params){
+			$('.post-list-box').remove();
+			var settings = {
+					page : 1,
+					pageSize : 5,
+					/* type : 'java' */
+			};
+			settings = $.extend({},true,settings,params);
+			$.get('/list/getArticleList.action',settings,function(data){
+				var html='',datas=data.page.datas;
+				for(var index in datas){
+					var article = datas[index];
+					html +='<div class="post-list-box">';
+					html +='<h2><a href="/article/'+article.order+'">'+article.title+'</a></h2>';
+					html +='<time>'+dateFormat(article.createDate)+'</time>';
+					if(article.viewImgUrl != ''){
+						html +='<p><a href="/"><img src="img/goodsDetail.png" alt=""></a></p> ';
+					}
+					html +='<a href="/article/'+article.order+'" class="post-read-more">查看详情...</a>';
+					if (data.canEdit == true) {
+						html +='&nbsp;&nbsp;<a href="/write_md/'+article.id+'" class="post-read-more">编辑</a>';
+						html +='&nbsp;&nbsp;<a href="javascript:void(0);" onclick="deleteArticle('+article.id+')" class="post-read-more">删除</a>';
+					}
+					 html +='</div>';
+				}
+				$('#posts').prepend(html);
+			});
+		}
+		function dateFormat(date){
+			var date = new Date(date);
+			return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "
+			+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+		}
+	</script>
 </div>

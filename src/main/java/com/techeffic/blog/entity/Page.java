@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * 表格分页实体
+ * 1、需要初始页码与每页条数
+ * 2、需要设置总条数
  * 
  * @author xudong_liao<br/>
  * @date 2016年4月25日<br/>
@@ -12,7 +14,7 @@ import java.util.List;
 public class Page<E> implements Serializable {
 	private static final long serialVersionUID = -5332477098233421672L;
 	// 总记录数
-	private int total;
+	private long total;
 	// 每页显示行数
 	private int pageSize;
 	// 页数
@@ -40,18 +42,18 @@ public class Page<E> implements Serializable {
 		}
 	}
 
-	public int getTotal() {
+	public long getTotal() {
 		return total;
 	}
 
-	public void setTotal(int total) {
+	public void setTotal(long total) {
 		this.total = total;
 		// 计算总页数
 		if (total != 0 && pageSize != 0) {
 			if (total % pageSize == 0) {
-				pages = total / pageSize;
+				pages = (int) (total / pageSize);
 			} else {
-				pages = total / pageSize + 1;
+				pages = (int) (total / pageSize + 1);
 			}
 		}
 	}
@@ -65,17 +67,17 @@ public class Page<E> implements Serializable {
 	}
 
 	public int getPages() {
-		if (this.pages != 0) {
+		/*if (this.pages != 0) {
 			return this.pages;
 		}
 		// 计算总页数
 		if (total != 0 && pageSize != 0) {
 			if (total % pageSize == 0) {
-				pages = total / pageSize;
+				pages = (int) (total / pageSize);
 			} else {
-				pages = total / pageSize + 1;
+				pages = (int) (total / pageSize + 1);
 			}
-		}
+		}*/
 		return pages;
 	}
 

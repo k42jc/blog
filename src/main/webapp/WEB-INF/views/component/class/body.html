@@ -7,16 +7,14 @@
 	}
 }
 </style>
-<div id="hero">
-	<div id="hero-box">
-		<h1>文章分类</h1>
-	</div>
+<div id="comments-moderate-message">
+	<h2>文章分类</h2>
 </div>
 <!-- 详细组件 -->
 <div id="plugins" class="wrap">
 	<blocks cols="3">
 		#for(SysData sysData:typeList)
-		<div class="shadow">
+		<div class="shadow" style="cursor:pointer;" onclick="window.location.href='/list/${sysData.key}'">
 			<h3><a href="/list/${sysData.key}">${sysData.value}</a></h3>
 			<p>${sysData.remark}</p>
 		</div>
