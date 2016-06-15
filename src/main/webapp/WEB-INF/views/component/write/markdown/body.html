@@ -162,6 +162,18 @@ samp{
                             //this.height(480);
                             //this.resize("100%", 640);
                         }*/
+                        onfullscreen : function() {
+                            // alert("onfullscreen");
+                            // console.log("onfullscreen =>", this, this.id, this.settings);
+                            // 编辑器全屏隐藏顶部导航栏
+                            $('#cover-customer').css('display','none');
+                        },
+                        onfullscreenExit : function() {
+                            // alert("onfullscreenExit");
+                            // console.log("onfullscreenExit =>", this, this.id, this.settings);
+                            // 退出全屏再显示回来
+                            $('#cover-customer').css('display','');
+                        }
                         
                 });
 

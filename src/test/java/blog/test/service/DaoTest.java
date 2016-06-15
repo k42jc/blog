@@ -272,6 +272,8 @@ public class DaoTest {
 	public void test(){
 		Article article = baseMongoDao.findOne(new Query().with(new Sort(Sort.Direction.DESC,"createDate")),Article.class);
 		System.out.println(article);
+		System.out.println("hello");
+		System.out.println();
 	}
 	@Test
 	public void testSort(){
