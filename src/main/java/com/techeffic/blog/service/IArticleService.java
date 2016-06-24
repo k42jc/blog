@@ -25,4 +25,6 @@ public interface IArticleService {
 
 	public Page<Article> pagenation(Class<Article> class1, Integer int1,
 			Integer int2, PageCondition condition);
+	
+	public Article findTitleKeywordsByOrder(Integer order);
 }

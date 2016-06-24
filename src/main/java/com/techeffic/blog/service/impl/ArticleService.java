@@ -3,10 +3,14 @@ package com.techeffic.blog.service.impl;
 import java.util.Date;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.QueryBuilder;
 import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.entity.Article;
@@ -14,6 +18,7 @@ import com.techeffic.blog.entity.Page;
 import com.techeffic.blog.entity.PageCondition;
 import com.techeffic.blog.service.BaseService;
 import com.techeffic.blog.service.IArticleService;
+import com.techeffic.blog.util.DateUtil;
 import com.techeffic.blog.util.KeyUtil;
 
 @Service
@@ -60,11 +65,18 @@ public class ArticleService extends BaseService implements IArticleService{
 
 	@Override
 	public WebResponse findByOrder(Integer order) {
+		//查询当前文章且显示上一篇下一篇文章
 		WebResponse webResponse = new WebResponse();
 		Article article = this.getDaoFactory().getArticleMongoDao().findByOrder(order);
 		webResponse.put("article", article);
-		Article previous = this.getDaoFactory().getArticleMongoDao().findOne(new Query(new Criteria("createDate").gt(article.getCreateDate())).with(new Sort(Sort.Direction.ASC,"createDate")), Article.class);
-		Article next = this.getDaoFactory().getArticleMongoDao().findOne(new Query(new Criteria("createDate").lt(article.getCreateDate())).with(new Sort(Sort.Direction.DESC,"createDate")), Article.class);
+		//过滤查询条件 查询指定列
+		DBObject queryObject = new BasicDBObject("createDate",new BasicDBObject("$gt", article.getCreateDate()));
+		DBObject queryObject2 = new BasicDBObject("createDate",new BasicDBObject("$lt", article.getCreateDate()));
+		DBObject filedsObject = new BasicDBObject("title", 1).append("order", 1);
+		Query query1 = new BasicQuery(queryObject, filedsObject);
+		Query query2 = new BasicQuery(queryObject2,filedsObject);
+		Article previous = this.getDaoFactory().getArticleMongoDao().findOne(query1.with(new Sort(Sort.Direction.ASC,"createDate")), Article.class);
+		Article next = this.getDaoFactory().getArticleMongoDao().findOne(query2.with(new Sort(Sort.Direction.DESC,"createDate")), Article.class);
 		webResponse.put("previous", previous);
 		webResponse.put("next", next);
 		return webResponse;
@@ -74,6 +86,19 @@ public class ArticleService extends BaseService implements IArticleService{
 	public Page<Article> pagenation(Class<Article> e, Integer page,
 			Integer pageSize, PageCondition condition) {
 		return this.getDaoFactory().getArticleMongoDao().pagenation(e, page, pageSize, condition);
+	}
+	
+	@Override
+	public Article findTitleKeywordsByOrder(Integer order) {
+		//指定查询条件 返回指定列的查询方式
+//		QueryBuilder builder = new QueryBuilder();
+//		builder.is(new BasicDBObject("order",order));
+		DBObject queryObject = new BasicDBObject("order",order);
+		DBObject fieldsObject = new BasicDBObject();
+		fieldsObject.put("title", 1);
+		fieldsObject.put("keywords", 1);
+		Query query = new BasicQuery(queryObject, fieldsObject);
+		return this.getDaoFactory().getArticleMongoDao().findOne(query, Article.class);
 	}
 	
 

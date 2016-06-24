@@ -10,7 +10,10 @@ import jetbrick.template.JetTemplate;
 import jetbrick.template.runtime.JetTagContext;
 import jetbrick.util.JSONUtils;
 
+import com.techeffic.blog.constants.Constants;
+import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.SpringContextHolder;
+import com.techeffic.blog.entity.Article;
 import com.techeffic.blog.entity.Component;
 import com.techeffic.blog.service.component.IDataModelService;
 
@@ -83,6 +86,21 @@ public class ExtendsTags extends BaseTags {
 		ctx.getWriter().print(writer.getBuffer().toString());
 		writer.flush();
 		writer.close();
+	}
+	
+	public static void description(JetTagContext ctx,String title,String ketwords,String description){
+		StringBuilder desc = new StringBuilder();
+		//非文章显示页面
+		if(webCtx.getRequest().getRequestURI().indexOf(Constants.REQUEST_URI_ARTICLE) < 0){
+			desc.append("<title>").append(title).append("</title>");
+			desc.append("<meta name=\"keywords\" content=\"").append(ketwords).append("\" />");
+		}else{
+			Integer articleId = Integer.parseInt(webCtx.getRequest().getRequestURI().substring(webCtx.getRequest().getRequestURI().lastIndexOf("/")+1));
+			Article article = serviceFactory.getArticleService().findTitleKeywordsByOrder(articleId);
+			desc.append("<title>").append(article.getTitle()).append("</title>");
+			desc.append("<meta name=\"keywords\" content=\"").append(article.getKeywords()).append("\" />");
+		}
+		desc.append("<meta name=\"description\" content=\"").append(description).append("\" />");
 	}
 
 }
