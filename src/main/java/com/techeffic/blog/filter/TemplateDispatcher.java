@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.techeffic.blog.constants.Constants;
+import com.techeffic.blog.entity.Article;
 import com.techeffic.blog.entity.Template;
 import com.techeffic.blog.util.TemplateUtil;
 
@@ -18,12 +19,17 @@ public class TemplateDispatcher extends BaseDispatcher{
 
 	@Override
 	public void dispatcher() throws IOException {
-
+		Map<String,Object> datas = new HashMap<String, Object>();
 		//包含多级请求
 		if(requestURI.lastIndexOf("/") != 0){
 			//处理文章显示页面的URI请求
 			if(requestURI.startsWith(Constants.REQUEST_URI_ARTICLE)){
-				webCtx.getRequest().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
+				String articleId = requestURI.substring(requestURI.lastIndexOf("/")+1);
+				webCtx.getRequest().setAttribute("articleId", articleId);
+				
+				Article article = serviceFactory.getArticleService().findTitleKeywordsByOrder(Integer.parseInt(articleId));
+				datas.put("title", article.getTitle());
+				datas.put("keywords", article.getKeywords());
 			}
 			//处理文章列表显示页面URI请求
 			if(requestURI.startsWith(Constants.REQUEST_URI_LIST)){
@@ -38,14 +44,14 @@ public class TemplateDispatcher extends BaseDispatcher{
 		}
 		try {
 			//获取对应页面并渲染
-			render();
+			render(datas);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("/404.html");
 		}
 	}
 
-	private void render() throws IOException {
+	private void render(Map<String,Object> datas) throws IOException {
 		// 获取对应请求模板数据
 		Template template = serviceFactory.getTemplateService()
 				.findTemplateByRequestURI(requestURI);
@@ -58,9 +64,11 @@ public class TemplateDispatcher extends BaseDispatcher{
 			}
 		}
 		// 填充页面数据
-		Map<String, Object> datas = new HashMap<String, Object>();
-		datas.put("title", template.getTitle());
-		datas.put("keywords", template.getKeyWords());
+//		Map<String, Object> datas = new HashMap<String, Object>();
+		if(datas.isEmpty()){
+			datas.put("title", template.getTitle());
+			datas.put("keywords", template.getKeyWords());
+		}
 		datas.put("description", template.getDescription());
 		/*//将请求中携带的参数放入模板数据
 		request.getParameterMap().forEach((key,values) ->{
