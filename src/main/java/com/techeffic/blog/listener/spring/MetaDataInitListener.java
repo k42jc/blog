@@ -138,6 +138,15 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		blogType7.setValue("开源框架");
 		blogType7.setRemark("Spring、Ibatis/MyBatis、Struts、Hibernate、Spark、Hadoop等流行开源框架的学习.");
 		
+		SysData blogType8 = new SysData();
+		blogType8.setId(KeyUtil.generate());
+		blogType8.setCreateDate(new Date());
+		blogType8.setOrders(8);
+		blogType8.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
+		blogType8.setKey("log");
+		blogType8.setValue("项目日志");
+		blogType8.setRemark("陈列一下开发任务，也不定期记录一下开发进度.");
+		
 		List<SysData> sysDataList = new ArrayList<SysData>();
 		
 		sysDataList.add(blogClazz);
@@ -149,6 +158,7 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		sysDataList.add(blogType5);
 		sysDataList.add(blogType6);
 		sysDataList.add(blogType7);
+		sysDataList.add(blogType8);
 		
 		sysDataList.forEach(sysData -> {
 			this.daoFactory.getSysDataMongoDao().saveOrUpdate(sysData);
