@@ -27,4 +27,8 @@ public interface IArticleService {
 			Integer int2, PageCondition condition);
 	
 	public Article findTitleKeywordsByOrder(Integer order);
+
+	public WebResponse findById(String string);
+
+	public Article findTitleKeywordsById(String articleId);
 }

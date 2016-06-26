@@ -80,7 +80,7 @@ public interface IBaseDao<E> {
 	 * @param e
 	 * @return
 	 */
-	public long count(Class<E> e);
+	public long count(Criteria condition,Class<E> e);
 	
 	/**
 	 * 分页查询

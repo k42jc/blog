@@ -26,6 +26,8 @@ public class ArticleService extends BaseService implements IArticleService{
 
 	@Override
 	public synchronized Article save(WebContext webCtx) {
+		String editType = webCtx.getRequestParameter().getString("editType");
+		String id = webCtx.getRequestParameter().getString("id");
 		String type = webCtx.getRequestParameter().getString("type");
 		String title = webCtx.getRequestParameter().getString("title");
 		String clazz = webCtx.getRequestParameter().getString("clazz");
@@ -34,7 +36,19 @@ public class ArticleService extends BaseService implements IArticleService{
 		String label = webCtx.getRequestParameter().getString("label");
 		String contentView = webCtx.getRequestParameter().getString("contentView");
 		Article article = new Article();
-		article.setId(KeyUtil.generate());
+		if("add".equals(editType)){
+			article.setId(KeyUtil.generate());
+			article.setCreateDate(new Date());
+			//找到上一篇文章
+			/*Article previous = this.getDaoFactory().getArticleMongoDao().findPrevious();
+			article.setOrder(previous == null?1:previous.getOrder()+1);*/
+		}else{//更新
+			article.setUpdateDate(new Date());
+			article.setId(id);
+		}
+		article.setContentMarkdown(markdown);
+		article.setContentView(contentView.length() >= 151?contentView.substring(0, 150):contentView);
+		article.setContentHtml(html);
 		article.setClazz(clazz);
 		article.setType(type);
 		article.setTitle(title);
@@ -45,13 +59,6 @@ public class ArticleService extends BaseService implements IArticleService{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}*/
-		article.setCreateDate(new Date());
-		//找到上一篇文章
-		Article previous = this.getDaoFactory().getArticleMongoDao().findPrevious();
-		article.setOrder(previous == null?1:previous.getOrder()+1);
-		article.setContentHtml(html);
-		article.setContentMarkdown(markdown);
-		article.setContentView(contentView.length() >= 151?contentView.substring(0, 150):contentView);
 		this.getDaoFactory().getArticleMongoDao().saveOrUpdate(article);
 		return article;
 	}
@@ -94,6 +101,35 @@ public class ArticleService extends BaseService implements IArticleService{
 //		QueryBuilder builder = new QueryBuilder();
 //		builder.is(new BasicDBObject("order",order));
 		DBObject queryObject = new BasicDBObject("order",order);
+		DBObject fieldsObject = new BasicDBObject();
+		fieldsObject.put("title", 1);
+		fieldsObject.put("keywords", 1);
+		Query query = new BasicQuery(queryObject, fieldsObject);
+		return this.getDaoFactory().getArticleMongoDao().findOne(query, Article.class);
+	}
+
+	@Override
+	public WebResponse findById(String id) {
+		//查询当前文章且显示上一篇下一篇文章
+		WebResponse webResponse = new WebResponse();
+		Article article = this.getDaoFactory().getArticleMongoDao().findById(id);
+		webResponse.put("article", article);
+		//过滤查询条件 查询指定列
+		DBObject queryObject = new BasicDBObject("createDate",new BasicDBObject("$gt", article.getCreateDate()));
+		DBObject queryObject2 = new BasicDBObject("createDate",new BasicDBObject("$lt", article.getCreateDate()));
+		DBObject filedsObject = new BasicDBObject("title", 1).append("order", 1);
+		Query query1 = new BasicQuery(queryObject, filedsObject);
+		Query query2 = new BasicQuery(queryObject2,filedsObject);
+		Article previous = this.getDaoFactory().getArticleMongoDao().findOne(query1.with(new Sort(Sort.Direction.ASC,"createDate")), Article.class);
+		Article next = this.getDaoFactory().getArticleMongoDao().findOne(query2.with(new Sort(Sort.Direction.DESC,"createDate")), Article.class);
+		webResponse.put("previous", previous);
+		webResponse.put("next", next);
+		return webResponse;
+	}
+
+	@Override
+	public Article findTitleKeywordsById(String id) {
+		DBObject queryObject = new BasicDBObject("id",id);
 		DBObject fieldsObject = new BasicDBObject();
 		fieldsObject.put("title", 1);
 		fieldsObject.put("keywords", 1);

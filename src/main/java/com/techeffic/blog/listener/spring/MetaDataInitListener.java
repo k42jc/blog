@@ -98,7 +98,7 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		blogType3.setCreateDate(new Date());
 		blogType3.setOrders(3);
 		blogType3.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
-		blogType3.setKey("server");
+		blogType3.setKey("linux");
 		blogType3.setValue("linux");
 		blogType3.setRemark("在校学的就是linux，需要懂一些，博客服务器就是自己搭的环境.");
 		
@@ -111,6 +111,33 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		blogType4.setValue("javascript");
 		blogType4.setRemark("前端知识也不能少，何况现在Node、Angular这么火，也是要学习的.");
 		
+		SysData blogType5 = new SysData();
+		blogType5.setId(KeyUtil.generate());
+		blogType5.setCreateDate(new Date());
+		blogType5.setOrders(5);
+		blogType5.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
+		blogType5.setKey("os");
+		blogType5.setValue("操作系统相关");
+		blogType5.setRemark("Windows、Linux、Mac常用操作.");
+		
+		SysData blogType6 = new SysData();
+		blogType6.setId(KeyUtil.generate());
+		blogType6.setCreateDate(new Date());
+		blogType6.setOrders(6);
+		blogType6.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
+		blogType6.setKey("dp");
+		blogType6.setValue("设计模式");
+		blogType6.setRemark("对常用设计模式的记录与见解.");
+		
+		SysData blogType7 = new SysData();
+		blogType7.setId(KeyUtil.generate());
+		blogType7.setCreateDate(new Date());
+		blogType7.setOrders(7);
+		blogType7.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
+		blogType7.setKey("framework");
+		blogType7.setValue("开源框架");
+		blogType7.setRemark("Spring、Ibatis/MyBatis、Struts、Hibernate、Spark、Hadoop等流行开源框架的学习.");
+		
 		List<SysData> sysDataList = new ArrayList<SysData>();
 		
 		sysDataList.add(blogClazz);
@@ -119,6 +146,9 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		sysDataList.add(blogType2);
 		sysDataList.add(blogType3);
 		sysDataList.add(blogType4);
+		sysDataList.add(blogType5);
+		sysDataList.add(blogType6);
+		sysDataList.add(blogType7);
 		
 		sysDataList.forEach(sysData -> {
 			this.daoFactory.getSysDataMongoDao().saveOrUpdate(sysData);

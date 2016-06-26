@@ -27,7 +27,7 @@ public class TemplateDispatcher extends BaseDispatcher{
 				String articleId = requestURI.substring(requestURI.lastIndexOf("/")+1);
 				webCtx.getRequest().setAttribute("articleId", articleId);
 				
-				Article article = serviceFactory.getArticleService().findTitleKeywordsByOrder(Integer.parseInt(articleId));
+				Article article = serviceFactory.getArticleService().findTitleKeywordsById(articleId);
 				datas.put("title", article.getTitle());
 				datas.put("keywords", article.getKeywords());
 			}

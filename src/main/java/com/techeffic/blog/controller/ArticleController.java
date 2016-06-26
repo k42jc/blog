@@ -34,7 +34,7 @@ public class ArticleController extends BaseController {
 		Article article = this.getServiceFactory().getArticleService()
 				.save(webCtx);
 		// webCtx.getResponse().sendRedirect("/article/"+article.getOrder());
-		webResponse.put("articleId", article.getOrder());
+		webResponse.put("articleId", article.getId());
 		return webResponse;
 		// webCtx.getRequest().getRequestDispatcher("/article/"+article.getOrder()).forward(webCtx.getRequest(),
 		// webCtx.getResponse());
@@ -51,7 +51,7 @@ public class ArticleController extends BaseController {
 	@RequestMapping("getArticleByOrder")
 	@ResponseBody
 	public WebResponse getArticleByOrder(){
-		webResponse = this.getServiceFactory().getArticleService().findByOrder(webCtx.getRequestParameter().getInt("articleId"));
+		webResponse = this.getServiceFactory().getArticleService().findById(webCtx.getRequestParameter().getString("articleId"));
 		SysData sysData = this.getServiceFactory().getSysDataService().findByKey(((Article)webResponse.get("article")).getClazz());
 		webResponse.put("clazzName", sysData.getValue());
 		webResponse.put("createTime", DateUtil.toDateStr(((Article)webResponse.get("article")).getCreateDate()));

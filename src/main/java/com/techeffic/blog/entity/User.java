@@ -1,9 +1,10 @@
 package com.techeffic.blog.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
-    private Long id;
+public class User extends IdEntity implements Serializable{
+	private static final long serialVersionUID = 7135230357093897452L;
 
     private String userName;
 
@@ -28,14 +29,6 @@ public class User {
 	public void setUserDetail(UserDetail userDetail) {
 		this.userDetail = userDetail;
 	}
-
-	public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;

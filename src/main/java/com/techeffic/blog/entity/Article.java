@@ -9,10 +9,8 @@ import java.util.Date;
  * @author k42jc
  *
  */
-public class Article implements Serializable {
+public class Article extends IdEntity implements Serializable {
 	private static final long serialVersionUID = -1029830130241178918L;
-	// 主键
-	private String id;
 	// 渲染文本格式 html或者markdown 默认html
 	private String viewType = "html";
 	// 标题
@@ -42,15 +40,15 @@ public class Article implements Serializable {
 	// 关联用户
 	private User user;
 	// 顺序 用于页面URL显示用
-	private Integer order;
+//	private Integer order;
 
-	public Integer getOrder() {
+	/*public Integer getOrder() {
 		return order;
 	}
 
 	public void setOrder(Integer order) {
 		this.order = order;
-	}
+	}*/
 
 	public String getType() {
 		return type;
@@ -82,14 +80,6 @@ public class Article implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getClazz() {

@@ -211,7 +211,7 @@ blockquote{
 <script type="text/javascript">
         $(function() {
 
-            $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:${articleId}}, async:false,success:function(data) {
+            $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:'${articleId}'}, async:false,success:function(data) {
                 $('#title').text(data.article.title);
                 $('#createDate').text(data.createTime);
                 $('#backClazz').text("回到"+data.clazzName+"分类");

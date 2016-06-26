@@ -8,10 +8,8 @@ import java.io.Serializable;
  * @author k42jc
  *
  */
-public class Template implements Serializable{
+public class Template extends IdEntity implements Serializable{
 	private static final long serialVersionUID = -2408389530061923159L;
-	//主键
-	private String id;
 	//请求URI
 	private String requestURI;
 	//页面标题
@@ -24,12 +22,6 @@ public class Template implements Serializable{
 	private String path;
 	//是否需要登录
 	private String needLogin;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getRequestURI() {
 		return requestURI;
 	}

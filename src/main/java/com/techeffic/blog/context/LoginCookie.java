@@ -34,11 +34,11 @@ public class LoginCookie {
 		String value = null;
 		Cookie[] cookies = webCtx.getRequest().getCookies();
 		if(cookies == null){
-			System.out.println(webCtx.getRequest().getRequestURI()+"---cookie为空");
+//			System.out.println(webCtx.getRequest().getRequestURI()+"---cookie为空");
 			return value;
-		}else{
+		}/*else{
 			System.out.println(webCtx.getRequest().getRequestURI()+"---cookie不为空");
-		}
+		}*/
 		for(int i=0;i<cookies.length;i++){
 			if(key.equals(cookies[i].getName())){
 				value = cookies[i].getValue();

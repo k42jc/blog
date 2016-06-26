@@ -37,7 +37,7 @@
 				var dialogContent = '<form id="form" '+/*action="'+action+'" target="'+iframeName+'" */+'method="POST" '+/*enctype="multipart/form-data"*/' class="'+classPrefix+'form">'
     			+'<label>'+saveLang.labelNames.type+'</label><select id="type" name="type"><option selected="selected" value="0">请选择文章类型</option>'+saveLang.selectOptions.type+'</select>'
     			+'<br/>'
-    			+'<label>'+saveLang.labelNames.title+'</label><input id="title" name="title" type="text" value=""/>'
+    			+'<label>'+saveLang.labelNames.title+'</label><input name="title" type="text" value=""/>'
     			+'<br/>'
     			/*+'<label>'+saveLang.viewImgURL+'</label><input id="viewImg" name="viewImg" type="text" value="http://"/>'
     			+'<div class="'+classPrefix+'file-input"><input type="file" name="editormd-image-file" accept="image/*" /><input type="button" value="本地上传" /></div><br/>'*/
@@ -101,6 +101,8 @@
                                 	type:'POST',
                                 	dataType:'json',
                                 	data:{
+                                		editType:saveLang.props.editType,//编辑类型 新增 更新
+                                		id:saveLang.props.id,//主键
                                 		type:$('#type option:selected').val(),
                                 		title:$('input[name=title]').val(),
                                 		clazz:$('#clazz option:selected').val(),
@@ -113,7 +115,7 @@
                                 		/*var data = $.parseJSON(data);*/
                                 		if(data.success == 1){
                                 			alert("文章发表成功！页面跳转中...");
-                                			window.location.href = "/article/"+data.articleId;
+                                			setTimeout('window.location.href = "/article/'+data.articleId+'"',1000);
                                 		}else{
                                 			alert('服务器故障，文章发表失败！');
                                 		}
@@ -140,13 +142,19 @@
 						}],
 						cancel	: [lang.buttons.cancel, function() {
                             this.hide().lockScreen(false).hideMask();
-
                             return false;
                         }]
 					}
 				});
 				
 				dialog.attr("id",classPrefix+"save-dialog"+guid);
+			}
+			//设置选中
+			if(saveLang.props.editType == 'edit'){
+				$('#type').val(saveLang.props.type);
+				$('input[name=title]').val(saveLang.props.title);
+				$('#clazz').val(saveLang.props.clazz);
+				$('#label').val(saveLang.props.label);
 			}
 			
 			dialog = editor.find("."+dialogName);

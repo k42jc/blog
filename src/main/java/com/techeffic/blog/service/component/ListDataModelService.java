@@ -30,7 +30,7 @@ public class ListDataModelService extends BaseService implements IDataModelServi
 		String clazz = webCtx.getRequestAttribute().getString("articleClazz");
 		//查询前10条某个类别的文章并按发表日期逆序
 		PageCondition condition = new PageCondition();
-		condition.setCondition("clazz", "java");
+		condition.setCondition("clazz", clazz);
 		condition.setSortColumns("createDate");
 		condition.setSortWay(Direction.DESC);
 		Page<Article> page = this.getDaoFactory().getArticleMongoDao().pagenation(Article.class, 1, 5, condition);

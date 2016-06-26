@@ -9,10 +9,8 @@ import java.util.Date;
  * @author k42jc
  *
  */
-public class SysData implements Serializable {
+public class SysData extends IdEntity implements Serializable {
 	private static final long serialVersionUID = 969953959641510380L;
-	// 主键
-	private String id;
 	// 类型
 	private String type;
 	// 编码
@@ -68,14 +66,6 @@ public class SysData implements Serializable {
 
 	public void setOrders(Integer orders) {
 		this.orders = orders;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public Integer getStatus() {

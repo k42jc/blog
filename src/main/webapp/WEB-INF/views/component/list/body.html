@@ -18,11 +18,11 @@
 	<!-- 文章预览效果 -->
 	#for (Article article:page.datas)
 	<div class="post-list-box">
-		<h2><a href="/article/${article.order}">${article.title}</a></h2>
+		<h2><a href="/article/${article.id}">${article.title}</a></h2>
 		<time>${article.createDate.format("yyyy-MM-dd HH:mm:ss")}</time>
 		#if (article.viewImgUrl != '')<p><a href="/"><img src="img/goodsDetail.png" alt=""></a></p> #end
 		<!-- <p>#if (article.contentView.length() >= 150) ${article.contentView.substring(0,150)} #else ${article.contentView} #end</p> -->
-		<a href="/article/${article.order}" class="post-read-more">查看详情...</a>
+		<a href="/article/${article.id}" class="post-read-more">查看详情...</a>
 		#if (canEdit == true) 
 		&nbsp;&nbsp;<a href="/write_md/${article.id}" class="post-read-more">编辑</a>
 		&nbsp;&nbsp;<a href="javascript:void(0);" onclick="deleteArticle('${article.id}')" class="post-read-more">删除</a>
@@ -107,12 +107,12 @@
 				for(var index in datas){
 					var article = datas[index];
 					html +='<div class="post-list-box">';
-					html +='<h2><a href="/article/'+article.order+'">'+article.title+'</a></h2>';
+					html +='<h2><a href="/article/'+article.id+'">'+article.title+'</a></h2>';
 					html +='<time>'+dateFormat(article.createDate)+'</time>';
 					if(article.viewImgUrl != ''){
 						html +='<p><a href="/"><img src="img/goodsDetail.png" alt=""></a></p> ';
 					}
-					html +='<a href="/article/'+article.order+'" class="post-read-more">查看详情...</a>';
+					html +='<a href="/article/'+article.id+'" class="post-read-more">查看详情...</a>';
 					if (data.canEdit == true) {
 						html +='&nbsp;&nbsp;<a href="/write_md/'+article.id+'" class="post-read-more">编辑</a>';
 						html +='&nbsp;&nbsp;<a href="javascript:void(0);" onclick="deleteArticle('+article.id+')" class="post-read-more">删除</a>';

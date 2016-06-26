@@ -7,22 +7,14 @@ import java.io.Serializable;
  * @author k42jc
  *
  */
-public class Component implements Serializable{
+public class Component extends IdEntity implements Serializable{
 	private static final long serialVersionUID = 6385751780887960216L;
-	//主键
-	private String id;
 	//当前组件唯一标识
 	private String key;
 	//当前组件所在目录
 	private String path;
 	//当前组件内嵌数据获取类名
 	private String className;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	/*public String getTemplateId() {
 		return templateId;
 	}

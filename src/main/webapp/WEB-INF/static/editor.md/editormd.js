@@ -85,6 +85,15 @@
             "undo", "redo", "|",
             "watch", "preview", "|",
             "help", "info"
+        ],
+        customer : [
+            "save", "|",
+            "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+            "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+            "list-ul", "list-ol", "hr", "|",
+            "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak", "|",
+            "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|",
+            "help", 
         ]
     };
     
@@ -124,7 +133,7 @@
 		styleSelectedText    : true,
         matchWordHighlight   : true,           // options: true, false, "onselected"
         styleActiveLine      : true,           // Highlight the current line
-        dialogLockScreen     : true,
+        dialogLockScreen     : true,//取消锁屏 避免弹窗时因为右侧滚动条消失而出现页面元素往右展开而抖动的情况
         dialogShowMask       : true,
         dialogDraggable      : true,
         dialogMaskBgColor    : "#fff",

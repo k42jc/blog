@@ -16,8 +16,8 @@ public class ArticleMongoDao extends BaseMongoDao<Article> implements IArticleDa
 	 * @param articleId 文章标志 系统使用文章顺序
 	 */
 	@Override
-	public Article findByOrder(int articleId) {
-		return getMongoTemplate().findOne(new Query(new Criteria("order").is(articleId)), Article.class);	
+	public Article findByOrder(int order) {
+		return getMongoTemplate().findOne(new Query(new Criteria("order").is(order)), Article.class);	
 	}
 	
 	/**
@@ -26,6 +26,11 @@ public class ArticleMongoDao extends BaseMongoDao<Article> implements IArticleDa
 	@Override
 	public Article findPrevious() {
 		return getMongoTemplate().findOne(new Query().with(new Sort(Sort.Direction.DESC,"createDate")),Article.class);
+	}
+
+	@Override
+	public Article findById(String id) {
+		return getMongoTemplate().findOne(new Query(new Criteria("id").is(id)), Article.class);
 	}
 
 }

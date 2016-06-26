@@ -1,5 +1,7 @@
 package com.techeffic.blog.dao;
 
+import java.util.List;
+
 import com.techeffic.blog.entity.SysData;
 
 /**
@@ -9,4 +11,5 @@ import com.techeffic.blog.entity.SysData;
  */
 public interface ISysDataDao extends IBaseDao<SysData>{
 	
+	public List<SysData> findByType(String type);
 }

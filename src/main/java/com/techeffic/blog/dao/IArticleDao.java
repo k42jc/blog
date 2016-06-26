@@ -22,4 +22,11 @@ public interface IArticleDao extends IBaseDao<Article>{
 	 */
 	Article findPrevious();
 	
+	/**
+	 * 根据id查询文章信息
+	 * @param id
+	 * @return
+	 */
+	Article findById(String id);
+	
 }

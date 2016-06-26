@@ -38,6 +38,7 @@ public class LoginController extends BaseController{
 			map.put("password", "密码错误！");
 		}else{
 			String userId = "abcd";
+			System.out.println(webCtx.getRequest().getRequestURI());
 			webResponse.setSuccess(Constants.SUCCESS);
 			webResponse.setType("location");
 			webResponse.put("data", webCtx.getRequestParameter().getString("redirectURI"));

@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.techeffic.blog.dao.IBaseDao;
+import com.techeffic.blog.entity.IdEntity;
 import com.techeffic.blog.entity.Page;
 import com.techeffic.blog.entity.PageCondition;
 
@@ -22,7 +23,7 @@ import com.techeffic.blog.entity.PageCondition;
  *            对应的实体类对象
  */
 // @Repository
-public class BaseMongoDao<E> implements IBaseDao<E> {
+public class BaseMongoDao<E extends IdEntity> implements IBaseDao<E> {
 
 	private MongoTemplate mongoTemplate;
 
@@ -43,8 +44,7 @@ public class BaseMongoDao<E> implements IBaseDao<E> {
 	 */
 	@Override
 	public void saveOrUpdate(E e) {
-		if (!this.mongoTemplate.exists(new Query(new Criteria(e.getClass()
-				.getSimpleName().toLowerCase())), e.getClass())) {
+		if (!this.mongoTemplate.exists(new Query(new Criteria("id").is(e.getId())), e.getClass())) {
 			this.mongoTemplate.insert(e);
 		} else {
 			this.mongoTemplate.save(e);
@@ -106,20 +106,20 @@ public class BaseMongoDao<E> implements IBaseDao<E> {
 		return this.mongoTemplate.find(query, e);
 	}
 	
-	public long count(Class<E> e){
-		return this.mongoTemplate.count(new Query(), e);
+	public long count(Criteria condition,Class<E> e){
+		return this.mongoTemplate.count(new Query(condition), e);
 	}
 
 	public Page<E> pagenation(Class<E> e, int page, int pageSize,
 			PageCondition condition) {
-		Query query = new Query();
 		Criteria criteria = new Criteria();
 		// 设置查询条件
 		Map<String, Object> queryCondition = condition.getCondtion();
 		queryCondition.forEach((key, value) -> {
 			// 置入查询条件
-				criteria.and(key).is(value);
-			});
+			criteria.and(key).is(value);
+		});
+		Query query = new Query(criteria);
 		// 设置排序条件
 		query.with(new Sort(condition.getSortWay(), condition.getSortColumns()));
 		// 过滤分页参数
@@ -129,9 +129,10 @@ public class BaseMongoDao<E> implements IBaseDao<E> {
 		}
 		List<E> resultList = this.mongoTemplate.find(
 				query.skip(skip).limit(pageSize), e);
+//		int count = count(criteria,e);
 		// 将数据封装为page对象
 		Page<E> datas = new Page<E>(page, pageSize);
-		datas.setTotal(count(e));
+		datas.setTotal(count(criteria,e));
 		datas.setDatas(resultList);
 		return datas;
 	}
