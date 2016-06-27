@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import com.techeffic.blog.dao.IBaseDao;
 import com.techeffic.blog.entity.IdEntity;
@@ -44,11 +45,17 @@ public class BaseMongoDao<E extends IdEntity> implements IBaseDao<E> {
 	 */
 	@Override
 	public void saveOrUpdate(E e) {
-		if (!this.mongoTemplate.exists(new Query(new Criteria("id").is(e.getId())), e.getClass())) {
+		/*if (!this.mongoTemplate.exists(new Query(new Criteria("id").is(e.getId())), e.getClass())) {
 			this.mongoTemplate.insert(e);
-		} else {
-			this.mongoTemplate.save(e);
-		}
+		} else {*/
+			Update update = new Update();
+			Map<String,Object> props = e.getProps();
+			for(String key:props.keySet()){
+				update.set(key, props.get(key));
+			}
+			this.mongoTemplate.upsert(new Query(new Criteria("id").is(e.getId())), update, e.getClass());
+//			this.mongoTemplate.save(e);
+//		}
 	}
 
 	/**

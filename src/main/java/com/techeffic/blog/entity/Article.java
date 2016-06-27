@@ -56,6 +56,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+		super.putProp("type", type);
 	}
 
 	public Integer getViewNums() {
@@ -64,6 +65,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setViewNums(Integer viewNums) {
 		this.viewNums = viewNums;
+		super.putProp("viewNums", viewNums);
 	}
 
 	public String getViewType() {
@@ -72,6 +74,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setViewType(String viewType) {
 		this.viewType = viewType;
+		super.putProp("viewType", viewType);
 	}
 
 	public String getTitle() {
@@ -80,6 +83,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+		super.putProp("title", title);
 	}
 
 	public String getClazz() {
@@ -88,6 +92,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setClazz(String clazz) {
 		this.clazz = clazz;
+		super.putProp("clazz", clazz);
 	}
 
 	public String getUserId() {
@@ -96,6 +101,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+		super.putProp("userId", userId);
 	}
 
 	public String getKeywords() {
@@ -104,6 +110,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
+		super.putProp("keywords", keywords);
 	}
 
 	public Date getCreateDate() {
@@ -112,6 +119,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+		super.putProp("createDate", createDate);
 	}
 
 	public Date getUpdateDate() {
@@ -120,6 +128,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+		super.putProp("updateDate", updateDate);
 	}
 
 	public String getViewImgUrl() {
@@ -128,6 +137,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setViewImgUrl(String viewImgUrl) {
 		this.viewImgUrl = viewImgUrl;
+		super.putProp("viewImgUrl", viewImgUrl);
 	}
 
 	public String getContentView() {
@@ -136,6 +146,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setContentView(String contentView) {
 		this.contentView = contentView;
+		super.putProp("contentView", contentView);
 	}
 
 	public String getContentHtml() {
@@ -144,6 +155,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setContentHtml(String contentHtml) {
 		this.contentHtml = contentHtml;
+		super.putProp("contentHtml", contentHtml);
 	}
 
 	public String getContentMarkdown() {
@@ -152,6 +164,7 @@ public class Article extends IdEntity implements Serializable {
 
 	public void setContentMarkdown(String contentMarkdown) {
 		this.contentMarkdown = contentMarkdown;
+		super.putProp("contentMarkdown", contentMarkdown);
 	}
 
 	public User getUser() {

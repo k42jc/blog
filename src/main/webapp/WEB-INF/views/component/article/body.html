@@ -112,7 +112,7 @@ blockquote{
 	<p class="text-centered"><a href="/list/${article.clazz?!''}" id="backClazz" class="soft-muted">回到${clazzName}分类</a></p>
 	<section class="post">
 		<header class="headline text-centered">
-			<h1 id="title">${article.title?!''}</h1>
+			<h1 id="title">#if (article != null)<span style="background: url(/static/img/${article.type?!''}.png) no-repeat 0 10px;padding:5px 3px;">&nbsp;&nbsp;&nbsp;</span>#end${article.title?!''}</h1>
 			<time id="createDate" class="upper soft-muted">#if (article!=null)${article.createDate.format("yyyy-MM-dd HH:mm:ss")} #end</time>
 		</header>
 		<article id="article" class="markdown-body editormd-html-preview">
@@ -135,8 +135,8 @@ blockquote{
 		<footer>
 			<!-- <hr> -->
 			<ul class="next-prev">
-				<li><a href="#if (previous == null) javascript:void(0); #else /article/${previous.order?!0} #end" class="prev">#if (previous == null) 已经是第一篇文章了~ #else 上一篇:${previous.title?!''} #end</a></li>
-				<li><a href="#if (next == null) javascript:void(0); #else /article/${next.order?!0} #end" class="next">#if (next == null) 已经是最后一篇文章了~ #else 下一篇:${next.title?!''} #end</a></li>
+				<li><a href="#if (previous == null) javascript:void(0); #else /article/${previous.id?!0} #end" class="prev">#if (previous == null) 已经是第一篇文章了~ #else 上一篇:${previous.title?!''} #end</a></li>
+				<li><a href="#if (next == null) javascript:void(0); #else /article/${next.id?!0} #end" class="next">#if (next == null) 已经是最后一篇文章了~ #else 下一篇:${next.title?!''} #end</a></li>
 			</ul>
 		</footer>
 	</section>
@@ -212,7 +212,7 @@ blockquote{
         $(function() {
 
             $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:'${articleId}'}, async:false,success:function(data) {
-                $('#title').text(data.article.title);
+                $('#title').html('<span style="background: url(/static/img/'+data.article.type+'.png) no-repeat 0 10px;padding:5px 3px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.article.title);
                 $('#createDate').text(data.createTime);
                 $('#backClazz').text("回到"+data.clazzName+"分类");
                 $('#backClazz').attr('href','/list/'+data.article.clazz);

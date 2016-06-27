@@ -114,10 +114,16 @@
                                 	success:function(data){
                                 		/*var data = $.parseJSON(data);*/
                                 		if(data.success == 1){
-                                			alert("文章发表成功！页面跳转中...");
-                                			setTimeout('window.location.href = "/article/'+data.articleId+'"',1000);
+                                			var msg = saveLang.props.editType == 'add'?'发布成功！':'修改成功！';
+                                			layer.msg(msg+"页面跳转中...", {
+                                				  icon: 1,
+                                				  time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                				}, function(){
+                                					window.location.href = "/article/"+data.articleId;
+                                				}
+                                			); 
                                 		}else{
-                                			alert('服务器故障，文章发表失败！');
+                                			layer.msg('服务器故障，文章发表失败！', {icon: 2});
                                 		}
                                 	}
                                 });

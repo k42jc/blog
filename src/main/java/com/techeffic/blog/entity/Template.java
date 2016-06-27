@@ -27,36 +27,42 @@ public class Template extends IdEntity implements Serializable{
 	}
 	public void setRequestURI(String requestURI) {
 		this.requestURI = requestURI;
+		super.putProp("requestURI", requestURI);
 	}
 	public String getNeedLogin() {
 		return needLogin;
 	}
 	public void setNeedLogin(String needLogin) {
 		this.needLogin = needLogin;
+		super.putProp("needLogin", needLogin);
 	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
+		super.putProp("title", title);
 	}
 	public String getKeyWords() {
 		return keyWords;
 	}
 	public void setKeyWords(String keyWords) {
 		this.keyWords = keyWords;
+		super.putProp("keyWords", keyWords);
 	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
+		super.putProp("description", description);
 	}
 	public String getPath() {
 		return path;
 	}
 	public void setPath(String path) {
 		this.path = path;
+		super.putProp("path", path);
 	}
 	
 	

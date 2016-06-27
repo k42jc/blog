@@ -34,6 +34,7 @@ public class SysData extends IdEntity implements Serializable {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+		super.putProp("remark", remark);
 	}
 
 	public String getKey() {
@@ -42,6 +43,7 @@ public class SysData extends IdEntity implements Serializable {
 
 	public void setKey(String key) {
 		this.key = key;
+		super.putProp("key", key);
 	}
 
 	public String getType() {
@@ -50,6 +52,7 @@ public class SysData extends IdEntity implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+		super.putProp("type", type);
 	}
 
 	public String getValue() {
@@ -58,6 +61,7 @@ public class SysData extends IdEntity implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
+		super.putProp("value", value);
 	}
 
 	public Integer getOrders() {
@@ -66,6 +70,7 @@ public class SysData extends IdEntity implements Serializable {
 
 	public void setOrders(Integer orders) {
 		this.orders = orders;
+		super.putProp("orders", orders);
 	}
 
 	public Integer getStatus() {
@@ -74,6 +79,7 @@ public class SysData extends IdEntity implements Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+		super.putProp("status", status);
 	}
 
 	public Date getCreateDate() {
@@ -82,6 +88,7 @@ public class SysData extends IdEntity implements Serializable {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+		super.putProp("createDate", createDate);
 	}
 
 	public Date getUpdateDate() {
@@ -90,5 +97,6 @@ public class SysData extends IdEntity implements Serializable {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+		super.putProp("updateDate", updateDate);
 	}
 }

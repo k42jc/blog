@@ -18,10 +18,10 @@
 	<!-- 文章预览效果 -->
 	#for (Article article:page.datas)
 	<div class="post-list-box">
-		<h2><a href="/article/${article.id}">${article.title}</a></h2>
+		<h2><span style="background: url(/static/img/${article.type}.png) no-repeat 0 10px;padding:3px 3px;">&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="/article/${article.id}">${article.title}</a></h2>
 		<time>${article.createDate.format("yyyy-MM-dd HH:mm:ss")}</time>
 		#if (article.viewImgUrl != '')<p><a href="/"><img src="img/goodsDetail.png" alt=""></a></p> #end
-		<!-- <p>#if (article.contentView.length() >= 150) ${article.contentView.substring(0,150)} #else ${article.contentView} #end</p> -->
+		<p>${article.contentView}</p>
 		<a href="/article/${article.id}" class="post-read-more">查看详情...</a>
 		#if (canEdit == true) 
 		&nbsp;&nbsp;<a href="/write_md/${article.id}" class="post-read-more">编辑</a>
@@ -36,8 +36,9 @@
 		 			data:{id:id},
 		 			success:function(data){
 		 				if(data.success === 1){
-		 					alert('删除成功！');
-		 					window.location.href="/list/${sysData.key}";
+		 					layer.msg("删除成功！即将刷新页面...",{icon:6,time:1000},function(){
+		 						window.location.reload();
+		 					});
 		 				}
 		 			}
 		 		});
@@ -107,8 +108,9 @@
 				for(var index in datas){
 					var article = datas[index];
 					html +='<div class="post-list-box">';
-					html +='<h2><a href="/article/'+article.id+'">'+article.title+'</a></h2>';
+					html +='<h2><span style="background: url(/static/img/'+article.type+'.png) no-repeat 0 10px;padding:3px 3px;">&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="/article/'+article.id+'">'+article.title+'</a></h2>';
 					html +='<time>'+dateFormat(article.createDate)+'</time>';
+					html +='<p>'+article.contentView+'</p>';
 					if(article.viewImgUrl != ''){
 						html +='<p><a href="/"><img src="img/goodsDetail.png" alt=""></a></p> ';
 					}
