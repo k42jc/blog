@@ -12,7 +12,7 @@ import com.techeffic.blog.service.ServiceFactory;
  *
  */
 public class BaseTags{
-	protected static WebContext webCtx;
+	protected volatile static WebContext webCtx;
 	protected static ServiceFactory serviceFactory;
 	
 	static{

@@ -217,7 +217,7 @@ blockquote{
                 $('#backClazz').text("回到"+data.clazzName+"分类");
                 $('#backClazz').attr('href','/list/'+data.article.clazz);
                 if(data.previous != null){
-	                $('.prev').attr('href',data.previous.order);
+	                $('.prev').attr('href',data.previous.id);
 	                $('.prev').text('上一篇:'+data.previous.title);
                 }else{
                 	$('.prev').attr('href','javascript:void(0);');
@@ -225,7 +225,7 @@ blockquote{
                 }
                 if(data.next != null){
     	            $('.next').text('下一篇:'+data.next.title);
-        	        $('.next').attr('href',data.next.order);
+        	        $('.next').attr('href',data.next.id);
                 }else{
     	            $('.next').text('已经是最后一篇文章了~');
         	        $('.next').attr('href','javascript:void(0);');

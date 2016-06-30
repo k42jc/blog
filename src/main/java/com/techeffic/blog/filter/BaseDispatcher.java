@@ -22,11 +22,11 @@ import com.techeffic.blog.service.ServiceFactory;
  *
  */
 public abstract class BaseDispatcher implements Filter {
-	protected String requestURI;
-	protected WebContext webCtx;
+	protected volatile String requestURI;
+	protected volatile WebContext webCtx;
 	protected ServiceFactory serviceFactory;
-	protected HttpServletRequest request;
-	protected HttpServletResponse response;
+	protected volatile HttpServletRequest request;
+	protected volatile HttpServletResponse response;
 
 	@Override
 	public void destroy() {
