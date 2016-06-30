@@ -134,7 +134,7 @@ samp{
                         saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea 允许使用editormd.getHTML()获取解析好的html元素
                         imageUpload : true,
                         imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                        imageUploadURL : "./php/upload.php",
+                        imageUploadURL : "/file/upload.action",
                         /* theme : "default",
                         previewTheme : "default",
                         editorTheme : "pastel-on-dark",
@@ -158,8 +158,8 @@ samp{
                         //dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
                         dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
                         dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
-                        /*onload : function() {
-                            console.log('onload', this);
+                        onload : function() {//加载完成绑定事件
+                            //console.log('onload', this);
                             //this.fullscreen();
                             //this.unwatch();
                             //this.watch().fullscreen();
@@ -168,7 +168,14 @@ samp{
                             //this.width("100%");
                             //this.height(480);
                             //this.resize("100%", 640);
-                        }*/
+                            var _self=this,cus_key = {//绑定快捷键
+                           		"Ctrl-S": function(cm) {
+                           			storageContent(_self);//存储当前文本
+                                 },
+                            };
+                            _self.addKeyMap(cus_key);
+                            _self.setMarkdown(localStorage.getItem('content'));
+                        },
                         onfullscreen : function() {
                             // alert("onfullscreen");
                             // console.log("onfullscreen =>", this, this.id, this.settings);
@@ -180,9 +187,25 @@ samp{
                             // console.log("onfullscreenExit =>", this, this.id, this.settings);
                             // 退出全屏再显示回来
                             $('#cover-customer').css('display','');
+                        },
+                        onchange : function() {//内容变化处理事件
+                        	var _self =this;
+                           	if(typeof(Worker) != 'undefined'){
+	                            window.setTimeout(function(){
+	                            		localStorage.setItem('content',_self.getMarkdown());
+	                            },5000);
+                           	}
+                            //console.log("onchange =>", this, this.id, this.settings, this.state);
+                            // ....
                         }
                         
                 });
+                    
+                function storageContent(_this){
+                	if(typeof(Worker) != 'undefined'){
+                		localStorage.setItem('content',_this.getMarkdown());
+                	}
+                }
 
                 
                 /*
