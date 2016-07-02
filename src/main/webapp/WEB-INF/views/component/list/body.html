@@ -27,9 +27,14 @@
 		&nbsp;&nbsp;<a href="/write_md/${article.id}" class="post-read-more">编辑</a>
 		&nbsp;&nbsp;<a href="javascript:void(0);" onclick="deleteArticle('${article.id}')" class="post-read-more">删除</a>
 		 #end
-		 <script type="text/javascript">
-		 	function deleteArticle(id){
-		 		$.ajax({
+	</div>
+	#end
+	<script type="text/javascript">
+	 	function deleteArticle(id){
+			layer.confirm('确定删除这篇文章？', {
+			  btn: ['删除','取消'] //按钮
+			}, function(){
+				$.ajax({
 		 			url:'/article/delete.action',
 		 			dataType:'json',
 		 			method:'POST',
@@ -42,10 +47,11 @@
 		 				}
 		 			}
 		 		});
-		 	}
-		 </script>
-	</div>
-	#end
+			}, function(){
+			  layer.close();
+			});
+	 	}
+	 </script>
 	<!-- 分页条 -->
 	<ul class="pagination" id="pagenation">
 		#for(int p:range(1,page.pages))
