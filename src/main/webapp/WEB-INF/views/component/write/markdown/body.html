@@ -174,7 +174,9 @@ samp{
                                  },
                             };
                             _self.addKeyMap(cus_key);
-                            _self.setMarkdown(localStorage.getItem('content'));
+                            #if (editType == Constants::EDIT_TYPE_ADD)
+                            _self.setMarkdown(localStorage.getItem('content'));//刷新页面时，将内容还原
+                            #end
                         },
                         onfullscreen : function() {
                             // alert("onfullscreen");

@@ -114,6 +114,10 @@
                                 	success:function(data){
                                 		/*var data = $.parseJSON(data);*/
                                 		if(data.success == 1){
+                                			//清空之前的缓存
+                                			if(typeof(Worker) != 'undefined'){
+                                				localStorage.removeItem('content');
+                                			}
                                 			var msg = saveLang.props.editType == 'add'?'发布成功！':'修改成功！';
                                 			layer.msg(msg+"页面跳转中...", {
                                 				  icon: 1,
