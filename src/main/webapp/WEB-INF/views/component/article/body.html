@@ -98,8 +98,11 @@ blockquote{
 		padding-right: 5px;
 	}
 }
-#article p{
+article>p{
 	text-indent: 2em;
+}
+article>p>*{
+	text-indent: 0em;
 }
 .post-box, .post-list-box{
 	max-width: 900px;
@@ -210,7 +213,7 @@ blockquote{
 #if (clientType == ClientType::CLIENT_TYPE_PC)
 <script type="text/javascript">
         $(function() {
-
+			
             $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:'${articleId}'}, async:false,success:function(data) {
                 $('#title').html('<span style="background: url(/static/img/'+data.article.type+'.png) no-repeat 0 10px;padding:5px 3px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.article.title);
                 $('#createDate').text(data.createTime);
@@ -273,7 +276,6 @@ blockquote{
                 sequenceDiagram : true,  // 默认不解析
             });*/
 			
-
 		    scrolltop();
 		    codeCopy();
         });
