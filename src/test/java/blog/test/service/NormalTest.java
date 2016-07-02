@@ -1,9 +1,16 @@
 package blog.test.service;
 
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.Mongo;
+import com.mongodb.MongoException;
 
 public class NormalTest {
 	/*@Test
@@ -43,5 +50,34 @@ public class NormalTest {
 		System.out.println(Thread.currentThread().getName());
 		thread.start();
 		System.out.println("结束时间："+System.currentTimeMillis());
+	}
+	
+	public static void main(String[] args) {
+		try {
+
+			Mongo mongo = new Mongo("localhost", 27017);
+			DB db = mongo.getDB("admin");
+					
+			boolean auth = db.authenticate("k42jc", "a635684783".toCharArray());
+			if (auth) {
+					
+				DBCollection table = db.getCollection("sysData");
+
+				/*BasicDBObject document = new BasicDBObject();
+				document.put("name", "mkyong");
+				table.insert(document);*/
+				System.out.println(table.findOne());
+			
+				System.out.println("Login is successful!");
+			} else {
+				System.out.println("Login is failed!");
+			}
+			System.out.println("Done");
+
+		    } catch (UnknownHostException e) {
+			e.printStackTrace();
+		    } catch (MongoException e) {
+			e.printStackTrace();
+		    }
 	}
 }

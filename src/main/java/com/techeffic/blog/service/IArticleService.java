@@ -16,13 +16,6 @@ public interface IArticleService {
 	 */
 	public void deleteById(WebContext webCtx);
 	
-	/**
-	 * 根据order查找文章
-	 * @param int1
-	 * @return
-	 */
-	public WebResponse findByOrder(Integer int1);
-
 	public Page<Article> pagenation(Class<Article> class1, Integer int1,
 			Integer int2, PageCondition condition);
 	

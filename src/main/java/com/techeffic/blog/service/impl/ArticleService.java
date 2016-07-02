@@ -70,16 +70,17 @@ public class ArticleService extends BaseService implements IArticleService{
 		this.getDaoFactory().getArticleMongoDao().remove(article);
 	}
 
-	@Override
-	public WebResponse findByOrder(Integer order) {
+	/*@Override
+	public WebResponse findById(String id) {
 		//查询当前文章且显示上一篇下一篇文章
 		WebResponse webResponse = new WebResponse();
-		Article article = this.getDaoFactory().getArticleMongoDao().findByOrder(order);
+		Article article = this.getDaoFactory().getArticleMongoDao().findById(id);
 		webResponse.put("article", article);
 		//过滤查询条件 查询指定列
 		DBObject queryObject = new BasicDBObject("createDate",new BasicDBObject("$gt", article.getCreateDate()));
+		queryObject.put("type", arg1)
 		DBObject queryObject2 = new BasicDBObject("createDate",new BasicDBObject("$lt", article.getCreateDate()));
-		DBObject filedsObject = new BasicDBObject("title", 1).append("order", 1);
+		DBObject filedsObject = new BasicDBObject("title", 1).append("id", 1);
 		Query query1 = new BasicQuery(queryObject, filedsObject);
 		Query query2 = new BasicQuery(queryObject2,filedsObject);
 		Article previous = this.getDaoFactory().getArticleMongoDao().findOne(query1.with(new Sort(Sort.Direction.ASC,"createDate")), Article.class);
@@ -87,7 +88,7 @@ public class ArticleService extends BaseService implements IArticleService{
 		webResponse.put("previous", previous);
 		webResponse.put("next", next);
 		return webResponse;
-	}
+	}*/
 
 	@Override
 	public Page<Article> pagenation(Class<Article> e, Integer page,
@@ -116,8 +117,10 @@ public class ArticleService extends BaseService implements IArticleService{
 		webResponse.put("article", article);
 		//过滤查询条件 查询指定列
 		DBObject queryObject = new BasicDBObject("createDate",new BasicDBObject("$gt", article.getCreateDate()));
+		queryObject.put("clazz", article.getClazz());
 		DBObject queryObject2 = new BasicDBObject("createDate",new BasicDBObject("$lt", article.getCreateDate()));
-		DBObject filedsObject = new BasicDBObject("title", 1).append("order", 1);
+		queryObject2.put("clazz", article.getClazz());
+		DBObject filedsObject = new BasicDBObject("title", 1).append("id", 1);
 		Query query1 = new BasicQuery(queryObject, filedsObject);
 		Query query2 = new BasicQuery(queryObject2,filedsObject);
 		Article previous = this.getDaoFactory().getArticleMongoDao().findOne(query1.with(new Sort(Sort.Direction.ASC,"createDate")), Article.class);

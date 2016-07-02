@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.5.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 	<!-- 加载mongo配置文件 -->
 	<context:property-placeholder location="classpath:properties/mongodb.properties" />
+	<!--这里使用mongo:mongo-client -->
+	<mongo:mongo-client id="mongo" host="${mongo.hostport}"
+		credentials="${mongo.username}:${mongo.password}@${mongo.dbname}">
+		<mongo:client-options min-connections-per-host="2"
+			connections-per-host="100" connect-timeout="5000" max-wait-time="120000"
+			heartbeat-frequency="2000" heartbeat-connect-timeout="10000"
+			max-connection-life-time="3000" socket-keep-alive="true"
+			socket-timeout="3000"
+			threads-allowed-to-block-for-connection-multiplier="5" write-concern="SAFE" />
+	</mongo:mongo-client>
 
-	<!-- 定义mongo对象，对应的是mongodb官方jar包中的Mongo，replica-set设置集群副本的ip地址和端口 -->
-	<mongo:mongo id="mongo" replica-set="${mongo.hostport}">
-		<!-- 一些连接属性的设置 -->
-		<mongo:options 
-		 connections-per-host="${mongo.connectionsPerHost}" 
-		 threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
-		 connect-timeout="${mongo.connectTimeout}" 
-		 max-wait-time="${mongo.maxWaitTime}" 
-		 auto-connect-retry="${mongo.autoConnectRetry}" 
-		 socket-keep-alive="${mongo.socketKeepAlive}" 
-		 socket-timeout="${mongo.socketTimeout}" 
-		 slave-ok="${mongo.slaveOk}" 
-		 write-number="1" 
-		 write-timeout="0" 
-		 write-fsync="true" />
-	</mongo:mongo>
-	<mongo:db-factory dbname="database" mongo-ref="mongo" />
+	<mongo:db-factory id="mongoDbFactory" mongo-ref="mongo"
+		dbname="${mongo.dbname}" />
 
-	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-		<constructor-arg ref="mongo" />
-		<constructor-arg name="databaseName" value="${mongo.db_name}" />
+	<bean id="mappingContext"
+		class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+
+	<bean id="mappingConverter"
+		class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg ref="mongoDbFactory" />
+		<constructor-arg ref="mappingContext" />
 	</bean>
 
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		<constructor-arg name="mongoConverter" ref="mappingConverter" />
+		<property name="writeConcern">
+			<util:constant static-field="com.mongodb.WriteConcern.SAFE" />
+		</property>
+		<property name="writeResultChecking" value="EXCEPTION" />
+	</bean>
+	<!-- mongodb bean的仓库目录，会自动扫描扩展了MongoRepository接口的接口进行注入 -->
+	<!-- <mongo:repositories base-package="com.techeffic.blog.dao.mongodb"
+		mongo-template-ref="mongoTemplate" /> -->
 </beans>
