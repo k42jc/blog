@@ -21,7 +21,7 @@
             var cm          = this.cm;
             var lang        = this.lang;
             var editor      = this.editor;
-            var settings    = this.settings;
+            var settings    = $.extend({},true,this.settings,{uploadType:"image"});
             var cursor      = cm.getCursor();
             var selection   = cm.getSelection();
             var imageLang   = lang.dialog.image;
@@ -51,7 +51,8 @@
                                         "<label>" + imageLang.url + "</label>" +
                                         "<input type=\"text\" data-url />" + (function(){
                                             return (settings.imageUpload) ? "<div class=\"" + classPrefix + "file-input\">" +
-                                                                                "<input type=\"file\" name=\"" + classPrefix + "image-file\" accept=\"image/*\" />" +
+                                                                                "<input type=\"file\" name=\"file\" accept=\"image/*\" />" +
+                                                                                "<input name=\"type\" type=\"hidden\" value=\""+settings.uploadType+"\"/>" +
                                                                                 "<input type=\"submit\" value=\"" + imageLang.uploadButton + "\" />" +
                                                                             "</div>" : "";
                                         })() +
@@ -125,7 +126,7 @@
                     return ;
                 }
 				//文件上传配置
-				var fileInput  = dialog.find("[name=\"" + classPrefix + "image-file\"]");
+				var fileInput  = dialog.find("[name=\"file\"]");
 
 				fileInput.bind("change", function() {
 					var fileName  = fileInput.val();

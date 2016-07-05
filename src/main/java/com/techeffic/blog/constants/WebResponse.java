@@ -1,7 +1,6 @@
 package com.techeffic.blog.constants;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.json.JSONException;
 import org.json.JSONObject;

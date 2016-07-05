@@ -1,5 +1,8 @@
 package com.techeffic.blog.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.WebContext;
 
 public interface IFileUploadService {
@@ -11,7 +14,7 @@ public interface IFileUploadService {
 	 * @throws Exception
 	 *
 	 */
-	String fileManage(WebContext webContext) throws Exception;
+	WebResponse fileManage(WebContext webContext) throws Exception;
 	
 	/**
 	 * 文件上传
@@ -19,5 +22,5 @@ public interface IFileUploadService {
 	 * @param webCtx
 	 *
 	 */
-	String fileUpload(WebContext webCtx) throws Exception;
+	WebResponse upload(WebContext webCtx,MultipartFile file) throws Exception;
 }
