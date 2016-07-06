@@ -28,7 +28,14 @@ public class FileUploadController extends BaseController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> uploadAction(
-			@RequestParam(value = "file") MultipartFile file) throws Exception {
+			@RequestParam(value = "file",required=false) MultipartFile file) throws Exception {
+		Map<String,String[]> parameterMap = webCtx.getRequest().getParameterMap();
+		parameterMap.forEach((k,v)->{
+			System.out.println(k+"-->");
+			for(int i=0;i<parameterMap.get(k).length;i++){
+				System.out.println(parameterMap.get(k)[i]);
+			}
+		});
 		// 使用此响应格式可以解决IE8上传完成后弹出下载框的问题
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setContentType(MediaType.TEXT_HTML);
@@ -39,7 +46,7 @@ public class FileUploadController extends BaseController {
 
 	@RequestMapping("manage")
 	@ResponseBody
-	public WebResponse manage() throws Exception {
+	public String manage() throws Exception {
 
 		return this.getServiceFactory().getFileUploadService()
 				.fileManage(webCtx);

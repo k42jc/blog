@@ -14,7 +14,7 @@ public interface IFileUploadService {
 	 * @throws Exception
 	 *
 	 */
-	WebResponse fileManage(WebContext webContext) throws Exception;
+	String fileManage(WebContext webContext) throws Exception;
 	
 	/**
 	 * 文件上传

@@ -30,7 +30,11 @@ a.switchEditor{
 		</section>
 		<section>
 			<h6>文章预览图<span class="req">*</span></h6>
-			<input name="file" type="text" id="imageViewURL" style="width:210px" /><button id="imageView" class="btn" onclick="return false;">选择图片</button>
+			<input name="imageViewURL" type="text" id="imageViewURL" style="width:210px" /><button id="imageView" class="btn" onclick="return false;">选择图片</button>
+		</section>
+		<section>
+			<h6>浏览图片<span class="req">*</span></h6>
+			<input name="viewImage" type="text" id="viewImage" style="width:210px" /><button id="viewImageBtn" class="btn" onclick="return false;">查看服务器图片</button>
 		</section>
 		<section class="checkbox-list" style="margin: 5px 0px 8px 0px;">
 			<h6>所属分类<span class="req">*</span></h6>
@@ -44,7 +48,7 @@ a.switchEditor{
 		</section>
 		<section>
 			<h6>文章内容<span class="req">*</span></h6>
-			<textarea id="content" style="width:800px;height:400px;visibility:hidden;"></textarea>
+			<textarea id="content" style="width:800px;height:400px;visibility:hidden;display:none;"></textarea>
 		</section>
 		<br>
 		<section>
@@ -54,7 +58,7 @@ a.switchEditor{
   #tag introduce("/static/kindeditor/kindeditor-min.js") #end
  <script>
 			var editor;
-			var imageOnly;
+			//var imageOnly;
 			KindEditor.ready(function(K) {
 				editor = K.create('#content', {
 					uploadJson : 'file/upload.action',
@@ -64,18 +68,30 @@ a.switchEditor{
 						'image', 'multiimage','insertfile', 'hr', 'baidumap', 'anchor', 'link'],
 					resizeType:0
 				});
-				imageOnly = K.editor({
+				/* imageOnly = K.editor({
 					allowFileManager:true,
 					uploadJson : 'file/upload.action',
 					fileManagerJson : 'file/manage.action'
-				});
+				}); */
 				K('#imageView').click(function() {
-					imageOnly.loadPlugin('image', function() {
-						imageOnly.plugin.imageDialog({
+					editor.loadPlugin('image', function() {
+						editor.plugin.imageDialog({
 							imageUrl : K('#imageViewURL').val(),
 							clickFn : function(url, title, width, height, border, align) {
 								K('#imageViewURL').val(url);
 								imageOnly.hideDialog();
+							}
+						});
+					});
+				});
+				K('#viewImageBtn').click(function(){
+					editor.loadPlugin('filemanager', function() {
+						editor.plugin.filemanagerDialog({
+							viewType : 'VIEW',
+							dirName : 'image',
+							clickFn : function(url, title) {
+								K('#viewImage').val(url);
+								editor.hideDialog();
 							}
 						});
 					});

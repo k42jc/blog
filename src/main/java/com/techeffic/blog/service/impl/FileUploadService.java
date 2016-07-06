@@ -129,7 +129,7 @@ public class FileUploadService implements IFileUploadService {
 		}
 	}
 
-	public WebResponse fileManage(WebContext webCtx) throws Exception {
+	public String fileManage(WebContext webCtx) throws Exception {
 		// 根目录路径，可以指定绝对路径，比如 /var/www/attached/
 		String rootPath = webCtx.getRequest().getSession().getServletContext()
 				.getRealPath("/")
@@ -232,7 +232,7 @@ public class FileUploadService implements IFileUploadService {
 
 		webCtx.getResponse().setContentType("application/json; charset=UTF-8");
 		System.out.println(result.toJSONString());
-		return new WebResponse();
+		return result.toJSONString();
 	};
 
 }
