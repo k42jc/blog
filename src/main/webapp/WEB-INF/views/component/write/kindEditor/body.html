@@ -30,7 +30,7 @@ a.switchEditor{
 		</section>
 		<section>
 			<h6>文章预览图<span class="req">*</span></h6>
-			<input name="imageView" type="text" id="imageViewURL" style="width:210px" /><button id="imageView" class="btn" onclick="return false;">选择图片</button>
+			<input name="file" type="text" id="imageViewURL" style="width:210px" /><button id="imageView" class="btn" onclick="return false;">选择图片</button>
 		</section>
 		<section class="checkbox-list" style="margin: 5px 0px 8px 0px;">
 			<h6>所属分类<span class="req">*</span></h6>
@@ -57,8 +57,8 @@ a.switchEditor{
 			var imageOnly;
 			KindEditor.ready(function(K) {
 				editor = K.create('#content', {
-					uploadJson : 'file/upload.htm',
-					fileManagerJson : 'file/manage.htm',
+					uploadJson : 'file/upload.action',
+					fileManagerJson : 'file/manage.action',
 					allowFileManager : true,
 					items:['source', '|', 'undo', 'redo', '|','code', 'cut', 'copy', 'paste', '|', 'justifyleft', 'justifycenter', 'justifyright','insertorderedlist', 'quickformat', 'selectall','formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold','italic', 'underline', '|',
 						'image', 'multiimage','insertfile', 'hr', 'baidumap', 'anchor', 'link'],
@@ -66,8 +66,8 @@ a.switchEditor{
 				});
 				imageOnly = K.editor({
 					allowFileManager:true,
-					uploadJson : 'file/upload.htm',
-					fileManagerJson : 'file/manage.htm'
+					uploadJson : 'file/upload.action',
+					fileManagerJson : 'file/manage.action'
 				});
 				K('#imageView').click(function() {
 					imageOnly.loadPlugin('image', function() {
@@ -82,7 +82,7 @@ a.switchEditor{
 				});
 				
 				$('#me_text').form({
-						url:'saveArticle.htm',
+						url:'saveArticle.action',
 						onSubmit:function(param){
 							param.contentView=editor.text().replace(/[\r\n]/g,"");
 							param.content = editor.html();

@@ -28,7 +28,7 @@ public class FileUploadController extends BaseController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> uploadAction(
-			@RequestParam(value = "file") MultipartFile file,@RequestParam(value="type") String type) throws Exception {
+			@RequestParam(value = "file") MultipartFile file) throws Exception {
 		// 使用此响应格式可以解决IE8上传完成后弹出下载框的问题
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setContentType(MediaType.TEXT_HTML);
