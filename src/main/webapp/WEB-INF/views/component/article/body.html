@@ -213,8 +213,8 @@ article>p>*{
 #if (clientType == ClientType::CLIENT_TYPE_PC)
 <script type="text/javascript">
         $(function() {
-			
-            $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:'${articleId}'}, async:false,success:function(data) {
+        	var _load = layer.load(0,{shade:false});
+            $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:'${articleId}'}, success:function(data) {
                 $('#title').html('<span style="background: url(/static/img/'+data.article.type+'.png) no-repeat 0 10px;padding:5px 3px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.article.title);
                 $('#createDate').text(data.createTime);
                 $('#backClazz').text("回到"+data.clazzName+"分类");
@@ -252,6 +252,7 @@ article>p>*{
                     //flowChart       : true,  // 默认不解析
                     //sequenceDiagram : true,  // 默认不解析
                 });
+			   layer.close(_load);
 				//$('#article>p').css('text-indent','2em');
 					//$('#article>em>p').css('text-indent','2em');
 					//$('#article>ul').css('margin-left','3em');
@@ -265,6 +266,7 @@ article>p>*{
                 //console.log(testEditormdView.getMarkdown());
                 
                 //alert(testEditormdView.getMarkdown());
+			    codeCopy();
            }});
                 
             /* testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
@@ -276,48 +278,8 @@ article>p>*{
                 sequenceDiagram : true,  // 默认不解析
             });*/
 			
-		    scrolltop();
-		    codeCopy();
+		    //scrolltop();
         });
-		/**
-     * 单击此处，返回到顶部
-     */
-    function scrolltop() {
-        var $dom = $('<img src="/static/img/scrolltop.png" />');
-        $dom.css({
-            display: 'none',
-            cursor: 'pointer',
-            position: 'fixed',
-            right: '60px',
-            bottom: '80px',
-            border: '0 none',
-            margin: 0,
-            padding: 0,
-            width: 'auto',
-            height: 'auto'
-        });
-        $('body').append($dom);
-
-        $dom.click(function() {
-            $('body,html').animate({scrollTop:0}, 400);
-            return false;
-        });
-
-        var hidden = true;
-        $(window).on('scroll resize', function() {
-            if ($(window).scrollTop() > 40) {
-                if (hidden) {
-                    $dom.fadeIn();
-                    hidden = false;
-                }
-            } else {
-                if (!hidden) {
-                    $dom.fadeOut();
-                    hidden = true;
-                }
-            }
-        });
-    };
     
     function codeCopy(){
     	$("pre>ol").each(function() {

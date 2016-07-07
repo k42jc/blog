@@ -55,6 +55,47 @@
 	}
 }
 </style>
+<script type="text/javascript">
+/**
+ * 单击此处，返回到顶部
+ */
+$(function(){
+	var $dom = $('<img src="/static/img/scrolltop.png" />');
+    $dom.css({
+        display: 'none',
+        cursor: 'pointer',
+        position: 'fixed',
+        right: '60px',
+        bottom: '80px',
+        border: '0 none',
+        margin: 0,
+        padding: 0,
+        width: 'auto',
+        height: 'auto'
+    });
+    $('body').append($dom);
+
+    $dom.click(function() {
+        $('body,html').animate({scrollTop:0}, 400);
+        return false;
+    });
+
+    var hidden = true;
+    $(window).on('scroll resize', function() {
+        if ($(window).scrollTop() > 40) {
+            if (hidden) {
+                $dom.fadeIn();
+                hidden = false;
+            }
+        } else {
+            if (!hidden) {
+                $dom.fadeOut();
+                hidden = true;
+            }
+        }
+    });
+});
+</script>
 <footer id="footer">
 	<p><!-- &copy;廖旭东个人博客. -->粤ICP 备16024758号-1. &copy; 廖旭东 All Rights Reserved</p>
 	<nav>
