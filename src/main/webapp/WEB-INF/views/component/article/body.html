@@ -213,6 +213,10 @@ article>p>*{
 #if (clientType == ClientType::CLIENT_TYPE_PC)
 <script type="text/javascript">
         $(function() {
+        	//设置加载动画的便宜位置适合当前页面
+        	layer.config({
+        		offset:150
+        	});
         	var _load = layer.load(0,{shade:false});
             $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:'${articleId}'}, success:function(data) {
                 $('#title').html('<span style="background: url(/static/img/'+data.article.type+'.png) no-repeat 0 10px;padding:5px 3px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.article.title);

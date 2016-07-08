@@ -25,33 +25,10 @@
 		<a href="/article/${article.id}" class="post-read-more">查看详情...</a>
 		#if (canEdit == true) 
 		&nbsp;&nbsp;<a href="/write_md/${article.id}" class="post-read-more">编辑</a>
-		&nbsp;&nbsp;<a href="javascript:void(0);" onclick="deleteArticle('${article.id}')" class="post-read-more">删除</a>
+		&nbsp;&nbsp;<a href="javascript:void(0);" id="delete_${article.id}" class="post-read-more">删除</a>
 		 #end
 	</div>
 	#end
-	<script type="text/javascript">
-	 	function deleteArticle(id){
-			layer.confirm('确定删除这篇文章？', {
-			  btn: ['删除','取消'] //按钮
-			}, function(){
-				$.ajax({
-		 			url:'/article/delete.action',
-		 			dataType:'json',
-		 			method:'POST',
-		 			data:{id:id},
-		 			success:function(data){
-		 				if(data.success === 1){
-		 					layer.msg("删除成功！即将刷新页面...",{icon:6,time:1000},function(){
-		 						window.location.reload();
-		 					});
-		 				}
-		 			}
-		 		});
-			}, function(){
-			  layer.close();
-			});
-	 	}
-	 </script>
 	<!-- 分页条 -->
 	<ul class="pagination" id="pagenation">
 		#for(int p:range(1,page.pages))
@@ -66,6 +43,35 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			//设置加载层位置适合当前页面
+			layer.config({
+				offset:200
+			});
+			#if (canEdit == true) 
+			//删除文章
+			$('body').on('click','a[id^=delete]',function(){
+				var id = $(this).attr('id').split('_')[1];
+				layer.confirm('确定删除这篇文章？', {
+				  btn: ['删除','取消'] //按钮
+				}, function(){
+					$.ajax({
+			 			url:'/article/delete.action',
+			 			dataType:'json',
+			 			method:'POST',
+			 			data:{id:id},
+			 			success:function(data){
+			 				if(data.success === 1){
+			 					layer.msg("删除成功！即将刷新页面...",{icon:6,time:1000},function(){
+			 						window.location.reload();
+			 					});
+			 				}
+			 			}
+			 		});
+				}, function(){
+				  layer.close();
+				});
+			});
+			#end
 			//因为通过js拼接的元素会导致直接事件失效 所以将点击事件委托到父级元素
 			$('#pagenation').on('click','a',function(event){
 				//当前页点击无效
@@ -124,7 +130,7 @@
 					html +='<a href="/article/'+article.id+'" class="post-read-more">查看详情...</a>';
 					if (data.canEdit == true) {
 						html +='&nbsp;&nbsp;<a href="/write_md/'+article.id+'" class="post-read-more">编辑</a>';
-						html +='&nbsp;&nbsp;<a href="javascript:void(0);" onclick="deleteArticle('+article.id+')" class="post-read-more">删除</a>';
+						html +='&nbsp;&nbsp;<a href="javascript:void(0);" id="delete_'+article.id+'" class="post-read-more">删除</a>';
 					}
 					 html +='</div>';
 				}
