@@ -13,15 +13,19 @@ public class RequestAttribute {
 	}
 
 	public Integer getInt(String params) {
-		Object result = webCtx.getRequest().getAttribute(params);
+		Object result = getObject(params);
 		if (result == null) {
 			return null;
 		}
 		return Integer.valueOf(result.toString());
 	}
+	
+	public Object getObject(String params){
+		return webCtx.getRequest().getSession().getAttribute(params);
+	}
 
 	public Long getLong(String params) {
-		Object result = webCtx.getRequest().getAttribute(params);
+		Object result = getObject(params);
 		if (result == null) {
 			return null;
 		}
@@ -29,7 +33,7 @@ public class RequestAttribute {
 	}
 
 	public String getString(String params) {
-		Object result = webCtx.getRequest().getAttribute(params);
+		Object result = getObject(params);
 		if (result == null) {
 			return null;
 		}
@@ -37,7 +41,7 @@ public class RequestAttribute {
 	}
 
 	public Double getDouble(String params) {
-		Object result = webCtx.getRequest().getAttribute(params);
+		Object result = getObject(params);
 		if (result == null) {
 			return null;
 		}

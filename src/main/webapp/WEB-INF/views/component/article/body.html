@@ -218,7 +218,7 @@ article>p>*{
         		offset:150
         	});
         	var _load = layer.load(0,{shade:false});
-            $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:'${articleId}'}, success:function(data) {
+            $.ajax({url:"/article/getArticleByOrder.action",data:{articleId:'${articleId}'},success:function(data) {
                 $('#title').html('<span style="background: url(/static/img/'+data.article.type+'.png) no-repeat 0 10px;padding:5px 3px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.article.title);
                 $('#createDate').text(data.createTime);
                 $('#backClazz').text("回到"+data.clazzName+"分类");
@@ -270,7 +270,7 @@ article>p>*{
                 //console.log(testEditormdView.getMarkdown());
                 
                 //alert(testEditormdView.getMarkdown());
-			    codeCopy();
+                setTimeout("codeCopy();",1000);
            }});
                 
             /* testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
@@ -286,7 +286,7 @@ article>p>*{
         });
     
     function codeCopy(){
-    	$("pre>ol").each(function() {
+    	$("body").find("pre>ol").each(function() {
 	        var $copy = '<div class="zero-clipboard"><span class="btn-clipboard">Copy</span></div>';
 	        $(this).parent().before($copy);
 	    });
