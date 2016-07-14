@@ -5,6 +5,8 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.techeffic.blog.constants.Constants;
 import com.techeffic.blog.entity.Article;
 import com.techeffic.blog.entity.Template;
@@ -16,36 +18,38 @@ import com.techeffic.blog.util.TemplateUtil;
  *
  */
 public class TemplateDispatcher extends BaseDispatcher{
+	private static Logger logger = Logger.getLogger(TemplateDispatcher.class);
 
 	@Override
 	public void dispatcher() throws IOException {
 		Map<String,Object> datas = new HashMap<String, Object>();
-		//包含多级请求
-		if(requestURI.lastIndexOf("/") != 0){
-			//处理文章显示页面的URI请求
-			if(requestURI.startsWith(Constants.REQUEST_URI_ARTICLE)){
-				String articleId = requestURI.substring(requestURI.lastIndexOf("/")+1);
-				webCtx.getRequest().getSession().setAttribute("articleId", articleId);
-				Article article = serviceFactory.getArticleService().findTitleKeywordsById(articleId);
-				datas.put("title", article.getTitle());
-				datas.put("keywords", article.getKeywords());
-			}
-			//处理文章列表显示页面URI请求
-			if(requestURI.startsWith(Constants.REQUEST_URI_LIST)){
-				webCtx.getRequest().getSession().setAttribute("articleClazz", requestURI.substring(requestURI.lastIndexOf("/")+1));
-			}
-			//处理文章编辑页面URI请求
-			if(requestURI.startsWith(Constants.REQUEST_URI_WRITE_MD)){
-				webCtx.getRequest().getSession().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
-			}
-			requestURI = requestURI.substring(0,requestURI.lastIndexOf("/"));
-			
-		}
 		try {
+			//包含多级请求
+			if(requestURI.lastIndexOf("/") != 0){
+				//处理文章显示页面的URI请求
+				if(requestURI.startsWith(Constants.REQUEST_URI_ARTICLE)){
+					String articleId = requestURI.substring(requestURI.lastIndexOf("/")+1);
+					webCtx.getRequest().getSession().setAttribute("articleId", articleId);
+					Article article = serviceFactory.getArticleService().findTitleKeywordsById(articleId);
+					datas.put("title", article.getTitle());
+					datas.put("keywords", article.getKeywords());
+				}
+				//处理文章列表显示页面URI请求
+				if(requestURI.startsWith(Constants.REQUEST_URI_LIST)){
+					webCtx.getRequest().getSession().setAttribute("articleClazz", requestURI.substring(requestURI.lastIndexOf("/")+1));
+				}
+				//处理文章编辑页面URI请求
+				if(requestURI.startsWith(Constants.REQUEST_URI_WRITE_MD)){
+					webCtx.getRequest().getSession().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
+				}
+				requestURI = requestURI.substring(0,requestURI.lastIndexOf("/"));
+				
+			}
 			//获取对应页面并渲染
 			render(datas);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("页面渲染异常:"+this.getClass().getName(), e);
 			response.sendRedirect("/404.html");
 		}
 	}
