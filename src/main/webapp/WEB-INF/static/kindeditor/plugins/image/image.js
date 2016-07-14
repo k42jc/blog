@@ -191,7 +191,7 @@ KindEditor.plugin('image', function(K) {
 			width: 60,
 			afterUpload : function(data) {
 				dialog.hideLoading();
-				if (data.error === 0) {
+				if (data.success) {
 					var url = data.url;
 					if (formatUploadUrl) {
 						url = K.formatUrl(url, 'absolute');

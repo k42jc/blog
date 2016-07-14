@@ -989,6 +989,16 @@
 	top: 0;
 	cursor: pointer;
 }
+.ke-inline-block .ke-delete {/*增加文件管理的删除图片按钮*/
+	display: block;
+	background: url(default.png) no-repeat scroll 0px -688px;
+	width: 16px;
+	height: 16px;
+	/* position: absolute; */
+	right: 0;
+	top: 0;
+	cursor: pointer;
+}
 .ke-swfupload-body .ke-status  {
 	position: absolute;
 	left: 0;

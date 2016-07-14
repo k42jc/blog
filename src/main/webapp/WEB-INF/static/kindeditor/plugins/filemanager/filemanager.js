@@ -83,15 +83,21 @@ KindEditor.plugin('filemanager', function(K) {
 				dirPath = encodeURIComponent(result.current_dir_path + data.filename + '/');
 			if (data.is_dir) {
 				el.click(function(e) {
-					reloadPage(dirPath, orderTypeBox.val(), createFunc);
+					if(e.target.className.indexOf('ke-delete') < 0){//避免删除文件时进入了之前默认绑定的事件
+						reloadPage(dirPath, orderTypeBox.val(), createFunc);
+					}
 				});
 			} else if (data.is_photo) {
 				el.click(function(e) {
-					clickFn.call(this, fileUrl, data.filename);
+					if(e.target.className.indexOf('ke-delete') < 0){
+						clickFn.call(this, fileUrl, data.filename);
+					}
 				});
 			} else {
 				el.click(function(e) {
-					clickFn.call(this, fileUrl, data.filename);
+					if(e.target.className.indexOf('ke-delete') < 0){
+						clickFn.call(this, fileUrl, data.filename);
+					}
 				});
 			}
 			elList.push(el);
@@ -152,6 +158,27 @@ KindEditor.plugin('filemanager', function(K) {
 				K(row[0].insertCell(2)).addClass('ke-cell ke-datetime').html(data.datetime);
 			}
 		}
+		//删除文件操作
+		function removeFile(_this,file,createView){
+			if(file.is_dir){
+				file.filename=_this.parentNode.title;//避免每次操作的都是最新的文件夹
+			}
+			$.ajax({
+				url:'/fileUpload/deleteFile.jhtml',
+				type:'POST',
+				dataType:'json',
+				data:{file:JSON.stringify(file)},
+				success:function(data){
+					if(data.success){
+						if (!file.is_dir) {//如果当前操作的是文件 则删除后重载当前目录窗口
+							reloadPage(file.filename.substring(0,8)+"%2F", orderTypeBox.val(), createView);
+						}else{//如果当前操作的为目录 则重载根窗口
+							reloadPage('', orderTypeBox.val(), createView);
+						}
+					}
+				}
+			});
+		}
 		function createView(result) {
 			createCommon(result, createView);
 			var fileList = result.file_list;
@@ -178,6 +205,14 @@ KindEditor.plugin('filemanager', function(K) {
 					photoDiv.attr('title', lang.emptyFolder);
 				}
 				photoDiv.append(img);
+				//删除图片相关配置
+				K('<span class="ke-delete"></span>').appendTo(photoDiv).mouseover(function(){
+					K(this).addClass('ke-on');
+				}).mouseout(function(e) {
+					K(this).removeClass('ke-on');
+				}).click(function() {
+					removeFile(this,data,createView);
+				});
 				div.append('<div class="ke-name" title="' + data.filename + '">' + data.filename + '</div>');
 			}
 		}
