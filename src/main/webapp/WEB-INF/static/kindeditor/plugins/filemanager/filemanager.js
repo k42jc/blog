@@ -164,7 +164,7 @@ KindEditor.plugin('filemanager', function(K) {
 				file.filename=_this.parentNode.title;//避免每次操作的都是最新的文件夹
 			}
 			$.ajax({
-				url:'/fileUpload/deleteFile.jhtml',
+				url:'/file/deleteFile.action',
 				type:'POST',
 				dataType:'json',
 				data:{file:JSON.stringify(file)},

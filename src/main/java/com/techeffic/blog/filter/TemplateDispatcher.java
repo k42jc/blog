@@ -48,9 +48,11 @@ public class TemplateDispatcher extends BaseDispatcher{
 			//获取对应页面并渲染
 			render(datas);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			logger.error("页面渲染异常:"+this.getClass().getName(), e);
-			response.sendRedirect("/404.html");
+			//request.getRequestDispatcher("/404.html").forward(request, response);
+			//request.getSession();
+			//response.sendRedirect("/404.html");
 		}
 	}
 
@@ -58,6 +60,10 @@ public class TemplateDispatcher extends BaseDispatcher{
 		// 获取对应请求模板数据
 		Template template = serviceFactory.getTemplateService()
 				.findTemplateByRequestURI(requestURI);
+		if(template == null){
+			response.sendRedirect("/404.html");//找不到页面
+			return;
+		}
 		if (Constants.NEED_LOGIN.equals(template.getNeedLogin())) {
 			//需要登录则查看当前用户是否已登录 
 			if(!webCtx.getLoginState().isLogin()){
