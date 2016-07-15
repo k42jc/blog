@@ -45,7 +45,7 @@ public class WeChatService extends BaseService implements IWeChatService{
 	 */
 	public String checkSignature(WebContext webCtx) {
 		String signature = webCtx.getRequestParameter().getString("signature");
-		logger.info("原signture字符"+signature);
+		logger.info("原signture字符:"+signature);
 		String timestamp = webCtx.getRequestParameter().getString("timestamp");
 		String nonce = webCtx.getRequestParameter().getString("nonce");
 		
@@ -58,7 +58,7 @@ public class WeChatService extends BaseService implements IWeChatService{
 		}
 		//sha1加密
 		String targetString = DigestUtils.sha1Hex(sb.toString());
-		logger.info("转换拼接字符"+targetString);
+		logger.info("转换拼接字符:"+targetString);
 		
 		if(signature.equals(targetString))
 			return webCtx.getRequestParameter().getString("echostr");

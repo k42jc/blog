@@ -55,6 +55,6 @@ public class FileUploadController extends BaseController {
 	@RequestMapping("deleteFile")
 	@ResponseBody
 	public WebResponse deleteFile(){
-		return webResponse;
+		return this.getServiceFactory().getFileUploadService().deleteFile(webCtx);
 	}
 }

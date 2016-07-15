@@ -23,6 +23,7 @@ import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.service.IFileUploadService;
 import com.techeffic.blog.util.FileUtil;
 import com.techeffic.blog.util.JsonUtil;
+import com.techeffic.blog.util.Log4jUtil;
 
 /**
  * 文件上传处理service
@@ -245,8 +246,10 @@ public class FileUploadService implements IFileUploadService {
 				FileUtil.deleteFile(new File(savePath + folder + "/" + fileName));
 			}
 			resultMap.put("success", true);
+			Log4jUtil.info(savePath + fileName+"---文件/目录删除成功");
 			return resultMap;
 		} catch (Exception e) {
+			Log4jUtil.error("删除失败",e);
 			resultMap.put("success", false);
 		}
 		return resultMap;

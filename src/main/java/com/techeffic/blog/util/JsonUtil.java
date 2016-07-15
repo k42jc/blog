@@ -30,7 +30,7 @@ public class JsonUtil {
 	 */
 	public static Map<String, Object> toMap(String jsonStr) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		if (jsonObject != null)
+		if (jsonObject == null)
 			jsonObject = new JSONObject(jsonStr);
 		try {
 			Iterator ite = jsonObject.keys();
@@ -56,7 +56,7 @@ public class JsonUtil {
 	 * @return 转换后的java对象
 	 */
 	public static <T> T readValue(String jsonStr, Class<T> clazz) {
-		if (objectMapper != null)
+		if (objectMapper == null)
 			objectMapper = new ObjectMapper();
 		try {
 			return objectMapper.readValue(jsonStr, clazz);
@@ -78,7 +78,7 @@ public class JsonUtil {
 	 * @return 转换后的java对象
 	 */
 	public static <T> T readValue(String jsonStr, TypeReference<T> typeReference) {
-		if (objectMapper != null)
+		if (objectMapper == null)
 			objectMapper = new ObjectMapper();
 		try {
 			return objectMapper.readValue(jsonStr, typeReference);
