@@ -23,4 +23,13 @@ public interface IFileUploadService {
 	 *
 	 */
 	WebResponse upload(WebContext webCtx,MultipartFile file) throws Exception;
+	
+	/**
+	 * 删除
+	 * @author xudong_liao
+	 * @Time 2016年7月15日下午6:57:19
+	 * @param webCtx
+	 * @return
+	 */
+	WebResponse deleteFile(WebContext webCtx);
 }

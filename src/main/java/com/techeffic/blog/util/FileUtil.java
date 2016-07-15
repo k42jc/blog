@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -107,5 +109,79 @@ public class FileUtil {
 		} else {
 			FileUtils.copyFileToDirectory(file, new File(targetPath));
 		}
+	}
+	
+
+	/**
+	 * 删除文件夹/文件 
+	 * 如果是文件夹则遍历删除文件夹下的所有文件
+	 * @author xudong_liao
+	 * @Time 2016年5月31日上午10:45:03
+	 * @param file
+	 * @return
+	 */
+	public static boolean deleteFile(File file) {
+		if (file.isDirectory()) {
+			String[] filelist = file.list();
+			for (int i = 0; i < filelist.length; i++) {
+				File delfile = new File(file.getPath() + "\\" + filelist[i]);
+				if (!delfile.isDirectory()) {
+					delfile.delete();
+					System.out.println(delfile.getAbsolutePath() + "删除文件成功");
+				} else if (delfile.isDirectory()) {
+					deleteFile(new File(file.getPath() + "\\" + filelist[i]));
+				}
+			}
+			System.out.println(file.getAbsolutePath() + "删除成功");
+			file.delete();
+		} else if (file.exists()) {
+			file.delete();
+		} else{
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 获取指定目录的所有文件名
+	 * 
+	 * @author xudong_liao
+	 * @Time 2016年5月31日上午11:14:13
+	 * @param file
+	 * @return
+	 */
+	public static List<String> getFileNames(File file) {
+		List<File> fileList = listFiles(file);
+		List<String> nameList = new ArrayList<String>();
+		fileList.forEach(f -> {
+			nameList.add(f.getName());
+		});
+		return nameList;
+	}
+
+	/**
+	 * 遍历指定目录文件
+	 * 
+	 * @author xudong_liao
+	 * @Time 2016年5月31日上午11:16:55
+	 * @param file
+	 * @return
+	 */
+	public static List<File> listFiles(File file) {
+		List<File> fs = new ArrayList<File>();
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			for (File f : files) {
+				if (f.isDirectory()) {
+					listFiles(f);
+				} else if (f.isFile()) {
+					fs.add(f);
+				}
+			}
+		} else {
+			if (file.isFile())
+				fs.add(file);
+		}
+		return fs;
 	}
 }

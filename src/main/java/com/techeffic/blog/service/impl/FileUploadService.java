@@ -1,19 +1,15 @@
 package com.techeffic.blog.service.impl;
 
 import java.io.File;
-import java.rmi.ServerException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import javax.sql.rowset.serial.SerialException;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Logger;
@@ -22,13 +18,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.techeffic.blog.constants.Constants;
 import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.service.IFileUploadService;
-import com.techeffic.blog.util.NameComparator;
-import com.techeffic.blog.util.SizeComparator;
-import com.techeffic.blog.util.TypeComparator;
+import com.techeffic.blog.util.FileUtil;
+import com.techeffic.blog.util.JsonUtil;
 
 /**
  * 文件上传处理service
@@ -46,13 +40,8 @@ public class FileUploadService implements IFileUploadService {
 	String imageExtension = "";
 	@Value("#{settings['fileExtension']}")
 	String fileExtension = "";
-	@Value("#{settings['fileMaxSize']}")
-	Long fileMaxSize = 0l;
-	@Value("#{settings['fileTypes']}")
-	String fileTypes = "";
 
-	public WebResponse upload(WebContext webCtx, MultipartFile file)
-			throws Exception {
+	public WebResponse upload(WebContext webCtx, MultipartFile file) {
 		WebResponse response = new WebResponse();
 		String type = webCtx.getRequestParameter().getString("type");
 		// 设置保存文件路径
@@ -64,9 +53,11 @@ public class FileUploadService implements IFileUploadService {
 				+ fileUploadPath + "/";
 		// 定义允许上传的文件扩展名
 		Map<String, String> extMap = new HashMap<String, String>();
-		extMap.put("image", imageExtension);
-		extMap.put("file", fileExtension);
-		response.setSuccess(Constants.FAIL);
+		if ("image".equals(type)) {
+			extMap.put("image", imageExtension);
+		} else if ("file".equals(type)) {
+			extMap.put("file", fileExtension);
+		}
 		if (!ServletFileUpload.isMultipartContent(webCtx.getRequest())) {// 上传仅支持POST与enctype="multipart/form-data"类型
 			response.put("message", "请检查文件上传组件配置！");
 			return response;
@@ -94,14 +85,10 @@ public class FileUploadService implements IFileUploadService {
 		}
 		// 原始文件名
 		String fileName = file.getOriginalFilename();
-
-		long fileSize = file.getSize(); // 检查文件大小 
-		if (fileSize > fileMaxSize)
-		{
-			response.put("message", "上传文件大小超过限制!");
-			return response;
-		}
-
+		/*
+		 * long fileSize = file.getSize(); // 检查文件大小 if (fileSize > fileMaxSize)
+		 * { response.put("error", "上传文件大小超过限制!"); return response; }
+		 */
 		// 检查扩展名
 		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1)
 				.toLowerCase();
@@ -110,6 +97,7 @@ public class FileUploadService implements IFileUploadService {
 			response.put("message", "不支持此文件类型!");
 			return response;
 		}
+
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss_S");
 		String newFileName = df.format(new Date()) + "_"
 				+ new Random().nextInt(100) + "." + fileExt;
@@ -117,9 +105,9 @@ public class FileUploadService implements IFileUploadService {
 			File uploadedFile = new File(savePath, newFileName);
 			file.transferTo(uploadedFile);
 			saveUrl += newFileName;
-			response.put("success", Constants.SUCCESS);
+			response.put("message", "上传成功！");
 			response.put("url", saveUrl);
-			response.put("message", "上传成功!");
+			response.put("path", savePath + newFileName);
 			logger.info("文件上传成功，保存路径：" + savePath + newFileName
 					+ "<br/>,访问url：" + saveUrl);
 			return response;
@@ -127,9 +115,11 @@ public class FileUploadService implements IFileUploadService {
 			response.put("message", "上传操作出现错误!");
 			return response;
 		}
+
 	}
 
-	public String fileManage(WebContext webCtx) throws Exception {
+	@Override
+	public String fileManage(WebContext webCtx) {
 		// 根目录路径，可以指定绝对路径，比如 /var/www/attached/
 		String rootPath = webCtx.getRequest().getSession().getServletContext()
 				.getRealPath("/")
@@ -142,9 +132,11 @@ public class FileUploadService implements IFileUploadService {
 
 		String dirName = webCtx.getRequest().getParameter("dir");
 		if (dirName != null) {
-			if (!Arrays.<String> asList(fileTypes.split(",")).contains(dirName)) {
-				throw new SerialException("无效文件类型！");
-			}
+			/*
+			 * if (!Arrays.<String>
+			 * asList(fileTypes.split(",")).contains(dirName)) { throw new
+			 * SerialException("无效文件类型！"); }
+			 */
 			rootPath += dirName + "/";
 			rootUrl += dirName + "/";
 			File saveDirFile = new File(rootPath);
@@ -173,17 +165,17 @@ public class FileUploadService implements IFileUploadService {
 
 		// 不允许使用..移动到上一级目录
 		if (path.indexOf("..") >= 0) {
-			throw new ServerException("非法操作！");
+			throw new RuntimeException("非法操作！");
 		}
 		// 最后一个字符不是/
 		if (!"".equals(path) && !path.endsWith("/")) {
 			System.out.println("Parameter is not valid.");
-			throw new ServerException("参数异常！");
+			throw new RuntimeException("参数异常！");
 		}
 		// 目录不存在或不是目录
 		File currentPathFile = new File(currentPath);
 		if (!currentPathFile.isDirectory()) {
-			throw new ServerException("目录不存在！");
+			throw new RuntimeException("目录不存在！");
 		}
 
 		// 遍历目录取的文件信息
@@ -217,11 +209,11 @@ public class FileUploadService implements IFileUploadService {
 		}
 
 		if ("size".equals(order)) {
-			Collections.sort(fileList, new SizeComparator());
+			// Collections.sort(fileList, new SizeComparator());
 		} else if ("type".equals(order)) {
-			Collections.sort(fileList, new TypeComparator());
+			// Collections.sort(fileList, new TypeComparator());
 		} else {
-			Collections.sort(fileList, new NameComparator());
+			// Collections.sort(fileList, new NameComparator());
 		}
 		JSONObject result = new JSONObject();
 		result.put("moveup_dir_path", moveupDirPath);
@@ -230,9 +222,34 @@ public class FileUploadService implements IFileUploadService {
 		result.put("total_count", fileList.size());
 		result.put("file_list", fileList);
 
-		webCtx.getResponse().setContentType("application/json; charset=UTF-8");
-		System.out.println(result.toJSONString());
-		return result.toJSONString();
-	};
+		webCtx.getResponse().getResponse()
+				.setContentType("application/json; charset=UTF-8");
+		// System.out.println(result.toJSONString());
+		return result.toString();
+	}
+
+	public WebResponse deleteFile(WebContext webCtx) {
+		Map<String, Object> file = JsonUtil.readValue(webCtx
+				.getRequestParameter().getString("file"), Map.class);
+		WebResponse resultMap = new WebResponse();
+		try {
+			String savePath = webCtx.getRequest().getSession()
+					.getServletContext().getRealPath("/")
+					+ "/" + fileUploadPath + "/image/";
+			// 文件夹
+			String fileName = file.get("filename").toString();
+			if ((boolean) file.get("is_dir")) {
+				FileUtil.deleteFile(new File(savePath + fileName));
+			} else if ((boolean) file.get("is_photo")) {// 图片
+				String folder = file.get("filename").toString().substring(0, 8);
+				FileUtil.deleteFile(new File(savePath + folder + "/" + fileName));
+			}
+			resultMap.put("success", true);
+			return resultMap;
+		} catch (Exception e) {
+			resultMap.put("success", false);
+		}
+		return resultMap;
+	}
 
 }

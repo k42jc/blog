@@ -1,5 +1,6 @@
 package com.techeffic.blog.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -48,7 +49,23 @@ public class DateUtil {
         date.setTime(twelve);
         return date;
     }
-
+    
+	/**
+	 * 字符串转换为日期
+	 * @author xudong_liao
+	 * @Time 2016年5月16日上午11:39:27
+	 * @param dateStr yyyy-MM-dd格式日期
+	 * @return
+	 */
+	public final static Date toDate(String dateStr){
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			return formatter.parse(dateStr);
+		} catch (ParseException e) {
+			return null;
+		}
+	}
+	
     public static void main(String[] args) {
         System.out.println(getZeroDate(new Date()));
         System.out.println(getEndDate(new Date()));

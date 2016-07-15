@@ -57,6 +57,24 @@ public class WebContext {
 	}
 	
 	/**
+	 * 取得域名
+	 */
+	public String getDomain() {
+		String domain = getDomainWithPort();
+		if (domain.indexOf(":") > 0) {
+			domain = domain.substring(0, domain.indexOf(":"));
+		}
+		return domain;
+	}
+	
+	public String getDomainWithPort() {
+		StringBuffer url = request.getRequestURL();
+		String domain = url.delete(url.length() - request.getRequestURI().length(), url.length()).delete(0, 7)
+				.toString();
+		return domain;
+	}
+	
+	/**
 	 * 用户登录
 	 * @param userId
 	 */
