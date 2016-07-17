@@ -139,6 +139,5 @@ public class ArticleService extends BaseService implements IArticleService{
 		Query query = new BasicQuery(queryObject, fieldsObject);
 		return this.getDaoFactory().getArticleMongoDao().findOne(query, Article.class);
 	}
-	
 
 }

@@ -24,7 +24,16 @@ public class DaoFactory {
 	private ISysDataDao sysDataMongoDao;
 	//文章实例化接口
 	private IArticleDao articleMongoDao;
+	//评论接口
+	private ICommentDao commentMongoDao;
 	
+	public ICommentDao getCommentMongoDao() {
+		return commentMongoDao;
+	}
+	@Autowired
+	public void setCommentMongoDao(ICommentDao commentMongoDao) {
+		this.commentMongoDao = commentMongoDao;
+	}
 	public IArticleDao getArticleMongoDao() {
 		return articleMongoDao;
 	}

@@ -17,6 +17,7 @@ import com.techeffic.blog.util.KeyUtil;
 
 /**
  * 用于容器初启动完成后执行操作
+ * 用于初始化基础数据 需要的时候可放开clear与init方法的
  * @author k42jc
  *
  */
@@ -30,9 +31,9 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		super.loadCompleteExecute(event);
 		if(isRootLoad){
 			//先清空集合
-			clear();
+			//clear();
 			//初始化数据
-			init();
+			//init();
 		}
 	}
 	

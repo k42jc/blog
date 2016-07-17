@@ -31,10 +31,13 @@ public class ArticleDataModelService extends BaseService implements IDataModelSe
 			//上一篇 下一篇
 			resultMap.put("previous", previous);
 			resultMap.put("next", next);
-		}else{
-			resultMap.put("articleId", articleId);
 		}
+		resultMap.put("articleId", articleId);
+		
 		resultMap.put("clientType", webCtx.getClientType().toString());
+		
+		//处理评论显示
+		resultMap.put("comments", this.getDaoFactory().getCommentMongoDao().findCommentByArticleId(articleId));
 		return resultMap;
 	}
 

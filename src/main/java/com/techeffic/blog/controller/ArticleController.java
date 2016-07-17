@@ -4,10 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.techeffic.blog.annotation.IsLogined;
@@ -55,6 +58,13 @@ public class ArticleController extends BaseController {
 		SysData sysData = this.getServiceFactory().getSysDataService().findByKey(((Article)webResponse.get("article")).getClazz());
 		webResponse.put("clazzName", sysData.getValue());
 		webResponse.put("createTime", DateUtil.toDateStr(((Article)webResponse.get("article")).getCreateDate()));
+		return webResponse;
+	}
+	
+	@RequestMapping("comment")
+	@ResponseBody
+	public WebResponse comment(@RequestParam(name="id",required=true) String articleId,@RequestParam(name="comment",required=true) String content){
+		this.getServiceFactory().getCommentService().comment(webCtx, articleId, StringUtils.EMPTY, content);
 		return webResponse;
 	}
 }

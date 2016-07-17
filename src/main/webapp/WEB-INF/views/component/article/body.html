@@ -12,105 +12,7 @@
 #tag introduce("/static/editor.md/lib/jquery.flowchart.min.js") #end-->
 #tag introduce("/static/editor.md/editormd.min.js") #end
 #end
-<style>
-article {
-	font-size:14px;
-}
-.post p:first-child{
-	font-size:14px;
-}
-.editormd-html-preview{
-	background-color: #fafafa;
-}
-.editormd-html-preview ol.linenums{
-	padding-left: 0;
-}
-.markdown-body ol{
-	padding-left: 0;
-}
-.linenums ol li:after{
-	content: "";
-}
-blockquote{
-	background-color: rgba(128,128,128,0.05);
-}
-.zero-clipboard {
-    position: relative;
-}
-.btn-clipboard {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-    display: block;
-    padding: 5px 8px;
-    border: 1px solid #ccc;
-    border-radius: 0 4px 0 4px;
-    font-size: 12px;
-    background-color: #fff;
-    cursor: pointer;
-}
-#copy{
-	position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-    display: block;
-    padding: 3px 8px;
-    border: 1px solid #ccc;
-    border-radius: 0 4px 0 4px;
-    font-size: 12px;
-    background-color: #fff;
-    cursor: pointer;
-    width: 140px;
-    margin: 0 48px;
-}
-.zeroclipboard-is-hover {
-    color: #FFF;
-    background-color: #563D7C;
-    border-color: #563D7C;
-}
-.zeroclipboard-is-active {
-}
-.markdown-body pre>code{
-	font-size: 120%;
-}
-.zeroclipboard-is-hover{
-	background-color: #eb4f38;
-	border-color: #eb4f38;
-}
-.post article, .post footer{
-	margin-top: 20px;
-}
-@media(max-width: 768px){
-	.btn[type="primary"]{
-		float: right;
-	}
-	.zero-clipboard{
-		display: none;
-	}
-	.post, #posts{
-		padding-left: 5px;
-		padding-right: 5px;
-	}
-	.editormd-html-preview, .editormd-preview-container{
-		padding-left: 5px;
-		padding-right: 5px;
-	}
-}
-article>p{
-	text-indent: 2em;
-}
-article>p>*{
-	text-indent: 0em;
-}
-.post-box, .post-list-box{
-	max-width: 900px;
-}
-.editormd-html-preview, .editormd-preview-container{
-	padding: 20px 0;
-}
-</style>
+<style>article{font-size:14px}.post p:first-child{font-size:14px}.editormd-html-preview{background-color:#fafafa}.editormd-html-preview ol.linenums{padding-left:0}.markdown-body ol{padding-left:0}.linenums ol li:after{content:""}blockquote{background-color:rgba(128,128,128,0.05)}.zero-clipboard{position:relative}.btn-clipboard{position:absolute;top:0;right:0;z-index:10;display:block;padding:5px 8px;border:1px solid #ccc;border-radius:0 4px 0 4px;font-size:12px;background-color:#fff;cursor:pointer}#copy{position:absolute;top:0;right:0;z-index:10;display:block;padding:3px 8px;border:1px solid #ccc;border-radius:0 4px 0 4px;font-size:12px;background-color:#fff;cursor:pointer;width:140px;margin:0 48px}.zeroclipboard-is-hover{color:#FFF;background-color:#563d7c;border-color:#563d7c}.markdown-body pre>code{font-size:120%}.zeroclipboard-is-hover{background-color:#eb4f38;border-color:#eb4f38}.post article,.post footer{margin-top:20px}@media(max-width:768px){.btn[type="primary"]{float:right}.zero-clipboard{display:none}.post,#posts{padding-left:5px;padding-right:5px}.editormd-html-preview,.editormd-preview-container{padding-left:5px;padding-right:5px}}article>p{text-indent:2em}article>p>*{text-indent:0}.post-box,.post-list-box{max-width:900px}.editormd-html-preview,.editormd-preview-container{padding:20px 0}.next-prev a{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}</style>
 <div class="post-box">
 	<p class="text-centered"><a href="/list/${article.clazz?!''}" id="backClazz" class="soft-muted">回到${clazzName}分类</a></p>
 	<section class="post">
@@ -127,47 +29,80 @@ article>p>*{
 			{article.contentMarkdown}
 		</textarea> -->
 		<!--订阅按钮 -->
-		<!-- <hr>
-		<p class="subscribe-btns">
-			<a href="/" class="btn" type="primary">关注微信公众号</a>
-			<a href="/" class="btn" type="black" outline>RSS订阅博客</a>
-		</p>
-		<p class="small soft-muted content-width-5">您可以通过关注微信公众号或者RSS邮件订阅本站，及时获取博客更新资讯。</p> -->
 		<hr>
+		<p class="subscribe-btns">
+			<a href="/" class="btn" type="primary">关注微信公众号</a><!-- &nbsp;&nbsp;
+			<a href="/" class="btn" type="black" outline>RSS订阅博客</a> -->
+		</p>
+		<p class="small soft-muted content-width-5">您可以通过关注微信公众号或者RSS邮件订阅本站，及时获取博客更新资讯。</p>
+		<br>
 		<!-- 博客底部 上一篇 下一篇-->
 		<footer>
 			<!-- <hr> -->
 			<ul class="next-prev">
-				<li><a href="#if (previous == null) javascript:void(0); #else /article/${previous.id?!0} #end" class="prev">#if (previous == null) 已经是第一篇文章了~ #else 上一篇:${previous.title?!''} #end</a></li>
-				<li><a href="#if (next == null) javascript:void(0); #else /article/${next.id?!0} #end" class="next">#if (next == null) 已经是最后一篇文章了~ #else 下一篇:${next.title?!''} #end</a></li>
+				<li><a href="#if (previous == null) javascript:void(0); #else /article/${previous.id?!0} #end" id="prevArticle" class="prev">#if (previous == null) 已经是第一篇文章了~ #else 上一篇:${previous.title?!''} #end</a></li>
+				<li><a href="#if (next == null) javascript:void(0); #else /article/${next.id?!0} #end" id="nextArticle" class="next">#if (next == null) 已经是最后一篇文章了~ #else 下一篇:${next.title?!''} #end</a></li>
 			</ul>
 		</footer>
 	</section>
 	<!-- 评论 -->
 	<div id="comments-box">
-		<form action="" method="POST" class="forms">
+		<!-- <form id="commentForm" action="/article/comment.action" method="POST" class="forms"> -->
 			<section>
-				<label for="">
 				<h3>用户评论</h3>
-				</label>
-				<textarea rows="6" placeholder="评论功能还没做，莫瞎点"></textarea>
-				<a href="javascript:void(0);" class="btn right" type="primary" style="margin-top: 8px;">发表</a>	
+				<textarea name="comment"  rows="6" placeholder="顺手把评论功能做了，说点什么吧~"></textarea>
+				<a href="javascript:void(0);" id="comment" class="btn right" type="primary" style="margin-top: 8px;">发表</a>	
 			</section>
-		</form>
+		<!-- </form> -->
+		<script type="text/javascript">
+			$('#comment').click(function(){
+				$.ajax({
+					url:'/article/comment.action',
+                   	type:'POST',
+                   	dataType:'json',
+                   	data:{id:"${articleId?!''}",comment:$('textarea[name=comment]').val()},
+                   	success:function(data){
+                   		//评论发表成功后将评论框复原 且显示提示信息 在5秒后自动隐藏
+                   		$('textarea[name=comment]').val('');
+						$('#comments-moderate-message').css('display','');
+                   		setTimeout("$('#comments-moderate-message').css('display','none')",5000);
+                   	}
+				});
+				$('#commentForm').submit();
+			});
+		</script>
 		<!-- 评论完成后提示 -->
-		<p id="comments-moderate-message" style="display: none;">Thank you. Your comment should be displayed soon.</p>
-		<!-- <br>
-		<ul id="comments" class="comments"> style="background:#FCFCFC;"
+		<p id="comments-moderate-message" style="display: none;">评论发表成功，将在页面刷新后显示在下面列表中.</p>
+		<br>
+		<ul id="comments" class="comments"> <!-- style="background:#FCFCFC;" -->
 			<header class="headline text-left">
 				<h5>评论列表</h5>
 			</header>
+			#if (comments != null && !comments.isEmpty())
+			#for (Comment comment:comments)
+			<!-- 暂时先做单条评论吧 评论回复过两天再做 -->
 			<li>
+				<p>
+					<b>游客 </b>&nbsp;&nbsp;发布于<time class="">${comment.createdate.format("yyyy-MM-dd HH:mm:ss")}</time>	
+				</p>			
+				<fieldset>
+					<span>${comment.content}</span>
+					<p class="next-prev"><a href="" class="next">回复</a></p>
+				</fieldset>
+			</li>
+			#end
+			#else
+			<li>
+				<p>
+					<b>暂无评论，评价一下呗~</b>	
+				</p>
+			</li>
+			#end
+			<!-- <li>
 				<p>
 					<b>广东深圳游客:192.168.1.1</b>&nbsp;&nbsp;发布于<time class="">2015.10.01</time>	
 				</p>			
 				<fieldset>
-					<legend>
-					</legend>
 					<span>挺不错的文章，受教了！</span>
 					<p class="next-prev"><a href="" class="next">回复</a></p>
 				</fieldset>
@@ -177,8 +112,6 @@ article>p>*{
 					<b>广东深圳游客:114.125.0.16</b>&nbsp;&nbsp;发布于<time class="">2016.01.21</time>	
 				</p>	
 				<fieldset>			
-					<legend>
-					</legend>
 				<legend>回复<b>广东深圳游客:192.168.1.1</b></legend>
 				<blockquote>
 				挺不错的文章，受教了！
@@ -204,9 +137,9 @@ article>p>*{
 					<span>非常好!</span>
 					<p class="next-prev"><a href="" class="next">回复</a></p>
 				</fieldset>	
-			</li>
-		</ul> -->
-		 <badge id="comments-counter"></badge>
+			</li> -->
+		</ul>
+		 <!-- <badge id="comments-counter"></badge> -->
 	</div>
 </div>
 
@@ -224,18 +157,18 @@ article>p>*{
                 $('#backClazz').text("回到"+data.clazzName+"分类");
                 $('#backClazz').attr('href','/list/'+data.article.clazz);
                 if(data.previous != null){
-	                $('.prev').attr('href',data.previous.id);
-	                $('.prev').text('上一篇:'+data.previous.title);
+	                $('#prevArticle').attr('href',data.previous.id);
+	                $('#prevArticle').text('上一篇:'+data.previous.title);
                 }else{
-                	$('.prev').attr('href','javascript:void(0);');
-	                $('.prev').text('已经是第一篇文章了~');
+                	$('#prevArticle').attr('href','javascript:void(0);');
+	                $('#prevArticle').text('已经是第一篇文章了~');
                 }
                 if(data.next != null){
-    	            $('.next').text('下一篇:'+data.next.title);
-        	        $('.next').attr('href',data.next.id);
+    	            $('#nextArticle').text('下一篇:'+data.next.title);
+        	        $('#nextArticle').attr('href',data.next.id);
                 }else{
-    	            $('.next').text('已经是最后一篇文章了~');
-        	        $('.next').attr('href','javascript:void(0);');
+    	            $('#nextArticle').text('已经是最后一篇文章了~');
+        	        $('#nextArticle').attr('href','javascript:void(0);');
                 }
 			   var testEditormdView = editormd.markdownToHTML("article", {
                     markdown        : data.article.contentMarkdown ,//+ "\r\n" + $("#append-test").text(),

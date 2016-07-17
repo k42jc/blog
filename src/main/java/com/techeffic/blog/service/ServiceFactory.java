@@ -16,7 +16,15 @@ public class ServiceFactory {
 	private IComponentService componentService;
 	private IArticleService articleService;
 	private ISysDataService sysDataService;
+	private ICommentService commentService;
 	
+	public ICommentService getCommentService() {
+		return commentService;
+	}
+	@Autowired
+	public void setCommentService(ICommentService commentService) {
+		this.commentService = commentService;
+	}
 	public ISysDataService getSysDataService() {
 		return sysDataService;
 	}

@@ -22,47 +22,51 @@ public class Template extends IdEntity implements Serializable{
 	private String path;
 	//是否需要登录
 	private String needLogin;
+	
+	public Template() {
+		this.getProps().clear();
+	}
 	public String getRequestURI() {
 		return requestURI;
 	}
 	public void setRequestURI(String requestURI) {
 		this.requestURI = requestURI;
-		super.putProp("requestURI", requestURI);
+		this.putProp("requestURI", requestURI);
 	}
 	public String getNeedLogin() {
 		return needLogin;
 	}
 	public void setNeedLogin(String needLogin) {
 		this.needLogin = needLogin;
-		super.putProp("needLogin", needLogin);
+		this.putProp("needLogin", needLogin);
 	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
-		super.putProp("title", title);
+		this.putProp("title", title);
 	}
 	public String getKeyWords() {
 		return keyWords;
 	}
 	public void setKeyWords(String keyWords) {
 		this.keyWords = keyWords;
-		super.putProp("keyWords", keyWords);
+		this.putProp("keyWords", keyWords);
 	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
-		super.putProp("description", description);
+		this.putProp("description", description);
 	}
 	public String getPath() {
 		return path;
 	}
 	public void setPath(String path) {
 		this.path = path;
-		super.putProp("path", path);
+		this.putProp("path", path);
 	}
 	
 	

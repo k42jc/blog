@@ -2,94 +2,66 @@ package com.techeffic.blog.entity;
 
 import java.util.Date;
 
-public class Comment {
-    private Long id;
-
-    private Long blogId;
-
-    private Long userId;
-
-    private String name;
-
+public class Comment extends IdEntity{
+	private static final long serialVersionUID = -5980658818323902984L;
+	//文章id
+    private String articleId;
+    //用户id 提供默认空值 游客
+    private String userId = "";
+    //评论内容
     private String content;
-
-    private Integer likeNums;
-
-    private Long pid;
-
+    //点赞数量 暂时无此功能 默认为0
+    private Integer likeNums = 0;
+    //父级评论
+    private String pid;
+    //创建日期
     private Date createdate;
+    
+	public String getArticleId() {
+		return articleId;
+	}
+	public Comment() {
+		this.getProps().clear();
+	}
+	public void setArticleId(String articleId) {
+		this.articleId = articleId;
+		this.getProps().put("articleId", articleId);
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+		this.getProps().put("userId", userId);
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+		this.getProps().put("content", content);
+	}
+	public Integer getLikeNums() {
+		return likeNums;
+	}
+	public void setLikeNums(Integer likeNums) {
+		this.likeNums = likeNums;
+		this.getProps().put("likeNums", likeNums);
+		
+	}
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+		this.getProps().put("pid", pid);
+	}
+	public Date getCreatedate() {
+		return createdate;
+	}
+	public void setCreatedate(Date createdate) {
+		this.createdate = createdate;
+		this.getProps().put("createdate", createdate);
+	}
 
-    private Date updatedate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getBlogId() {
-        return blogId;
-    }
-
-    public void setBlogId(Long blogId) {
-        this.blogId = blogId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public Integer getLikeNums() {
-        return likeNums;
-    }
-
-    public void setLikeNums(Integer likeNums) {
-        this.likeNums = likeNums;
-    }
-
-    public Long getPid() {
-        return pid;
-    }
-
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
-
-    public Date getCreatedate() {
-        return createdate;
-    }
-
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
-
-    public Date getUpdatedate() {
-        return updatedate;
-    }
-
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate = updatedate;
-    }
 }

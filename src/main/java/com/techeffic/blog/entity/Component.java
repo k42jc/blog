@@ -21,26 +21,30 @@ public class Component extends IdEntity implements Serializable{
 	public void setTemplateId(String templateId) {
 		this.templateId = templateId;
 	}*/
+	
+	public Component() {
+		this.getProps().clear();
+	}
 	public String getKey() {
 		return key;
 	}
 	public void setKey(String key) {
 		this.key = key;
-		super.putProp("key", key);
+		this.putProp("key", key);
 	}
 	public String getPath() {
 		return path;
 	}
 	public void setPath(String path) {
 		this.path = path;
-		super.putProp("path", path);
+		this.putProp("path", path);
 	}
 	public String getClassName() {
 		return className;
 	}
 	public void setClassName(String className) {
 		this.className = className;
-		super.putProp("className", className);
+		this.putProp("className", className);
 	}
 	
 	
