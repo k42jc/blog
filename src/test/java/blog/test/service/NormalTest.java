@@ -11,6 +11,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
+import com.techeffic.blog.util.HttpClientUtil;
 
 public class NormalTest {
 	/*@Test
@@ -50,6 +51,15 @@ public class NormalTest {
 		System.out.println(Thread.currentThread().getName());
 		thread.start();
 		System.out.println("结束时间："+System.currentTimeMillis());
+	}
+	
+	
+	@Test
+	public void httpClientTest(){
+		Map<String,Object> addrInfo = HttpClientUtil.doGetMap("http://ip.taobao.com/service/getIpInfo.php?ip=114.215.205.4");
+		addrInfo.forEach((k,v)->{
+			System.out.println(k+"---"+v);
+		});
 	}
 	
 	public static void main(String[] args) {

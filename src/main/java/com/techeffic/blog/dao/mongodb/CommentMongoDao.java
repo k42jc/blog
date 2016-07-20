@@ -2,6 +2,7 @@ package com.techeffic.blog.dao.mongodb;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,7 @@ public class CommentMongoDao extends BaseMongoDao<Comment> implements ICommentDa
 	
 	@Override
 	public List<Comment> findCommentByArticleId(String articleId) {
-		return this.find(new Query(new Criteria("articleId").is(articleId)), Comment.class);
+		return this.find(new Query(new Criteria("articleId").is(articleId)).with(new Sort(Sort.Direction.DESC,"createdate")), Comment.class);
 	}
 
 }

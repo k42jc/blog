@@ -3,6 +3,8 @@ package com.techeffic.blog.context;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jetbrick.web.servlet.RequestUtils;
+
 /**
  * 系统参数类
  * 绑定系统常用参数
@@ -72,6 +74,14 @@ public class WebContext {
 		String domain = url.delete(url.length() - request.getRequestURI().length(), url.length()).delete(0, 7)
 				.toString();
 		return domain;
+	}
+	
+	/**
+	 * 获取用户真实ip地址
+	 * @return
+	 */
+	public String getIP(){
+		return RequestUtils.getClientIPAddress(request);
 	}
 	
 	/**

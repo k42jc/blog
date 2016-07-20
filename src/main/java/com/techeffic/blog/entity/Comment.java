@@ -8,6 +8,8 @@ public class Comment extends IdEntity{
     private String articleId;
     //用户id 提供默认空值 游客
     private String userId = "";
+    //游客名
+    private String userName;
     //评论内容
     private String content;
     //点赞数量 暂时无此功能 默认为0
@@ -17,6 +19,13 @@ public class Comment extends IdEntity{
     //创建日期
     private Date createdate;
     
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+		this.getProps().put("userName", userName);
+	}
 	public String getArticleId() {
 		return articleId;
 	}
