@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.math.RandomUtils;
 import org.junit.Test;
 
 import com.mongodb.BasicDBObject;
@@ -89,5 +90,14 @@ public class NormalTest {
 		    } catch (MongoException e) {
 			e.printStackTrace();
 		    }
+	}
+	
+	@Test
+	public void randomTest(){
+		int i=0;
+		while (i<100){
+			System.out.println(RandomUtils.nextInt(100));
+			i++;
+		}
 	}
 }

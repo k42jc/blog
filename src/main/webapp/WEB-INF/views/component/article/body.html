@@ -55,7 +55,11 @@
 			</section>
 		<!-- </form> -->
 		<script type="text/javascript">
-			$('#comment').click(function(){
+			$('#comment').click(function(event){
+				if($('textarea[name=comment]').val().trim() === ''){
+					layer.msg('请输入内容~');
+					return;
+				}
 				$.ajax({
 					url:'/article/comment.action',
                    	type:'POST',

@@ -10,12 +10,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
 
 import blog.test.JUnit4ClassRunner;
 
+import com.mongodb.CommandResult;
 import com.techeffic.blog.dao.DaoFactory;
 import com.techeffic.blog.dao.mongodb.BaseMongoDao;
 import com.techeffic.blog.entity.Article;
@@ -291,5 +291,24 @@ public class DaoTest {
 		Page<Article> page = baseMongoDao.pagenation(Article.class, 2, 5, condition);
 		Assert.assertNotNull(page);
 		org.springframework.util.Assert.notEmpty(page.getDatas());
+	}
+	@Test
+	public void topTest(){
+		List<Article> articleList = daoFactory.getArticleMongoDao().findViewedTopArticles(5);
+		Assert.assertNotNull(articleList);
+		org.springframework.util.Assert.notEmpty(articleList);
+		System.out.println(articleList.size());
+	}
+	
+	@Test
+	public void randomTest(){
+		List<Article> list = daoFactory.getArticleMongoDao().findRandomArticles(4);
+		org.springframework.util.Assert.notEmpty(list);
+	}
+	
+	@Test
+	public void countTest(){
+		Long  result = daoFactory.getArticleMongoDao().findNumsByClazz("java");
+		Assert.assertNotNull(result);
 	}
 }

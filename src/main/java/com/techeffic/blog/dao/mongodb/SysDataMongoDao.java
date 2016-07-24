@@ -20,6 +20,11 @@ public class SysDataMongoDao extends BaseMongoDao<SysData> implements ISysDataDa
 	public List<SysData> findByType(String type) {
 		return this.find(new Query(new Criteria("type").is(type)), SysData.class);
 	}
+
+	@Override
+	public SysData findByKey(String clazz) {
+		return this.getMongoTemplate().findOne(new Query(new Criteria("key").is(clazz)), SysData.class);
+	}
 	
 	
 }

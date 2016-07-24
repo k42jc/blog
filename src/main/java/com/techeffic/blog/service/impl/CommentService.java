@@ -24,7 +24,7 @@ public class CommentService extends BaseService implements ICommentService{
 		Comment comment = new Comment();
 		String ip;
 		try {
-			ip = "114.215.205.4";
+			ip = webCtx.getIP();
 			Map<String,Object> areaMap = AreaUtil.getArea(taobaoIPUrl+ip);
 			comment.setUserName(areaMap.get("region").toString()+areaMap.get("city").toString()+"-"+ip);
 		} catch (Exception e) {

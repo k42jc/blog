@@ -148,6 +148,15 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		blogType8.setValue("项目日志");
 		blogType8.setRemark("陈列一下开发任务，也不定期记录一下开发进度.");
 		
+		SysData blogType9 = new SysData();
+		blogType9.setId(KeyUtil.generate());
+		blogType9.setCreateDate(new Date());
+		blogType9.setOrders(9);
+		blogType9.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
+		blogType9.setKey("python");
+		blogType9.setValue("Python");
+		blogType9.setRemark("这一天突然想给自己的博客做一下测试，了解了一下python的自动化测试，鼓捣了一上午，及时记录");
+		
 		List<SysData> sysDataList = new ArrayList<SysData>();
 		
 		sysDataList.add(blogClazz);
@@ -160,6 +169,7 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		sysDataList.add(blogType6);
 		sysDataList.add(blogType7);
 		sysDataList.add(blogType8);
+		sysDataList.add(blogType9);
 		
 		sysDataList.forEach(sysData -> {
 			this.daoFactory.getSysDataMongoDao().saveOrUpdate(sysData);

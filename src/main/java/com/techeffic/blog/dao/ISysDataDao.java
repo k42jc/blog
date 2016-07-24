@@ -12,4 +12,11 @@ import com.techeffic.blog.entity.SysData;
 public interface ISysDataDao extends IBaseDao<SysData>{
 	
 	public List<SysData> findByType(String type);
+	
+	/**
+	 * 根据key查询value
+	 * @param clazz
+	 * @return
+	 */
+	public SysData findByKey(String clazz);
 }
