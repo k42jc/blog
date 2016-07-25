@@ -46,4 +46,11 @@ public interface IArticleDao extends IBaseDao<Article>{
 	 */
 	Long findNumsByClazz(String key);
 	
+	/**
+	 * 根据搜索内容查找相关的文章
+	 * @param content 搜索关键字
+	 * @return 符合查找条件的结果
+	 */
+	List<Article> findBySearch(String content);
+	
 }

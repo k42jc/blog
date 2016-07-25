@@ -1,17 +1,21 @@
 package blog.test.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.text.translate.UnicodeEscaper;
+import org.apache.commons.lang3.text.translate.UnicodeUnescaper;
 import org.junit.Test;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
+import com.techeffic.blog.util.EscapeUtil;
 import com.techeffic.blog.util.HttpClientUtil;
 
 public class NormalTest {
@@ -99,5 +103,25 @@ public class NormalTest {
 			System.out.println(RandomUtils.nextInt(100));
 			i++;
 		}
+	}
+	
+	@Test
+	public void unicodeTest() throws UnsupportedEncodingException{
+		String content = "你好";
+		UnicodeEscaper escaper = new UnicodeEscaper();
+		System.out.println(escaper.translate(content));
+		UnicodeUnescaper unescaper = new UnicodeUnescaper();
+		System.out.println(unescaper.translate(content));
+		System.out.println(escaper.translate(unescaper.translate(content)));
+		System.out.println(unescaper.translate(escaper.translate(content)));
+		
+		System.out.println("==============");
+		System.out.println(escaper.translate("%E6%AD%A3%E5%88%99"));
+		System.out.println(unescaper.translate("%E6%AD%A3%E5%88%99"));
+		
+		System.out.println(EscapeUtil.escape("%E6%AD%A3%E5%88%99"));
+		System.out.println(EscapeUtil.unescape("%E6%AD%A3%E5%88%99"));
+		
+		System.out.println(URLDecoder.decode("%E6%AD%A3%E5%88%99","UTF-8"));
 	}
 }

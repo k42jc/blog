@@ -311,4 +311,11 @@ public class DaoTest {
 		Long  result = daoFactory.getArticleMongoDao().findNumsByClazz("java");
 		Assert.assertNotNull(result);
 	}
+	
+	@Test
+	public void searchTest(){
+		List<Article> resultList = daoFactory.getArticleMongoDao().findBySearch("java");
+		Assert.assertNotNull(resultList);
+		org.springframework.util.Assert.notEmpty(resultList);
+	}
 }

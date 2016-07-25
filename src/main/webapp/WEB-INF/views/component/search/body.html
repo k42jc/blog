@@ -1,0 +1,28 @@
+<!-- 详情标题 -->
+<style>
+#hero{
+	padding: 60px 0 72px 0;
+}
+.post-list-box {
+    max-width: 700px;
+    margin: 0 auto;
+}
+</style>
+<div id="hero">
+	<div id="hero-box">
+		<h1>搜索结果</h1>
+	</div>
+</div>
+<!-- 页面详情 -->
+<div id="posts" style="margin-bottom:150px;">
+	<!-- 文章预览效果 -->
+	#for (Article article:datas)
+	<div class="post-list-box">
+		<h2><span style="background: url(/static/img/${article.type}.png) no-repeat 0 10px;padding:3px 3px;">&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="/article/${article.id}">${article.title}</a></h2>
+		<time>${article.createDate.format("yyyy-MM-dd HH:mm:ss")}</time>
+		#if (article.viewImgUrl != '')<p><a href="/"><img src="img/goodsDetail.png" alt=""></a></p> #end
+		<p>${article.contentView}</p>
+		<a href="/article/${article.id}" class="post-read-more">查看详情...</a>
+	</div>
+	#end
+</div>

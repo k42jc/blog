@@ -1,5 +1,7 @@
 package com.techeffic.blog.service;
 
+import java.util.List;
+
 import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.entity.Article;
@@ -24,5 +26,12 @@ public interface IArticleService {
 	public WebResponse findById(String string);
 
 	public Article findTitleKeywordsById(String articleId);
+	
+	/**
+	 * 根据搜索内容查找相关的文章
+	 * @param content 搜索关键字
+	 * @return 符合查找条件的结果
+	 */
+	public List<Article> findBySearch(String content);
 	
 }

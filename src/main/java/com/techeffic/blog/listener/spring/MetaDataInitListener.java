@@ -31,9 +31,9 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		super.loadCompleteExecute(event);
 		if(isRootLoad){
 			//先清空集合
-			//clear();
+			clear();
 			//初始化数据
-			//init();
+			init();
 		}
 	}
 	
@@ -243,6 +243,12 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		component11.setPath("/component/list/body.html");
 		component11.setClassName("listDataModelService");
 		
+		com.techeffic.blog.entity.Component component12 = new com.techeffic.blog.entity.Component();
+		component12.setId(UUID.randomUUID().toString());
+		component12.setKey("searchBody");
+		component12.setPath("/component/search/body.html");
+		component12.setClassName("searchDataModelService");
+		
 		
 		List<com.techeffic.blog.entity.Component> componentList = new ArrayList<com.techeffic.blog.entity.Component>();
 		componentList.add(component);
@@ -256,6 +262,7 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		componentList.add(component9);
 		componentList.add(component10);
 		componentList.add(component11);
+		componentList.add(component12);
 		componentList.forEach(c -> {
 			this.daoFactory.getComponentMongoDao().saveOrUpdate(c);
 		});
@@ -335,6 +342,14 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		template8.setKeyWords("技术博客，个人博客，技术文章");
 		template8.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
 		
+		Template template9 = new Template();
+		template9.setId(UUID.randomUUID().toString());
+		template9.setRequestURI("/search");
+		template9.setPath("/search.html");
+		template9.setNeedLogin("0");
+		template9.setTitle("搜索列表-技术之路-廖旭东个人博客");
+		template9.setKeyWords("技术博客，个人博客，技术文章");
+		template9.setDescription("本站用于记录我的技术成长之路，学习生活中的快乐与悲伤，主要是技术类文章，偶尔在这发发小牢骚");
 		
 		
 		List<Template> list = new ArrayList<Template>();
@@ -346,6 +361,7 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		list.add(template6);
 		list.add(template7);
 		list.add(template8);
+		list.add(template9);
 		
 		list.forEach(t -> {
 			this.daoFactory.getTemplateMongoDao().saveOrUpdate(t);

@@ -43,6 +43,8 @@ public class Constants {
 	public static final String REQUEST_URI_LIST = "/list"; 
 	/**文章编辑请求URI*/
 	public static final String REQUEST_URI_WRITE_MD = "/write_md"; 
+	/**文章搜索请求URI*/
+	public static final String REQUEST_URI_SEARCH = "/search"; 
 	/**文章新增**/
 	public static final String EDIT_TYPE_EDIT = "edit";
 	/**文章编辑**/

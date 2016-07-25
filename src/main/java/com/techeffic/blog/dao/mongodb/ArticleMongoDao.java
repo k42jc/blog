@@ -1,6 +1,7 @@
 package com.techeffic.blog.dao.mongodb;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.data.domain.Sort;
@@ -66,6 +67,12 @@ public class ArticleMongoDao extends BaseMongoDao<Article> implements IArticleDa
 	@Override
 	public Long findNumsByClazz(String key) {
 		return this.getMongoTemplate().count(new Query(new Criteria("clazz").is(key)), Article.class);
+	}
+
+	@Override
+	public List<Article> findBySearch(String content) {
+		Pattern pattern = Pattern.compile("^.*"+content+".*$", Pattern.CASE_INSENSITIVE);
+		return this.getMongoTemplate().find(new Query(new Criteria().orOperator(Criteria.where("title").regex(pattern),Criteria.where("contentMarkdown").regex(pattern))), Article.class);
 	}
 
 }

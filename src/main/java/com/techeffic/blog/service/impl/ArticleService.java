@@ -1,6 +1,7 @@
 package com.techeffic.blog.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.BasicQuery;
@@ -138,6 +139,11 @@ public class ArticleService extends BaseService implements IArticleService{
 		fieldsObject.put("keywords", 1);
 		Query query = new BasicQuery(queryObject, fieldsObject);
 		return this.getDaoFactory().getArticleMongoDao().findOne(query, Article.class);
+	}
+
+	@Override
+	public List<Article> findBySearch(String content) {
+		return this.getDaoFactory().getArticleMongoDao().findBySearch(content);
 	}
 
 }
