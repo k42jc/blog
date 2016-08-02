@@ -75,4 +75,14 @@ public class ArticleMongoDao extends BaseMongoDao<Article> implements IArticleDa
 		return this.getMongoTemplate().find(new Query(new Criteria().orOperator(Criteria.where("title").regex(pattern),Criteria.where("contentMarkdown").regex(pattern))), Article.class);
 	}
 
+	@Override
+	public List<Article> findAllIds() {
+		DBObject fields = new BasicDBObject();
+		fields.put("id", 1);
+		
+		DBObject queryObject = new BasicDBObject();
+		Query query = new BasicQuery(queryObject, fields);
+		return this.getMongoTemplate().find(query, Article.class);
+	}
+
 }

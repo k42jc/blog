@@ -26,7 +26,16 @@ public class DaoFactory {
 	private IArticleDao articleMongoDao;
 	//评论接口
 	private ICommentDao commentMongoDao;
+	//操作日志接口
+	private ILogDao logDao;
 	
+	public ILogDao getLogDao() {
+		return logDao;
+	}
+	@Autowired
+	public void setLogDao(ILogDao logDao) {
+		this.logDao = logDao;
+	}
 	public ICommentDao getCommentMongoDao() {
 		return commentMongoDao;
 	}

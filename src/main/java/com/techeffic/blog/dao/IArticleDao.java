@@ -53,4 +53,10 @@ public interface IArticleDao extends IBaseDao<Article>{
 	 */
 	List<Article> findBySearch(String content);
 	
+	/**
+	 * 找到所有文章的id
+	 * @return
+	 */
+	List<Article> findAllIds();
+	
 }

@@ -2,16 +2,16 @@ package com.techeffic.blog.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.mongodb.QueryBuilder;
 import com.techeffic.blog.constants.WebResponse;
 import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.entity.Article;
@@ -19,12 +19,14 @@ import com.techeffic.blog.entity.Page;
 import com.techeffic.blog.entity.PageCondition;
 import com.techeffic.blog.service.BaseService;
 import com.techeffic.blog.service.IArticleService;
-import com.techeffic.blog.util.DateUtil;
+import com.techeffic.blog.service.ISitePushService;
 import com.techeffic.blog.util.KeyUtil;
+import com.techeffic.blog.util.Log4jUtil;
 
 @Service
 public class ArticleService extends BaseService implements IArticleService{
-
+	@Autowired
+	private ISitePushService sitePushService;
 	@Override
 	public synchronized Article save(WebContext webCtx) {
 		String editType = webCtx.getRequestParameter().getString("editType");
@@ -61,6 +63,9 @@ public class ArticleService extends BaseService implements IArticleService{
 			e.printStackTrace();
 		}*/
 		this.getDaoFactory().getArticleMongoDao().saveOrUpdate(article);
+		//提交本条链接到baidu收录
+		Map<String,Object> result = sitePushService.push("http://www.techeffic.com/article/"+article.getId());
+		Log4jUtil.info("文章发表成功，已将本条url提交到百度");
 		return article;
 	}
 

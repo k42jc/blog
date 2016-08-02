@@ -32,6 +32,8 @@ public class DaoTest {
 	
 	@Test
 	public void testDaoFatory(){
+		List<Article> list = daoFactory.getArticleMongoDao().findAllIds();
+		org.springframework.util.Assert.notEmpty(list);
 		/*User u =new User();
 		u.setId(5L);
 		u.setUserName("admin2");

@@ -51,6 +51,9 @@
   
      <import resource="classpath:mongodb/mongodb.xml"/> 
      
+     <!-- 加载定时任务 -->
+     <import resource="schedule/spring-scheduler.xml" />
+     
 	     
      <!-- <bean id="jetWebEngine" class="jetbrick.template.web.JetWebEngine"></bean> -->
 </beans>
