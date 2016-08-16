@@ -12,6 +12,7 @@ import com.techeffic.blog.context.WebContext;
 import com.techeffic.blog.entity.Article;
 import com.techeffic.blog.entity.SysData;
 import com.techeffic.blog.service.BaseService;
+import com.techeffic.blog.util.Log4jUtil;
 /**
  * 写文章/编辑文章 markdown模式
  * @author k42jc
@@ -24,6 +25,7 @@ public class MdDataModelService extends BaseService implements IDataModelService
 	public Map<String, Object> getData(WebContext webCtx) {
 		Map<String,Object> resultMap = new HashMap<String, Object>();
 		String articleId = webCtx.getRequestAttribute().getString("articleId");
+		Log4jUtil.info("文章ID========"+articleId);
 		if(null != articleId){
 			resultMap.put("editType", "edit");
 			Article article = this.getDaoFactory().getArticleMongoDao().findOne(new Query(new Criteria("id").is(articleId)), Article.class);

@@ -85,4 +85,16 @@ public class ArticleMongoDao extends BaseMongoDao<Article> implements IArticleDa
 		return this.getMongoTemplate().find(query, Article.class);
 	}
 
+	@Override
+	public List<Article> findNewArticles(int n) {
+		DBObject fields = new BasicDBObject();
+		fields.put("title", 1);
+		fields.put("createDate", 1);
+		
+		DBObject queryObject = new BasicDBObject();
+		
+		Query query = new BasicQuery(queryObject, fields);
+		return this.getMongoTemplate().find(query.with(new Sort(Sort.Direction.DESC,"createDate")).limit(n), Article.class);
+	}
+
 }

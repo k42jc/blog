@@ -21,7 +21,8 @@ public class RequestAttribute {
 	}
 	
 	public Object getObject(String params){
-		return webCtx.getRequest().getSession().getAttribute(params);
+//		return webCtx.getRequest().getSession().getAttribute(params);
+		return webCtx.getRequest().getAttribute(params);
 	}
 
 	public Long getLong(String params) {

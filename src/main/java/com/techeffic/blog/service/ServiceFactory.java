@@ -17,7 +17,15 @@ public class ServiceFactory {
 	private IArticleService articleService;
 	private ISysDataService sysDataService;
 	private ICommentService commentService;
+	private IWechatPayService wechatPayService;
 	
+	public IWechatPayService getWechatPayService() {
+		return wechatPayService;
+	}
+	@Autowired
+	public void setWechatPayService(IWechatPayService wechatPayService) {
+		this.wechatPayService = wechatPayService;
+	}
 	public ICommentService getCommentService() {
 		return commentService;
 	}

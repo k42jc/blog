@@ -29,22 +29,26 @@ public class TemplateDispatcher extends BaseDispatcher{
 				//处理文章显示页面的URI请求
 				if(requestURI.startsWith(Constants.REQUEST_URI_ARTICLE)){
 					String articleId = requestURI.substring(requestURI.lastIndexOf("/")+1);
-					webCtx.getRequest().getSession().setAttribute("articleId", articleId);
+					//webCtx.getRequest().getSession().setAttribute("articleId", articleId);
+					webCtx.getRequest().setAttribute("articleId", articleId);
 					Article article = serviceFactory.getArticleService().findTitleKeywordsById(articleId);
 					datas.put("title", article.getTitle());
 					datas.put("keywords", article.getKeywords());
 				}
 				//处理文章列表显示页面URI请求
 				if(requestURI.startsWith(Constants.REQUEST_URI_LIST)){
-					webCtx.getRequest().getSession().setAttribute("articleClazz", requestURI.substring(requestURI.lastIndexOf("/")+1));
+//					webCtx.getRequest().getSession().setAttribute("articleClazz", requestURI.substring(requestURI.lastIndexOf("/")+1));
+					webCtx.getRequest().setAttribute("articleClazz", requestURI.substring(requestURI.lastIndexOf("/")+1));
 				}
 				//处理文章编辑页面URI请求
 				if(requestURI.startsWith(Constants.REQUEST_URI_WRITE_MD)){
-					webCtx.getRequest().getSession().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
+//					webCtx.getRequest().getSession().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
+					webCtx.getRequest().setAttribute("articleId", requestURI.substring(requestURI.lastIndexOf("/")+1));
 				}
 				//处理文章搜索页面URI请求
 				if(requestURI.startsWith(Constants.REQUEST_URI_SEARCH)){
-					webCtx.getRequest().getSession().setAttribute("content", requestURI.substring(requestURI.lastIndexOf("/")+1));
+//					webCtx.getRequest().getSession().setAttribute("content", requestURI.substring(requestURI.lastIndexOf("/")+1));
+					webCtx.getRequest().setAttribute("content", requestURI.substring(requestURI.lastIndexOf("/")+1));
 				}
 				requestURI = requestURI.substring(0,requestURI.lastIndexOf("/"));
 				

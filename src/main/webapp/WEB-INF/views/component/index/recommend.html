@@ -31,7 +31,7 @@
 		<p>${article.contentView}</p>
 		<button type="primary" onclick="window.location.href='/article/${article.id}'" small>阅读全文&gt;&gt;</button>
 		<p class="blog-time">
-			<span>写于：${article.createDate.format("yyyy-MM-dd HH:mm:ss")}</span> <span>文章分类：[<a href="/class/${article.clazz}">${article.props.clazz}</a>]
+			<span>写于：${article.createDate.format("yyyy-MM-dd HH:mm:ss")}</span> <span>文章分类：[<a href="/list/${article.clazz}">${article.props.clazz}</a>]
 			</span>
 		</p>
 	</div>
@@ -40,6 +40,14 @@
 	<column cols="3">
 	<div class="blog-list-view-right">
 		<div class="type-list">
+			<h5>
+				<p>最新文章</p>
+			</h5>
+			<ul>
+				#for (Article _new:newArticles)
+				<li><a href="/article/${_new.id}">${_new.title}</a></li>
+				#end
+			</ul>
 			<h5>
 				<p>文章分类</p>
 			</h5>

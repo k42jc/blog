@@ -31,9 +31,9 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		super.loadCompleteExecute(event);
 		if(isRootLoad){
 			//先清空集合
-			clear();
+			//clear();
 			//初始化数据
-			init();
+			//init();
 		}
 	}
 	
@@ -91,7 +91,7 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		blogType2.setOrders(2);
 		blogType2.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
 		blogType2.setKey("db");
-		blogType2.setValue("数据库");
+		blogType2.setValue("数据库&缓存");
 		blogType2.setRemark("数据库方面的知识，现在对象型数据库渐渐流行，作为程序员，要有对新技术的追求.");
 		
 		SysData blogType3 = new SysData();
@@ -157,6 +157,24 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		blogType9.setValue("Python");
 		blogType9.setRemark("这一天突然想给自己的博客做一下测试，了解了一下python的自动化测试，鼓捣了一上午，及时记录");
 		
+		SysData blogType10 = new SysData();
+		blogType10.setId(KeyUtil.generate());
+		blogType10.setCreateDate(new Date());
+		blogType10.setOrders(10);
+		blogType10.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
+		blogType10.setKey("thread");
+		blogType10.setValue("并发&多线程");
+		blogType10.setRemark("单独记录一些并发相关知识，这一块还是比较薄弱");
+		
+		SysData blogType11 = new SysData();
+		blogType11.setId(KeyUtil.generate());
+		blogType11.setCreateDate(new Date());
+		blogType11.setOrders(11);
+		blogType11.setType(Constants.SYSDATA_TYPE_BLOG_CLAZZ);
+		blogType11.setKey("tool");
+		blogType11.setValue("开发工具");
+		blogType11.setRemark("现代变成都需要使用IDE，那么必不可少的需要掌握一些常用的开发工具");
+		
 		List<SysData> sysDataList = new ArrayList<SysData>();
 		
 		sysDataList.add(blogClazz);
@@ -170,6 +188,8 @@ public class MetaDataInitListener extends BaseSpringListener<ContextRefreshedEve
 		sysDataList.add(blogType7);
 		sysDataList.add(blogType8);
 		sysDataList.add(blogType9);
+		sysDataList.add(blogType10);
+		sysDataList.add(blogType11);
 		
 		sysDataList.forEach(sysData -> {
 			this.daoFactory.getSysDataMongoDao().saveOrUpdate(sysData);

@@ -26,14 +26,19 @@ public class RecommendDataModelService extends BaseService implements IDataModel
 		Log4jUtil.debug("********查询点击排行*******");
 		//查询点击排行
 		List<Article> topArticles = this.getDaoFactory().getArticleMongoDao().findViewedTopArticles(10);
+		Log4jUtil.debug("********查询最新文章*******");
+		//查询点击排行
+		List<Article> newArticles = this.getDaoFactory().getArticleMongoDao().findNewArticles(5);
 		Log4jUtil.debug("********查询随机推荐*******");
 		//查询随机推荐文章
 		List<Article> randomArticles = this.getDaoFactory().getArticleMongoDao().findRandomArticles(5);
 		randomArticles.forEach(random -> {
-			random.putProp("clazz", this.getDaoFactory().getSysDataMongoDao().findByKey(random.getClazz()).getValue());
+			SysData sys = this.getDaoFactory().getSysDataMongoDao().findByKey(random.getClazz());
+			random.putProp("clazz", sys.getValue());
 		});
 		resultMap.put("blogClazzs", blogClazzs);
 		resultMap.put("topArticles", topArticles);
+		resultMap.put("newArticles", newArticles);
 		resultMap.put("randomArticles", randomArticles);
 		Log4jUtil.debug("********返回数据*******");
 		return resultMap;

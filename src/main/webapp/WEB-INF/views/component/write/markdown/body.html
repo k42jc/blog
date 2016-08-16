@@ -195,6 +195,7 @@ samp{
                            	if(typeof(Worker) != 'undefined'){
 	                            window.setTimeout(function(){
 	                            		localStorage.setItem('content',_self.getMarkdown());
+	                            		layer.tips('本地保存成功','div.CodeMirror-lines');
 	                            },5000);
                            	}
                             //console.log("onchange =>", this, this.id, this.settings, this.state);

@@ -59,4 +59,11 @@ public interface IArticleDao extends IBaseDao<Article>{
 	 */
 	List<Article> findAllIds();
 	
+	/**
+	 * 查询最新的n篇文章
+	 * @param n
+	 * @return
+	 */
+	List<Article> findNewArticles(int n);
+	
 }
