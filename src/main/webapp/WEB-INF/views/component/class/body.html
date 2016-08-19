@@ -14,8 +14,8 @@
 <div id="plugins" class="wrap">
 	<blocks cols="3">
 		#for(SysData sysData:typeList)
-		<div class="shadow" style="cursor:pointer;" onclick="window.location.href='/list/${sysData.key}'">
-			<h3><a href="/list/${sysData.key}">${sysData.value}</a></h3>
+		<div class="shadow" style="cursor:pointer;" onclick="window.open('/list/${sysData.key}','_blank')">
+			<h3><a href="/list/${sysData.key}" target="_blank">${sysData.value}</a></h3>
 			<p>${sysData.remark}</p>
 		</div>
 		#end

@@ -26,8 +26,8 @@ public class ArticleDataModelService extends BaseService implements IDataModelSe
 			SysData sysData = this.getDaoFactory().getSysDataMongoDao().findOne(new Query(new Criteria("key").is(article.getClazz())), SysData.class);
 			resultMap.put("article", article);
 			resultMap.put("clazzName", sysData.getValue());
-			Article previous = this.getDaoFactory().getArticleMongoDao().findOne(new Query(new Criteria("createDate").gt(article.getCreateDate())).with(new Sort(Sort.Direction.ASC,"createDate")), Article.class);
-			Article next = this.getDaoFactory().getArticleMongoDao().findOne(new Query(new Criteria("createDate").lt(article.getCreateDate())).with(new Sort(Sort.Direction.DESC,"createDate")), Article.class);
+			Article previous = this.getDaoFactory().getArticleMongoDao().findOne(new Query(new Criteria("createDate").gt(article.getCreateDate()).and("clazz").is(sysData.getKey())).with(new Sort(Sort.Direction.ASC,"createDate")), Article.class);
+			Article next = this.getDaoFactory().getArticleMongoDao().findOne(new Query(new Criteria("createDate").lt(article.getCreateDate()).and("clazz").is(sysData.getKey())).with(new Sort(Sort.Direction.DESC,"createDate")), Article.class);
 			//上一篇 下一篇
 			resultMap.put("previous", previous);
 			resultMap.put("next", next);

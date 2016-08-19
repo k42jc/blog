@@ -58,7 +58,7 @@
 </div>
 <script type="text/javascript">
 	$(function() {
-		
+		$('.header .inner a[href!="/"]').attr('target','_blank');
 		var href = window.location.href;
 		if (href.indexOf('search') >= 0) {
 			var x = href.split('/');
