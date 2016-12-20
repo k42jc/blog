@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.techeffic</groupId>
+  <artifactId>blog-build</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <cxf.version>3.0.0</cxf.version>
+      <jackson.version>2.4.1</jackson.version>
+      <netty.version>4.1.6.Final</netty.version>
+  </properties>
+
+  <dependencies>
+      <!-- CXF -->
+      <dependency>
+          <groupId>org.apache.cxf</groupId>
+          <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+          <version>${cxf.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.cxf</groupId>
+          <artifactId>cxf-rt-transports-http-jetty</artifactId>
+          <version>${cxf.version}</version>
+      </dependency>
+      <!-- Jackson -->
+      <dependency>
+          <groupId>com.fasterxml.jackson.jaxrs</groupId>
+          <artifactId>jackson-jaxrs-json-provider</artifactId>
+          <version>${jackson.version}</version>
+      </dependency>
+      <!-- Netty -->
+   	  <dependency>
+		<groupId>io.netty</groupId>
+		<artifactId>netty-all</artifactId>
+		<version>${netty.version}</version>
+	  </dependency>
+  </dependencies>
+  
+  <modules>
+  	<module>blog-common</module>
+  	<module>blog-example</module>
+  </modules>
+</project>
