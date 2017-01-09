@@ -10,6 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<cxf.version>3.0.0</cxf.version>
 		<jackson.version>2.4.1</jackson.version>
+		<mina.version>2.0.16</mina.version>
 		<netty.version>4.1.6.Final</netty.version>
 		<spring.version>4.2.6.RELEASE</spring.version>
 		<mongodb.version>1.9.2.RELEASE</mongodb.version>
@@ -80,6 +81,12 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson-databind.version}</version>
+		</dependency>
+		<!-- Apache Mina -->
+		<dependency>
+		  <groupId>org.apache.mina</groupId>
+		  <artifactId>mina-core</artifactId>
+		  <version>${mina.version}</version>
 		</dependency>
 		<!-- Netty -->
 		<dependency>
