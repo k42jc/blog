@@ -1,5 +1,7 @@
 package com.techeffic.blog.example.netty.server;
 
+import java.nio.charset.Charset;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -8,9 +10,12 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 
 /**
  * Netty服务端
+ * 
  * @author liaoxudong
  *
  */
@@ -34,7 +39,14 @@ public class DiscardServer {
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 						protected void initChannel(SocketChannel ch)
 								throws Exception {
-							ch.pipeline().addLast(new CustomerChannelHandler());
+							ch.pipeline()
+									.addLast(
+											new StringDecoder(Charset
+													.forName("UTF-8")))//解码收到的客户端请求消息
+									.addLast(
+											new StringEncoder(Charset
+													.forName("UTF-8")))//转码发回客户端的消息
+									.addLast(new CustomerChannelHandler());
 						};
 					});
 
