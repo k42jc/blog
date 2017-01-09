@@ -1,6 +1,6 @@
 package com.techeffic.blog.example.netty;
 
-import com.techeffic.blog.example.netty.handler.DiscardServer;
+import com.techeffic.blog.example.netty.server.DiscardServer;
 
 
 public class ServerBootStrap {
