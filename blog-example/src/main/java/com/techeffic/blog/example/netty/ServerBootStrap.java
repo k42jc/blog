@@ -1,6 +1,6 @@
 package com.techeffic.blog.example.netty;
 
-import com.techeffic.blog.example.netty.server.DiscardServer;
+import com.techeffic.blog.example.netty.server.NettyServer;
 
 /**
  * 启动Netty server入口
@@ -10,6 +10,6 @@ import com.techeffic.blog.example.netty.server.DiscardServer;
 public class ServerBootStrap {
 	
 	public static void main(String[] args) {
-		new DiscardServer(8011).run();
+		new NettyServer(8011).run();
 	}
 }

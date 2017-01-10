@@ -19,10 +19,10 @@ import io.netty.handler.codec.string.StringEncoder;
  * @author liaoxudong
  *
  */
-public class DiscardServer {
+public class NettyServer {
 	private int port;
 
-	public DiscardServer(int port) {
+	public NettyServer(int port) {
 		this.port = port;
 	}
 
@@ -46,7 +46,7 @@ public class DiscardServer {
 									.addLast(
 											new StringEncoder(Charset
 													.forName("UTF-8")))//转码发回客户端的消息
-									.addLast(new CustomerChannelHandler());
+									.addLast(new ServerChannelHandler());
 						};
 					});
 
