@@ -1,9 +1,5 @@
 package com.techeffic.blog.example.netty.server;
 
-import java.util.Date;
-
-import com.techeffic.blog.example.thread.InheritableTools;
-
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
