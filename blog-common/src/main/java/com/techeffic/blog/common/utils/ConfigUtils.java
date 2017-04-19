@@ -20,7 +20,6 @@ public enum ConfigUtils {
         @Override
         protected void init(String fileExt) {
             try {
-                configuration  = new Properties();
                 logger.info("clear configuration,current size:"+configuration.size());
                 String pathName = Thread.currentThread().getContextClassLoader().getResource("").getPath();
                 File file = new File(pathName);
@@ -42,7 +41,7 @@ public enum ConfigUtils {
 //    private final static String SUFFIX = ".properties";
 
 
-    protected Properties configuration;
+    protected Properties configuration = new Properties();
     // 文件类型
     private String fileExt;
 
