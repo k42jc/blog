@@ -1,4 +1,4 @@
-###简介
+## 简介
 个人博客，提供后台管理+常规博客功能+微信公众号。上班族忙起来也没什么时间，现阶段实现个人博客前端功能，包括：
 * 简单登录及权限控制
 * 写博客(markdown编辑器or富文本编辑器+文件/图片上传)
@@ -18,19 +18,19 @@ markdown编辑器：github地址-[editor.md]()
 **预览地址：[技术之路-廖旭东个人博客](http://www.techeffic.com)**
 
 
-###部署准备
+### 部署准备
 >原来只是自己写着玩，使用到现在近两年时间，平时或是写点，或是转载，或是翻译，虽然没有特别有技术含量的东西，也写了不少。很多时候忙起来都会忽略对遇到的问题、接触到的新技术的记录，看来这个好习惯还是比较难以养成的。
 
 *本人是部署在centOS下，使用Nginx做反向代理，转发给tomcat*
 
 **前提：java8、maven、tomcat7+、mongodb**
-####IDE/windows
+#### IDE/windows
 
 修改`resources/mongodb.properties`到指定数据库连接
 **IDE**：下载或clone项目到本地，导入IDE，等待maven下载完成，将项目加入到IDE的TOMCAT启动即可
 **windows**：使用本地maven打包项目，放入本地tomcat下的webapp包或者修改server.xml到项目指定位置
 
-####linux
+#### linux
 
 关于Linux的java、数据库、nginx等环境准备，建议参照我的记录：[linux环境准备](http://www.techeffic.com/article/0000000056a6114c0156ad3a076e0003)
 nginx代理设置部分：
