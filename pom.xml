@@ -1,33 +1,25 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.techeffic</groupId>
-	<artifactId>blog-build</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	
-	<name>Personal Blog -- 技术之路，不断进步</name>
-	<description>这个版本基于Spring Boot开发，参考了许多优秀的开源项目，也加入一些自己想尝试使用的技术</description>
-	<url>http://projects.spring.io/spring-boot/</url>
-	<organization>
-		<name>廖旭东个人博客</name>
-		<url>http://www.techeffic.com:5193</url>
-	</organization>
-	
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.3.RELEASE</version>
-	</parent>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<main.basedir>${basedir}/../..</main.basedir>
+    <groupId>com.techeffic</groupId>
+    <artifactId>blog</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>blog_base</name>
+    <description>本版本会将系统对应功能根据Maven模块划分，另外会加入example示例程序模块</description>
+    <url>http://www.techeffic.com</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <main.basedir>${basedir}/../..</main.basedir>
         <java.version>1.8</java.version>
-        <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
-		<mina.version>2.0.16</mina.version>
-		<netty.version>4.1.6.Final</netty.version>
-		<httpclient.version>3.1</httpclient.version>
+        <mina.version>2.0.16</mina.version>
+        <netty.version>4.1.6.Final</netty.version>
+        <httpclient.version>3.1</httpclient.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <guava.version>18.0</guava.version>
         <shiro.version>1.2.3</shiro.version>
@@ -35,86 +27,58 @@
         <assertj.version>1.7.0</assertj.version>
         <jackson.version>2.4.4</jackson.version>
         <jetbrick.version>2.0.10</jetbrick.version>
-	</properties>
-	
+    </properties>
 
-	<dependencies>
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
-        </dependency>
+    <dependencies>
+        <!-- Apache Mina -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-redis</artifactId>
+            <groupId>org.apache.mina</groupId>
+            <artifactId>mina-core</artifactId>
+            <version>${mina.version}</version>
         </dependency>
+        <!-- Netty -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
         </dependency>
+        <!-- 模板引擎 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <groupId>com.github.subchen</groupId>
+            <artifactId>jetbrick-template-springmvc</artifactId>
+            <version>${jetbrick.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-webmvc</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <!-- httpclient -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-            <scope>provided</scope>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>${httpclient.version}</version>
         </dependency>
+        <!-- sitemesh -->
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
-        </dependency>
-		<!-- Apache Mina -->
-		<dependency>
-		  <groupId>org.apache.mina</groupId>
-		  <artifactId>mina-core</artifactId>
-		  <version>${mina.version}</version>
-		</dependency>
-		<!-- Netty -->
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>${netty.version}</version>
-		</dependency>
-		<!-- 模板引擎 -->
-		<dependency>
-			<groupId>com.github.subchen</groupId>
-			<artifactId>jetbrick-template-springmvc</artifactId>
-			<version>${jetbrick.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-webmvc</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- httpclient -->
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>${httpclient.version}</version>
-		</dependency>
-		<!-- sitemesh -->
-		<dependency>
             <groupId>org.sitemesh</groupId>
             <artifactId>sitemesh</artifactId>
             <version>${sitemesh.version}</version>
         </dependency>
         <!-- h2 base -->
-		<dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-		<!-- commons -->
+        <!-- commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -167,51 +131,30 @@
             <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
+    </dependencies>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
-	</dependencies>
-	<!-- 解决每次update maven后jre变为1.5 -->
-	<build>  
-        <plugins>  
-            <plugin>  
-                <groupId>org.apache.maven.plugins</groupId>  
-                <artifactId>maven-compiler-plugin</artifactId>  
-                <version>2.1</version>  
-                <configuration>  
-                    <source>${java.version}</source>  
-                    <target>${java.version}</target>  
-                </configuration>  
-            </plugin>  
-            
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <addResources>true</addResources>
-                    <fork>true</fork>
-                </configuration>
-            </plugin>
+    <!-- 解决每次update maven后jre变为1.5 -->
+    <build>
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.1</version>
                 <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
-        </plugins>  
-    </build>  
-	<modules>
-		<module>blog-common</module>
-		<module>blog-example</module>
-		<module>blog-web</module>
-	</modules>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>common</module><!-- 公共组件 -->
+        <module>dal</module><!-- 数据持久组件 -->
+        <module>front</module><!-- 前端模块 -->
+        <module>manager</module><!-- 后台管理模块-->
+        <module>test</module><!-- 测试模块-->
+        <module>example</module><!-- 常用示例程序-->
+    </modules>
+
 </project>
