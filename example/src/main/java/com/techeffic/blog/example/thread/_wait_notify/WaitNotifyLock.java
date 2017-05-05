@@ -1,4 +1,4 @@
-package example.thread._wait_notify;
+package com.techeffic.blog.example.thread._wait_notify;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

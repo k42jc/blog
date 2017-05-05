@@ -1,4 +1,4 @@
-package example.thread._wait_notify;
+package com.techeffic.blog.example.thread._wait_notify;
 
 /**
  * 生产/消费(等待/唤醒)演示一  ---------  使用synchronized实现

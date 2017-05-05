@@ -1,4 +1,4 @@
-package example.arithmetic;
+package com.techeffic.blog.example.arithmetic;
 
 /**
  * 二分查找

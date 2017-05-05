@@ -1,4 +1,4 @@
-package example.thread._synchronized;
+package com.techeffic.blog.example.thread._synchronized;
 
 /**
  * 当前线程用于示例程序的进入死循环操作

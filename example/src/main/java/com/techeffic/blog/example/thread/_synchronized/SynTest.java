@@ -1,4 +1,4 @@
-package example.thread._synchronized;
+package com.techeffic.blog.example.thread._synchronized;
 
 /**
  * 用于演示synchronized关键字修饰的同步块有volatile的同步功能

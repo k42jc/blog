@@ -1,4 +1,4 @@
-package example.thread.deadLock;
+package com.techeffic.blog.example.thread.deadLock;
 
 /**
  * 多线程死锁演示 使用锁嵌套的方式演示

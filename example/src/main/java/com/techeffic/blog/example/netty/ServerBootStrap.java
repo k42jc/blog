@@ -1,4 +1,4 @@
-package example.netty;
+package com.techeffic.blog.example.netty;
 
 import com.techeffic.blog.example.netty.server.NettyServer;
 

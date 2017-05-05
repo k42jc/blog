@@ -1,4 +1,4 @@
-package example.pattern.singleton;
+package com.techeffic.blog.example.pattern.singleton;
 
 /**
  * 懒汉模式 延迟加载

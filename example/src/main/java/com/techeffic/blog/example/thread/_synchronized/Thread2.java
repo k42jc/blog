@@ -1,4 +1,4 @@
-package example.thread._synchronized;
+package com.techeffic.blog.example.thread._synchronized;
 
 /**
  * 当前线程用于控制示例程序的循环停止标识赋值为false

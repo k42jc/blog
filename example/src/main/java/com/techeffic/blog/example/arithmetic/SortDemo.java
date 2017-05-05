@@ -1,4 +1,4 @@
-package example.arithmetic;
+package com.techeffic.blog.example.arithmetic;
 
 /**
  * 演示常用排序算法

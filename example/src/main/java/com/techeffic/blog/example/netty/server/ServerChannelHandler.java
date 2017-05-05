@@ -1,4 +1,4 @@
-package example.netty.server;
+package com.techeffic.blog.example.netty.server;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

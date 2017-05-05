@@ -1,4 +1,4 @@
-package example.nio;
+package com.techeffic.blog.example.nio;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

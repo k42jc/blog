@@ -1,4 +1,4 @@
-package example.netty.server;
+package com.techeffic.blog.example.netty.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
