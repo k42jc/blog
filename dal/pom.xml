@@ -3,15 +3,56 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>blog</artifactId>
+        <artifactId>blog_base</artifactId>
         <groupId>com.techeffic</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dal</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>dal</name>
     <packaging>jar</packaging>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.techeffic</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="../manager/target/classes">
+                                    <fileSet dir="src/main/resources"/>
+                                        <!--<exclude name="**/*.jar" />
+                                        <exclude name="**/*.dtd" />-->
+                                    <!--</fileSet>-->
+                                </copy>
+                                <!--<copy todir="../manager/src/main/resources">
+                                    <fileSet dir="src/main/resources">
+                                        &lt;!&ndash;<exclude name="**/*.jar" />
+                                        <exclude name="**/*.dtd" />&ndash;&gt;
+                                    </fileSet>
+                                </copy>-->
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

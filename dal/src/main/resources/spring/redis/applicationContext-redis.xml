@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:property-placeholder location="classpath*:prop/redis.properties"
+                                  ignore-unresolvable="true" />
+    <!--<context:component-scan base-package="com.techeffic.blog.common.cache.redis" />-->
+
+
+
+
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${cache.redis.maxTotal}" />
+        <property name="maxIdle" value="${cache.redis.maxIdle}" />
+        <property name="minIdle" value="${cache.redis.minIdle}" />
+        <property name="maxWaitMillis" value="${cache.redis.maxWaitMillis}" />
+    </bean>
+
+    <bean id="clusterConfig"
+          class="com.techeffic.blog.common.cache.redis.CacheRedisClusterConfig">
+        <constructor-arg index="0" value="${cache.redis.cluster.nodes}" />
+    </bean>
+
+    <bean id="connectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"  p:use-pool="true">
+        <constructor-arg name="poolConfig" ref="poolConfig" />
+        <constructor-arg name="clusterConfig" ref="clusterConfig" />
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory" /> </bean>
+    <!--<bean id="redisTemplate" class="com.techeffic.blog.common.cache.redis.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory" /> </bean>
+
+    <bean id="redisObjectService" class="com.techeffic.blog.common.cache.redis.RedisObjectService">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+
+    <bean id="redisStringService" class="com.techeffic.blog.common.cache.redis.RedisStringService">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+
+    <bean id="simpleRedisStringService" class="com.techeffic.blog.common.cache.redis.SimpleRedisStringService">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+
+    <bean id="redisContextAware" class="com.techeffic.blog.common.cache.redis.RedisContextAware" />-->
+</beans>

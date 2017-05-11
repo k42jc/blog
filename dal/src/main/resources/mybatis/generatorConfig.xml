@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <properties resource="prop/config.properties"/>
+    <!-- 数据库驱动包jar文件位置 -->
+    <classPathEntry location="C:\\Users\\liaoxudong\\.m2\\repository\\oracle\\ojdbc\\14.0\\ojdbc-14.0.driver" />
+    <context id="context">
+        <!-- 是否去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库连接信息 -->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@172.20.21.196:1521:sidopsmt"
+                        userId="op_third" password="op_third_0927" />
+        <!-- java与数据库类型转换 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+            <property name="useActualColumnNames" value="true" />
+            <property name="mapUnderscoreToCamelCase" value="true" />
+
+        </javaTypeResolver>
+        <!-- 成成对应文件存放目录 -->
+        <!-- 实体类生成存放目录-->
+        <javaModelGenerator targetPackage="com.xinguodu.openplatform.third.proxy.po.dal" targetProject="../openplatform_trade_third_proxy/src/main/java/" >
+            <property name="enableSubPackages" value="true"/>
+             <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成mapper.xml文件存放位置 -->
+        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="../openplatform_trade_third_proxy/src/main/resources/" />
+        <!-- 生成dao接口存放位置-->
+        <javaClientGenerator targetPackage="com.xinguodu.openplatform.third.proxy.dao" targetProject="../openplatform_trade_third_proxy/src/main/java/"
+                             type="XMLMAPPER" />
+        <table schema="" tableName="T_THIRD_DRIVER" domainObjectName="Park" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!-- 忽略列，不生成bean 字段 -->
+            <!--<ignoreColumn column="FRED" />-->
+            <!-- 指定列的java数据类型 -->
+            <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
+        </table>
+    </context>
+</generatorConfiguration>

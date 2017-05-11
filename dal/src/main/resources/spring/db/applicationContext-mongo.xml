@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <context:property-placeholder location="classpath*:prop/mongo.properties"
+                                  ignore-unresolvable="true"/>
+
+    <!--这里使用mongo:mongo-client -->
+    <mongo:mongo-client id="mongo" host="${mongo.hostport}"
+                        credentials="${mongo.username}:${mongo.password}@${mongo.dbname}">
+        <mongo:client-options min-connections-per-host="2"
+                              connections-per-host="100" connect-timeout="5000" max-wait-time="120000"
+                              heartbeat-frequency="2000" heartbeat-connect-timeout="10000"
+                              max-connection-life-time="3000" socket-keep-alive="true"
+                              socket-timeout="3000"
+                              threads-allowed-to-block-for-connection-multiplier="5" write-concern="SAFE" />
+    </mongo:mongo-client>
+
+    <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo"
+                      dbname="${mongo.dbname}" />
+
+    <bean id="mappingContext"
+          class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+
+    <bean id="mappingConverter"
+          class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+        <constructor-arg ref="mongoDbFactory" />
+        <constructor-arg ref="mappingContext" />
+    </bean>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+        <constructor-arg name="mongoConverter" ref="mappingConverter" />
+        <property name="writeConcern">
+            <util:constant static-field="com.mongodb.WriteConcern.SAFE" />
+        </property>
+        <property name="writeResultChecking" value="EXCEPTION" />
+    </bean>
+</beans>
