@@ -26,7 +26,7 @@ public class CacheRedisClusterConfig extends RedisClusterConfiguration{
                 //加入集群节点
                 addClusterNode(new RedisNode(hp[0],Integer.valueOf(hp[1])));
             }
-            logger.info("加入redis cluster节点："+nodes);
+            logger.info("redis集群配置："+nodes);
         } catch (Exception e) {
             logger.error("redis cluster节点配置错误，集群配置失败",e);
             e.printStackTrace();

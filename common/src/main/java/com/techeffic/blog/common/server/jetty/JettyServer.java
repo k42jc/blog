@@ -4,9 +4,12 @@ package com.techeffic.blog.common.server.jetty;
 import com.techeffic.blog.common.util.ConfigUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
+
+import java.lang.management.ManagementFactory;
 
 /**
  * Jetty容器相关
@@ -93,7 +96,10 @@ public class JettyServer {
         sslContextFactory.setKeyStorePath("keystore");
         sslContextFactory.setKeyStorePassword("OBF:1xtb1uo71wg41y0q1y7z1y101wfu1unr1xu7");
         sslContextFactory.setKeyManagerPassword("OBF:1xtb1uo71wg41y0q1y7z1y101wfu1unr1xu7");*/
-
+        // Setup JMX
+        MBeanContainer mbContainer = new MBeanContainer(
+                ManagementFactory.getPlatformMBeanServer());
+        server.addBean(mbContainer);
         //连接器
         connector = new ServerConnector(server/*,new SslConnectionFactory(sslContextFactory,"http/1.1"),
                 new HttpConnectionFactory(https_config)*/);
@@ -111,10 +117,13 @@ public class JettyServer {
         String contextPath = ConfigUtil.PROP.getProperty(JETTY_CONTEXTPATH);
         String webDescriptor = ConfigUtil.PROP.getProperty(JETTY_WEBDESCRIPTOR);
 
-        WebAppContext webAppContext = new WebAppContext(path+derectory,contextPath);
+        WebAppContext webAppContext = new WebAppContext();
         logger.info("web path："+path+derectory);
+        webAppContext.setContextPath(contextPath);
         webAppContext.setDescriptor(path+webDescriptor);
-        webAppContext.setResourceBase(derectory);
+        webAppContext.setResourceBase(path+derectory);
+        webAppContext.setWelcomeFiles(new String[]{"index.html"});
+        //禁用jetty的默认的查看服务器文件路径
         webAppContext.setInitParameter("org.eclipse.jetty.servlet.Default.dirAllowed", "false");
         webAppContext.setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
         server.setHandler(webAppContext);

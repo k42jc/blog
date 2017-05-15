@@ -17,14 +17,14 @@
     </listener>
 
 
-    <!-- 运维管理  -->
+    <!-- 后台管理  -->
     <servlet>
         <servlet-name>blogManager</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>
-                classpath*:servlet/webServlet.xml
+                classpath*:WEB-INF/spring-mvc.xml
             </param-value>
         </init-param>
     </servlet>
@@ -61,12 +61,12 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/web/page/404.html</location>
+        <location>/404.html</location>
     </error-page>
 
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/web/page/500.html</location>
+        <location>/500.html</location>
     </error-page>
 
     <!-- shiro过滤器 -->
