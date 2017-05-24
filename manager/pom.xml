@@ -84,8 +84,76 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- 使用mvn exec:java命令在浏览器使用H2数据库-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.h2.tools.Server</mainClass>
+                    <arguments>
+                        <argument>-web</argument>
+                        <argument>-webPort</argument>
+                        <argument>8090</argument>
+                        <argument>-browser</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
         </plugins>
 
     </build>
+
+    <!--<profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profiles.activation>development</profiles.activation>
+            </properties>
+            &lt;!&ndash;<build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>tomcat-maven-plugin</artifactId>
+                        <version>1.1</version>
+                        <configuration>
+                            &lt;!&ndash; 配置项目自动发布服务器 &ndash;&gt;
+                            <url>http://xx.xx.xx.xx:8080/manager/text</url>
+                            <path>/xmj-manager</path>
+                            <server>Tomcat</server>
+                            <warFile>target/${profiles.activation}.war</warFile>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>&ndash;&gt;
+        </profile>
+        <profile>
+            <id>test</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profiles.activation>test</profiles.activation>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profiles.activation>production</profiles.activation>
+            </properties>
+        </profile>
+    </profiles>-->
 
 </project>

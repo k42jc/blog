@@ -11,6 +11,10 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:spring/applicationContext.xml,classpath:shiro/spring-shiro.xml</param-value> <!-- ,classpath*:spring/applicationContext-mq.xml -->
     </context-param>
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>development</param-value>
+    </context-param>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -59,7 +63,7 @@
         <welcome-file>/index.html</welcome-file>
     </welcome-file-list>
 
-    <error-page>
+    <!--<error-page>
         <error-code>404</error-code>
         <location>/404.html</location>
     </error-page>
@@ -67,7 +71,7 @@
     <error-page>
         <error-code>500</error-code>
         <location>/500.html</location>
-    </error-page>
+    </error-page>-->
 
     <!-- shiro过滤器 -->
     <filter>

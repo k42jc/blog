@@ -1,0 +1,130 @@
+2017-05-23 16:55:56,924  [main] INFO  com.techeffic.blog.manager.App - 后台服务开始启动
+2017-05-23 16:55:56,933  [main] INFO  com.techeffic.blog.common.server.jetty.JettyServer - jetty web 【后台服务】 开始启动...
+2017-05-23 16:55:56,944  [main] INFO  com.techeffic.blog.common.util.ConfigUtil - .properties文件加载完成...
+2017-05-23 16:55:56,945  [main] INFO  com.techeffic.blog.common.server.jetty.JettyServer - web 端口：8081
+2017-05-23 16:55:57,074  [main] INFO  com.techeffic.blog.common.util.ConfigUtil - param:【jetty.directory】, result:【web】
+2017-05-23 16:55:57,075  [main] INFO  com.techeffic.blog.common.util.ConfigUtil - param:【jetty.contextPath】, result:【/】
+2017-05-23 16:55:57,075  [main] INFO  com.techeffic.blog.common.util.ConfigUtil - param:【jetty.webDescriptor】, result:【WEB-INF/web.xml】
+2017-05-23 16:55:57,175  [main] INFO  com.techeffic.blog.common.server.jetty.JettyServer - web path：/C:/Users/liaoxudong/Documents/GitHub/blog/manager/target/classes/web
+2017-05-23 16:55:58,196  [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\liaoxudong\Documents\GitHub\blog\dal\target\classes\com\techeffic\blog\dal\dao\jdbc\IUserMapper.class]
+2017-05-23 16:55:58,197  [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner - Creating MapperFactoryBean with name 'IUserMapper' and 'com.techeffic.blog.dal.dao.jdbc.IUserMapper' mapperInterface
+2017-05-23 16:55:58,199  [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner - Identified candidate component class: file [C:\Users\liaoxudong\Documents\GitHub\blog\dal\target\classes\com\techeffic\blog\dal\dao\jdbc\IUserMapper.class]
+2017-05-23 16:55:58,199  [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'IUserMapper' and 'com.techeffic.blog.dal.dao.jdbc.IUserMapper' mapperInterface. Bean already defined with the same name!
+2017-05-23 16:55:58,199  [main] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.techeffic.blog.dal.dao.jdbc]' package. Please check your configuration.
+2017-05-23 16:55:58,377  [main] DEBUG org.apache.shiro.realm.AuthorizingRealm - No authorizationCache instance set.  Checking for a cacheManager...
+2017-05-23 16:55:58,377  [main] DEBUG org.apache.shiro.realm.AuthorizingRealm - CacheManager [MemoryConstrainedCacheManager with 0 cache(s)): []] has been configured.  Building authorization cache named [com.techeffic.blog.common.shiro.ShiroRealm.authorizationCache]
+2017-05-23 16:55:58,379  [main] DEBUG org.apache.shiro.spring.LifecycleBeanPostProcessor - Initializing bean [myShiroRealm]...
+2017-05-23 16:55:58,540  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:55:58,611  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:55:58,947  [main] INFO  com.techeffic.blog.common.cache.redis.CacheRedisClusterConfig - redis集群配置：192.168.168.168:6380,192.168.168.168:6381,192.168.168.168:6382,192.168.168.168:6383,192.168.168.168:6384,192.168.168.168:6385
+2017-05-23 16:56:11,071  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,073  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,086  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,088  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,404  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,405  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,420  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,422  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,431  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,432  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,438  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,439  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,449  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,451  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,457  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,458  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,468  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,470  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,477  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,479  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,487  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,488  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,494  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,496  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,504  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,505  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,511  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,512  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,520  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,522  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,535  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Property 'configLocation' not specified, using default MyBatis Configuration
+2017-05-23 16:56:11,536  [main] DEBUG org.mybatis.spring.SqlSessionFactoryBean - Scanned package: 'com.techeffic.blog.dal.entity.jdbc' for aliases
+2017-05-23 16:56:11,542  [main] DEBUG org.apache.shiro.spring.LifecycleBeanPostProcessor - Destroying bean [securityManager]...
+2017-05-23 16:56:11,544  [main] DEBUG org.apache.shiro.spring.LifecycleBeanPostProcessor - Destroying bean [sessionManager]...
+2017-05-23 16:56:11,544  [main] DEBUG org.apache.shiro.spring.LifecycleBeanPostProcessor - Destroying bean [cacheManager]...
+2017-05-23 16:56:11,546  [main] ERROR org.springframework.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in URL [file:/C:/Users/liaoxudong/Documents/GitHub/blog/dal/target/classes/spring/db/applicationContext-jdbc.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\liaoxudong\Documents\GitHub\blog\manager\target\classes\mybatis\mapper\UserMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 9; columnNumber: 1; 尾随节中不允许有内容。
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1628) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:742) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:866) ~[spring-context-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:542) ~[spring-context-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:443) ~[spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325) [spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107) [spring-web-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:890) [jetty-server-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:532) [jetty-servlet-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:853) [jetty-server-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:344) [jetty-servlet-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1501) [jetty-webapp-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1463) [jetty-webapp-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:785) [jetty-server-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:261) [jetty-servlet-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:545) [jetty-webapp-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68) [jetty-util-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:131) [jetty-util-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.server.Server.start(Server.java:452) [jetty-server-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:105) [jetty-util-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:113) [jetty-server-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:419) [jetty-server-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68) [jetty-util-9.4.5.v20170502.jar:9.4.5.v20170502]
+	at com.techeffic.blog.common.server.jetty.JettyServer.init(JettyServer.java:132) [classes/:?]
+	at com.techeffic.blog.manager.App.main(App.java:32) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_25]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_25]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_25]
+	at java.lang.reflect.Method.invoke(Method.java:483) ~[?:1.8.0_25]
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147) [idea_rt.jar:?]
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\liaoxudong\Documents\GitHub\blog\manager\target\classes\mybatis\mapper\UserMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 9; columnNumber: 1; 尾随节中不允许有内容。
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:466) ~[mybatis-spring-1.2.2.jar:1.2.2]
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:340) ~[mybatis-spring-1.2.2.jar:1.2.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1687) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	... 35 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 9; columnNumber: 1; 尾随节中不允许有内容。
+	at org.apache.ibatis.parsing.XPathParser.createDocument(XPathParser.java:256) ~[mybatis-3.2.8.jar:3.2.8]
+	at org.apache.ibatis.parsing.XPathParser.<init>(XPathParser.java:125) ~[mybatis-3.2.8.jar:3.2.8]
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.<init>(XMLMapperBuilder.java:78) ~[mybatis-3.2.8.jar:3.2.8]
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:462) ~[mybatis-spring-1.2.2.jar:1.2.2]
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:340) ~[mybatis-spring-1.2.2.jar:1.2.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1687) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	... 35 more
+Caused by: org.xml.sax.SAXParseException: 尾随节中不允许有内容。
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:441) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:368) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1436) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$TrailingMiscDriver.next(XMLDocumentScannerImpl.java:1433) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:606) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:510) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:848) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:777) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243) ~[?:1.8.0_25]
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:348) ~[?:1.8.0_25]
+	at org.apache.ibatis.parsing.XPathParser.createDocument(XPathParser.java:254) ~[mybatis-3.2.8.jar:3.2.8]
+	at org.apache.ibatis.parsing.XPathParser.<init>(XPathParser.java:125) ~[mybatis-3.2.8.jar:3.2.8]
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.<init>(XMLMapperBuilder.java:78) ~[mybatis-3.2.8.jar:3.2.8]
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:462) ~[mybatis-spring-1.2.2.jar:1.2.2]
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:340) ~[mybatis-spring-1.2.2.jar:1.2.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1687) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624) ~[spring-beans-4.3.8.RELEASE.jar:4.3.8.RELEASE]
+	... 35 more
+2017-05-23 16:56:11,578  [main] INFO  com.techeffic.blog.common.server.jetty.JettyServer - jetty web 后台服务 启动完成

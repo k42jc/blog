@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 数据库驱动包jar文件位置 -->
+    <classPathEntry location="C:\Users\liaoxudong\Documents\GitHub\blog\dal\src\main\resources\mybatis\driver\mysql-connector-java-5.1.27.jar" />
+    <context id="context">
+        <!-- 是否去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库连接信息 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/blog?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"
+                        userId="root" password="a635684783" />
+        <!-- java与数据库类型转换 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+            <property name="useActualColumnNames" value="true" />
+            <property name="mapUnderscoreToCamelCase" value="true" />
+
+        </javaTypeResolver>
+        <!-- 成成对应文件存放目录 -->
+        <!-- 实体类生成存放目录-->
+        <javaModelGenerator targetPackage="com.techeffic.blog.dal.entity" targetProject="../dal/src/main/java/" >
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成mapper.xml文件存放位置 -->
+        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="../dal/src/main/resources/" />
+        <!-- 生成dao接口存放位置-->
+        <javaClientGenerator targetPackage="com.techeffic.blog.dal.dao.jdbc" targetProject="../openplatform_trade_third_proxy/src/main/java/"
+                             type="XMLMAPPER" />
+        <table schema="" tableName="T_THIRD_DRIVER" domainObjectName="Park" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!-- 忽略列，不生成bean 字段 -->
+            <!--<ignoreColumn column="FRED" />-->
+            <!-- 指定列的java数据类型 -->
+            <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
+        </table>
+    </context>
+</generatorConfiguration>

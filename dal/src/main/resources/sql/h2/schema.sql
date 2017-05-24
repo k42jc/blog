@@ -1,0 +1,3 @@
+CREATE TABLE T_USER{
+
+}

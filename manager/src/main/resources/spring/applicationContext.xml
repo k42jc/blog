@@ -15,7 +15,7 @@
     <!-- 注解式事务
     <tx:annotation-driven transaction-manager="transactionManager"/>-->
 
-    <!--<import resource="classpath*:spring/db/applicationContext-jdbc.xml"/>-->
+    <import resource="classpath*:spring/db/applicationContext-jdbc.xml"/>
     <import resource="classpath*:spring/db/applicationContext-mongo.xml"/>
     <import resource="classpath*:spring/redis/applicationContext-redis.xml"/>
 </beans>

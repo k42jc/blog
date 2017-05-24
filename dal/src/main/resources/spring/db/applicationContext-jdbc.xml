@@ -2,30 +2,30 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
     <context:property-placeholder location="classpath*:prop/jdbc.properties"
                                   ignore-unresolvable="true"/>
-
-    <!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
-    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
-          destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-        <property name="maxActive" value="${jdbc.pool.maxActive}" />
-        <property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-        <property name="minIdle" value="0" />
-        <property name="defaultAutoCommit" value="false" />
-        <!-- 连接Idle10分钟后超时，每1分钟检查一次 -->
-        <property name="timeBetweenEvictionRunsMillis" value="60000" />
-        <property name="minEvictableIdleTimeMillis" value="600000" />
+    <bean id="vendorProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="properties">
+            <props>
+                <!--<prop key="SQL Server">sqlserver</prop>
+                <prop key="DB2">db2</prop>
+                <prop key="Oracle">oracle</prop>-->
+                <prop key="MySQL">mysql</prop>
+                <prop key="H2">h2</prop>
+            </props>
+        </property>
     </bean>
 
+    <bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+        <property name="properties" ref="vendorProperties"/>
+    </bean>
     <!-- MyBatis配置 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+        <!-- 根据不同的数据源生成不同的sql格式 需要在mybatis的Mapper的xml里，把相应的语句加上 databaseId="xxx" -->
+        <property name="databaseIdProvider" ref="databaseIdProvider" />
         <!-- 自动扫描entity目录 -->
         <property name="typeAliasesPackage" value="com.techeffic.blog.dal.entity.jdbc" />
         <!-- 显式指定Mapper文件位置 -->
@@ -46,8 +46,54 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
+
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"
                           proxy-target-class="true" />
+    <beans profile="production">
+        <!-- 数据源配置,使用应用内的Tomcat JDBC连接池 -->
+        <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+              destroy-method="close">
+            <!-- Connection Info -->
+            <property name="driverClassName" value="${jdbc.driver}" />
+            <property name="url" value="${jdbc.url}" />
+            <property name="username" value="${jdbc.username}" />
+            <property name="password" value="${jdbc.password}" />
+            <property name="maxActive" value="${jdbc.pool.maxActive}" />
+            <property name="maxIdle" value="${jdbc.pool.maxIdle}" />
+            <property name="minIdle" value="0" />
+            <property name="defaultAutoCommit" value="false" />
+            <!-- 连接Idle10分钟后超时，每1分钟检查一次 -->
+            <property name="timeBetweenEvictionRunsMillis" value="60000" />
+            <property name="minEvictableIdleTimeMillis" value="600000" />
+        </bean>
+    </beans>
+    <beans profile="development">
+        <!-- 开发使用Spring-simple连接池 -->
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+            <property name="driverClass" value="${h2.jdbc.driver}"/>
+            <property name="url" value="${h2.jdbc.url}"/>
+            <property name="username" value="${h2.jdbc.username}"/>
+            <property name="password" value="${h2.jdbc.password}"/>
+        </bean>
+        <!-- 初始化数据结构与数据 -->
+        <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
+            <jdbc:script location="classpath:sql/h2/schema.sql" />
+            <jdbc:script location="classpath:sql/h2/import-data.sql" encoding="UTF-8"/>
+        </jdbc:initialize-database>
+    </beans>
+
+    <beans profile="test">
+        <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+              destroy-method="close">
+            <property name="driverClassName" value="org.h2.Driver"/>
+            <property name="url" value="jdbc:h2:file:~/.h2/WebMagic;AUTO_SERVER=TRUE"/>
+        </bean>
+        <!--Refer to https://github.com/springside/springside4/wiki/H2-Database -->
+        <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
+            <jdbc:script location="classpath:sql/h2/schema.sql" />
+            <!--<jdbc:script location="classpath:data/h2/import-data.sql" encoding="UTF-8"/>-->
+        </jdbc:initialize-database>
+    </beans>
 
 </beans>
