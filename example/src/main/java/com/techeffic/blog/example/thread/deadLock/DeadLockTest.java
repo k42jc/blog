@@ -8,7 +8,7 @@ public class DeadLockTest implements Runnable{
     private Object lock1 = new Object();
     private Object lock2 = new Object();
 
-    private int param;
+    private static int param;
 
     public void setParam(int param) {
         this.param = param;
@@ -43,7 +43,7 @@ public class DeadLockTest implements Runnable{
     }
 
     public static void main(String[] args) {
-        DeadLockTest deadLockTest = new DeadLockTest();
+        /*DeadLockTest deadLockTest = new DeadLockTest();
         deadLockTest.setParam(1);
         Thread thread1 = new Thread(deadLockTest);
         thread1.start();
@@ -55,7 +55,11 @@ public class DeadLockTest implements Runnable{
         }
         deadLockTest.setParam(2);
         Thread thread2 = new Thread(deadLockTest);
-        thread2.start();
+        thread2.start();*/
+        int i = 9;
+        int j = 9;
+        System.out.println(i&j);
+        System.out.println(i%j);
 
     }
 
